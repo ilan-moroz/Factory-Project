@@ -7,20 +7,24 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import FactoryIcon from "@mui/icons-material/Factory";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { NavLink, useNavigate } from "react-router-dom";
-import { store } from "../redux/Store";
+import { RootState, store } from "../redux/Store";
 import { setLogoutAction } from "../redux/UserReducer";
+import { useSelector } from "react-redux";
+import { Chip } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
 
 const pages = ["Departments", "Employees", "Shifts"];
 const settings = ["Logout"];
 
 function ResponsiveAppBar() {
+  const user = useSelector((state: RootState) => state.users.user);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -162,9 +166,19 @@ function ResponsiveAppBar() {
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
+                <Chip
+                  icon={<PersonIcon />}
+                  label={`${user?.fullName} `}
+                  variant="outlined"
+                  color="primary"
+                  onClick={handleOpenUserMenu}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    color: "white",
+                    marginLeft: "20px",
+                  }}
+                />
               </Tooltip>
               <Menu
                 sx={{ mt: "45px" }}
