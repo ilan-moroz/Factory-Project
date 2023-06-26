@@ -1,0 +1,23 @@
+.App {
+  height: 100vh;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+header {
+  position: relative;
+  z-index: 10;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  text-align: center;
+  font-style: italic;
+  color: white;
+  background: #121212;
+}
