@@ -18,6 +18,7 @@ export default function FormDialog() {
   };
 
   const handleClose = () => {
+    reset()
     setOpen(false);
   };
 
@@ -27,7 +28,7 @@ export default function FormDialog() {
 
   const {
     register,
-    handleSubmit,
+    handleSubmit,reset,
     formState: { errors },
   } = useForm();
 
