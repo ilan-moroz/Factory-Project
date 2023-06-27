@@ -23,9 +23,9 @@ export const createDepartment = async (req: Request, res: Response) => {
     }
 
     const newDepartment = new Department({ name });
-    const savedDepartment = await newDepartment.save();
+    newDepartment.save();
 
-    res.status(201).json(savedDepartment);
+    res.status(201).json(newDepartment);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
