@@ -22,7 +22,7 @@ export default function FormDialog() {
   };
 
   const onSubmit = () => {
-    setOpen(false);
+    handleClose();
   };
 
   const {
