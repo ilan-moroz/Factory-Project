@@ -9,28 +9,31 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Box, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
+import { fetchAddDepartment } from "../utils/fatchData";
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
-    reset()
+    reset();
     setOpen(false);
   };
 
-  const onSubmit = () => {
+  const onSubmit = (departmentName: any) => {
+    fetchAddDepartment(departmentName);
     handleClose();
   };
-
-  const {
-    register,
-    handleSubmit,reset,
-    formState: { errors },
-  } = useForm();
 
   return (
     <div>
