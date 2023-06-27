@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import NavBar from "./components/NavBar";
 import { useLocation } from "react-router-dom";
 import Department from "./pages/Department/Department";
+import Page404 from "./pages/page404/page404";
 
 function App() {
   const location = useLocation();
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/departments" element={<Department />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </main>
     </div>
