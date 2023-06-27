@@ -9,8 +9,8 @@ import {
 
 const router = express.Router();
 
-router.post("/", verifyToken, createDepartment);
-router.get("/", verifyToken, getAllDepartments);
+router.post("/addDepartment", verifyToken, createDepartment);
+router.get("/getAllDepartments", verifyToken, getAllDepartments);
 router.put("/:id", verifyToken, updateDepartment);
 router.delete("/:id", verifyToken, deleteDepartment);
 
