@@ -14,81 +14,35 @@ import { getAllDepartmentsAction } from "../../redux/DepartmentReducer";
 import { fetchGetAllDepartments } from "../../utils/fatchData";
 import { useSelector } from "react-redux";
 
-interface Data {
-  calories: number;
-  carbs: number;
-  dessert: string;
-  fat: number;
-  id: number;
-  protein: number;
+// Update your interface to reflect the actual structure of your department object
+interface Department {
+  id: string;
+  name: string;
+  // ... other department properties go here
 }
 
 interface ColumnData {
-  dataKey: keyof Data;
+  dataKey: keyof Department;
   label: string;
   numeric?: boolean;
   width: number;
 }
 
-type Sample = [string, number, number, number, number];
-
-const sample: readonly Sample[] = [
-  ["Frozen yoghurt", 159, 6.0, 24, 4.0],
-  ["Ice cream sandwich", 237, 9.0, 37, 4.3],
-  ["Eclair", 262, 16.0, 24, 6.0],
-  ["Cupcake", 305, 3.7, 67, 4.3],
-  ["Gingerbread", 356, 16.0, 49, 3.9],
-];
-
-function createData(
-  id: number,
-  dessert: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-): Data {
-  return { id, dessert, calories, fat, carbs, protein };
-}
-
 const columns: ColumnData[] = [
   {
     width: 200,
-    label: "Dessert",
-    dataKey: "dessert",
+    label: "Department ID",
+    dataKey: "id",
   },
   {
     width: 120,
-    label: "Calories\u00A0(g)",
-    dataKey: "calories",
-    numeric: true,
+    label: "Department Name",
+    dataKey: "name",
   },
-  {
-    width: 120,
-    label: "Fat\u00A0(g)",
-    dataKey: "fat",
-    numeric: true,
-  },
-  {
-    width: 120,
-    label: "Carbs\u00A0(g)",
-    dataKey: "carbs",
-    numeric: true,
-  },
-  {
-    width: 120,
-    label: "Protein\u00A0(g)",
-    dataKey: "protein",
-    numeric: true,
-  },
+  // Add other columns as needed, matching the properties of your department objects
 ];
 
-const rows: Data[] = Array.from({ length: 200 }, (_, index) => {
-  const randomSelection = sample[Math.floor(Math.random() * sample.length)];
-  return createData(index, ...randomSelection);
-});
-
-const VirtuosoTableComponents: TableComponents<Data> = {
+const VirtuosoTableComponents: TableComponents<Department> = {
   Scroller: React.forwardRef<HTMLDivElement>((props, ref) => (
     <TableContainer component={Paper} {...props} ref={ref} />
   )),
@@ -125,7 +79,7 @@ function fixedHeaderContent() {
   );
 }
 
-function rowContent(_index: number, row: Data) {
+function rowContent(_index: number, row: Department) {
   return (
     <React.Fragment>
       {columns.map((column) => (
@@ -144,11 +98,10 @@ export default function ReactVirtualizedTable() {
   const departments = useSelector(
     (state: RootState) => state.departments.departments
   );
-  console.log(departments);
 
   // get data from database and save in redux
   const fetchDepartments = () => {
-    console.log("getting vacations from backend....");
+    console.log("getting departments from backend....");
     fetchGetAllDepartments()
       .then((response) => {
         store.dispatch(getAllDepartmentsAction(response));
@@ -181,7 +134,7 @@ export default function ReactVirtualizedTable() {
       >
         <Paper style={{ height: 400, width: "70%" }}>
           <TableVirtuoso
-            data={rows}
+            data={departments}
             components={VirtuosoTableComponents}
             fixedHeaderContent={fixedHeaderContent}
             itemContent={rowContent}
