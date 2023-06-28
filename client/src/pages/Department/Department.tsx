@@ -13,13 +13,7 @@ import { useEffect } from "react";
 import { getAllDepartmentsAction } from "../../redux/DepartmentReducer";
 import { fetchGetAllDepartments } from "../../utils/fatchData";
 import { useSelector } from "react-redux";
-
-// Update your interface to reflect the actual structure of your department object
-interface Department {
-  id: string;
-  name: string;
-  // ... other department properties go here
-}
+import { Department } from "../../models/Department";
 
 interface ColumnData {
   dataKey: keyof Department;
@@ -32,7 +26,7 @@ const columns: ColumnData[] = [
   {
     width: 200,
     label: "Department ID",
-    dataKey: "id",
+    dataKey: "_id",
   },
   {
     width: 120,
