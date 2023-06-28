@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { fetchLoginData } from "../../utils/fetchData";
+import { fetchLogin } from "../../utils/fetchData";
 import { useForm } from "react-hook-form";
 import { InputAdornment } from "@mui/material";
 import { Password, Person } from "@mui/icons-material";
@@ -102,7 +102,7 @@ export default function Login() {
     const { userName, password } = data;
     const loginData = { userName, password };
     try {
-      const response = await fetchLoginData(loginData);
+      const response = await fetchLogin(loginData);
       if (!response) {
         notyf.error(
           "Invalid Username or password. Please check your credentials and try again"
