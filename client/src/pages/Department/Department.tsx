@@ -11,7 +11,7 @@ import FormDialog from "../../components/AddDepartment";
 import { RootState, store } from "../../redux/Store";
 import { useEffect } from "react";
 import { getAllDepartmentsAction } from "../../redux/DepartmentReducer";
-import { fetchGetAllDepartments } from "../../utils/fatchData";
+import { fetchGetAllDepartments } from "../../utils/fetchData";
 import { useSelector } from "react-redux";
 import { Department } from "../../models/Department";
 import EditIcon from "@mui/icons-material/Edit";
