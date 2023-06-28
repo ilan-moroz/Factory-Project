@@ -32,10 +32,14 @@ export default function FormDialog() {
     setOpen(false);
   };
 
-  const onSubmit = (departmentName: any) => {
-    fetchAddDepartment(departmentName);
-    store.dispatch(addDepartmentAction(departmentName));
-    handleClose();
+  const onSubmit = async (data: any) => {
+    try {
+      const response = await fetchAddDepartment(data.name);
+      store.dispatch(addDepartmentAction(response));
+      handleClose();
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
