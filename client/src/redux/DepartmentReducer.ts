@@ -55,7 +55,7 @@ export const departmentReducer = (
 
     case DepartmentActionType.updateDepartment:
       const updatedDepartmentIndex = state.departments.findIndex(
-        (department) => department._id === action.payload
+        (department) => department._id === action.payload.id
       );
       if (updatedDepartmentIndex !== -1) {
         const updatedDepartment = {

@@ -14,7 +14,6 @@ export enum UserActionType {
   addUser = "addUser",
   setLogout = "setLogout",
   setIsAdmin = "setIsAdmin",
-  getNumOfActions = "getNumOfActions",
   setLogin = "setLogin",
 }
 
@@ -47,10 +46,6 @@ export const setIsAdminAction = (isAdmin: boolean): UserAction => {
   return { type: UserActionType.setIsAdmin, payload: isAdmin };
 };
 
-export const getNumOfActionsAction = (numOfActions: number): UserAction => {
-  return { type: UserActionType.getNumOfActions, payload: numOfActions };
-};
-
 export const setLoginAction = (user: User, token: string): UserAction => {
   return { type: UserActionType.setLogin, payload: { user, token } };
 };
@@ -76,7 +71,7 @@ export const userReducer = (
 
     case UserActionType.deleteUser:
       newState.allUsers = newState.allUsers.filter(
-        (user) => user.id !== action.payload
+        (user) => user._id !== action.payload
       );
       break;
 
