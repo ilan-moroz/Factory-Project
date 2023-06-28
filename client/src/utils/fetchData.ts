@@ -1,6 +1,6 @@
 import axios from "axios";
-const baseUrl = "http://localhost:4000";
 
+const baseUrl = "http://localhost:4000";
 const api = axios.create({
   baseURL: baseUrl,
 });
@@ -26,24 +26,22 @@ api.interceptors.request.use(
   }
 );
 
-export const fetchLoginData = async (data: {
+export const fetchLogin = async (data: {
   userName: string;
   password: string;
 }) => {
   try {
     const response = await axios.post(`${baseUrl}/auth/login`, data);
-    console.log(response.data);
-    return response.data;
+    if (response.status === 200) return response.data;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const fetchAddDepartment = async (department: string) => {
+export const fetchAddDepartment = async (departmentName: string) => {
   try {
-    const response = await api.post(`/departments/addDepartment`, department);
-    console.log(response.data);
-    return response.data;
+    const response = await api.post("/departments/", { name: departmentName });
+    if (response.status === 201) return response.data;
   } catch (err) {
     console.log(err);
   }
@@ -51,8 +49,17 @@ export const fetchAddDepartment = async (department: string) => {
 
 export const fetchGetAllDepartments = async () => {
   try {
-    const response = await api.get(`/departments/getAllDepartments`);
-    return response.data;
+    const response = await api.get("/departments/");
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const fetchDeleteDepartment = async (id: string) => {
+  try {
+    const response = await api.delete(`/departments/${id}`);
+    if (response.status === 200) return response.data;
   } catch (err) {
     console.log(err);
   }
