@@ -81,7 +81,7 @@ export const userReducer = (
       break;
 
     case UserActionType.addUser:
-      newState.allUsers.push(action.payload);
+      newState.allUsers = [...newState.allUsers, action.payload];
       break;
 
     case UserActionType.setLogout:

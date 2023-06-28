@@ -50,7 +50,7 @@ export const departmentReducer = (
       break;
 
     case DepartmentActionType.addDepartment:
-      state.departments.push(action.payload);
+      state.departments = [...state.departments, action.payload];
       break;
 
     case DepartmentActionType.updateDepartment:

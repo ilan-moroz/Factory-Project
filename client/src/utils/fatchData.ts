@@ -48,3 +48,12 @@ export const fetchAddDepartment = async (department: string) => {
     console.log(err);
   }
 };
+
+export const fetchGetAllDepartments = async () => {
+  try {
+    const response = await api.get(`/departments/getAllDepartments`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -10,6 +10,8 @@ import { Box, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
 import { fetchAddDepartment } from "../utils/fatchData";
+import { store } from "../redux/Store";
+import { addDepartmentAction } from "../redux/DepartmentReducer";
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -32,6 +34,7 @@ export default function FormDialog() {
 
   const onSubmit = (departmentName: any) => {
     fetchAddDepartment(departmentName);
+    store.dispatch(addDepartmentAction(departmentName));
     handleClose();
   };
 
