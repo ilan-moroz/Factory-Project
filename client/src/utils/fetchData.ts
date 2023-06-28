@@ -40,7 +40,9 @@ export const fetchLogin = async (data: {
 
 export const fetchAddDepartment = async (departmentName: string) => {
   try {
-    const response = await api.post("/departments/", { name: departmentName });
+    const response = await api.post("/departments/addDepartment", {
+      name: departmentName,
+    });
     if (response.status === 201) return response.data;
   } catch (err) {
     console.log(err);
@@ -49,7 +51,7 @@ export const fetchAddDepartment = async (departmentName: string) => {
 
 export const fetchGetAllDepartments = async () => {
   try {
-    const response = await api.get("/departments/");
+    const response = await api.get("/departments/getAllDepartments");
     if (response.status === 200) return response.data;
   } catch (err) {
     console.log(err);
@@ -58,7 +60,7 @@ export const fetchGetAllDepartments = async () => {
 
 export const fetchDeleteDepartment = async (id: string) => {
   try {
-    const response = await api.delete(`/departments/${id}`);
+    const response = await api.delete(`/departments/deleteDepartment/${id}`);
     if (response.status === 200) return response.data;
   } catch (err) {
     console.log(err);

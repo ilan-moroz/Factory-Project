@@ -10,12 +10,19 @@ import { TableVirtuoso, TableComponents } from "react-virtuoso";
 import FormDialog from "../../components/AddDepartment";
 import { RootState, store } from "../../redux/Store";
 import { useEffect } from "react";
-import { getAllDepartmentsAction } from "../../redux/DepartmentReducer";
-import { fetchGetAllDepartments } from "../../utils/fetchData";
+import {
+  deleteDepartmentAction,
+  getAllDepartmentsAction,
+} from "../../redux/DepartmentReducer";
+import {
+  fetchDeleteDepartment,
+  fetchGetAllDepartments,
+} from "../../utils/fetchData";
 import { useSelector } from "react-redux";
 import { Department } from "../../models/Department";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import IconButton from "@mui/material/IconButton";
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -90,6 +97,11 @@ function fixedHeaderContent() {
 }
 
 function rowContent(_index: number, row: Department) {
+  const handleDelete = (id: string) => {
+    fetchDeleteDepartment(id);
+    store.dispatch(deleteDepartmentAction(id));
+    console.log(id);
+  };
   return (
     <React.Fragment>
       {columns.map((column) => {
@@ -99,7 +111,9 @@ function rowContent(_index: number, row: Department) {
               key={column.dataKey}
               align={column.numeric || false ? "right" : "left"}
             >
-              <DeleteForeverIcon />
+              <IconButton onClick={() => handleDelete(row._id)}>
+                <DeleteForeverIcon color="warning" />
+              </IconButton>
             </TableCell>
           );
         } else if (column.dataKey === "edit") {
@@ -145,6 +159,7 @@ export default function ReactVirtualizedTable() {
 
   //if departments is empty get all departments from database and save in redux
   useEffect(() => {
+    console.log(store.getState().departments.departments.length);
     if (store.getState().departments.departments.length < 1) {
       fetchDepartments();
     }
