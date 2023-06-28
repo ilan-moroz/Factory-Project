@@ -164,6 +164,7 @@ export default function ReactVirtualizedTable() {
       fetchDepartments();
     }
   }, []);
+
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
       <div style={{ marginTop: 10 }}>
