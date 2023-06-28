@@ -14,9 +14,11 @@ import { getAllDepartmentsAction } from "../../redux/DepartmentReducer";
 import { fetchGetAllDepartments } from "../../utils/fatchData";
 import { useSelector } from "react-redux";
 import { Department } from "../../models/Department";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 interface ColumnData {
-  dataKey: keyof Department;
+  dataKey: keyof Department | string;
   label: string;
   numeric?: boolean;
   width: number;
@@ -33,7 +35,21 @@ const columns: ColumnData[] = [
     label: "Department Name",
     dataKey: "name",
   },
-  // Add other columns as needed, matching the properties of your department objects
+  {
+    width: 120,
+    label: "Manger Name",
+    dataKey: "manager",
+  },
+  {
+    width: 120,
+    label: "Edit",
+    dataKey: "edit" as keyof Department,
+  },
+  {
+    width: 120,
+    label: "Delete",
+    dataKey: "delete" as keyof Department,
+  },
 ];
 
 const VirtuosoTableComponents: TableComponents<Department> = {
@@ -76,14 +92,36 @@ function fixedHeaderContent() {
 function rowContent(_index: number, row: Department) {
   return (
     <React.Fragment>
-      {columns.map((column) => (
-        <TableCell
-          key={column.dataKey}
-          align={column.numeric || false ? "right" : "left"}
-        >
-          {row[column.dataKey]}
-        </TableCell>
-      ))}
+      {columns.map((column) => {
+        if (column.dataKey === "delete") {
+          return (
+            <TableCell
+              key={column.dataKey}
+              align={column.numeric || false ? "right" : "left"}
+            >
+              <DeleteForeverIcon />
+            </TableCell>
+          );
+        } else if (column.dataKey === "edit") {
+          return (
+            <TableCell
+              key={column.dataKey}
+              align={column.numeric || false ? "right" : "left"}
+            >
+              <EditIcon />
+            </TableCell>
+          );
+        } else {
+          return (
+            <TableCell
+              key={column.dataKey}
+              align={column.numeric || false ? "right" : "left"}
+            >
+              {row[column.dataKey as keyof Department]}
+            </TableCell>
+          );
+        }
+      })}
     </React.Fragment>
   );
 }
