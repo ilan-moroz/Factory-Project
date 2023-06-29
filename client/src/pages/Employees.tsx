@@ -156,7 +156,7 @@ export default function ReactVirtualizedTable() {
         </TableCell>
         <TableCell>
           <IconButton>
-            <DeleteIcon color="warning" />
+            <DeleteIcon color="error" />
           </IconButton>
         </TableCell>
       </React.Fragment>
