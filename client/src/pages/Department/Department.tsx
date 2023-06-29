@@ -33,7 +33,7 @@ interface ColumnData {
 
 const columns: ColumnData[] = [
   {
-    width: 200,
+    width: 120,
     label: "Department ID",
     dataKey: "_id",
   },
@@ -100,7 +100,6 @@ function rowContent(_index: number, row: Department) {
   const handleDelete = (id: string) => {
     fetchDeleteDepartment(id);
     store.dispatch(deleteDepartmentAction(id));
-    console.log(id);
   };
   return (
     <React.Fragment>
@@ -159,7 +158,6 @@ export default function ReactVirtualizedTable() {
 
   //if departments is empty get all departments from database and save in redux
   useEffect(() => {
-    console.log(store.getState().departments.departments.length);
     if (store.getState().departments.departments.length < 1) {
       fetchDepartments();
     }
