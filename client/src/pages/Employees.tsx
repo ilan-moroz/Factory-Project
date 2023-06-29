@@ -11,7 +11,7 @@ import { Box, IconButton } from "@mui/material";
 import { Employee } from "../models/Employee";
 import { RootState, store } from "../redux/Store";
 import { useSelector } from "react-redux";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import AddEmployeeFormDialog from "../components/AddEmployee";
@@ -164,7 +164,7 @@ export default function ReactVirtualizedTable() {
         </TableCell>
         <TableCell>
           <IconButton onClick={() => handleDelete(row._id)}>
-            <DeleteIcon color="error" />
+            <DeleteForeverIcon color="error" />
           </IconButton>
         </TableCell>
       </React.Fragment>
