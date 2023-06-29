@@ -116,7 +116,7 @@ export default function ReactVirtualizedTable() {
     (state: RootState) => state.departments.departments
   );
 
-  const deleteEmployee = async (id: string) => {};
+  // const deleteEmployee = async (id: string) => {};
 
   const departmentIdNameMap: { [key: string]: string } = {};
   departments.forEach((department: Department) => {
