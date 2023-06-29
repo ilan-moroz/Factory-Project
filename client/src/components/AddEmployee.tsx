@@ -49,7 +49,6 @@ export default function AddEmployeeFormDialog() {
       <Fab
         variant="extended"
         size="medium"
-        color="primary"
         aria-label="add"
         onClick={handleClickOpen}
       >
