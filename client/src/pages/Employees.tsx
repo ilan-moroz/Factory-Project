@@ -16,8 +16,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import AddEmployeeFormDialog from "../components/AddEmployee";
 import { Department } from "../models/Department";
-import { fetchGetAllEmployees } from "../utils/fetchData";
-import { getAllEmployeesAction } from "../redux/EmployeeReducer";
+import { fetchDeleteEmployee, fetchGetAllEmployees } from "../utils/fetchData";
+import {
+  deleteEmployeeAction,
+  getAllEmployeesAction,
+} from "../redux/EmployeeReducer";
 import { useEffect } from "react";
 
 interface ColumnData {
@@ -119,8 +122,10 @@ export default function ReactVirtualizedTable() {
     (state: RootState) => state.departments.departments
   );
 
-  // const deleteEmployee = async (id: string) => {};
-
+  const handleDelete = (id: string) => {
+    fetchDeleteEmployee(id);
+    store.dispatch(deleteEmployeeAction(id));
+  };
   const departmentIdNameMap: { [key: string]: string } = {};
   departments.forEach((department: Department) => {
     departmentIdNameMap[department._id] = department.name;
@@ -154,11 +159,11 @@ export default function ReactVirtualizedTable() {
         </TableCell>
         <TableCell>
           <IconButton>
-            <EditIcon color="primary" />
+            <EditIcon color="secondary" />
           </IconButton>
         </TableCell>
         <TableCell>
-          <IconButton>
+          <IconButton onClick={() => handleDelete(row._id)}>
             <DeleteIcon color="error" />
           </IconButton>
         </TableCell>

@@ -42,6 +42,7 @@ export default function AddEmployeeFormDialog() {
     } catch (error) {
       console.log(error);
     }
+    handleClose();
   };
 
   return (
@@ -105,9 +106,9 @@ export default function AddEmployeeFormDialog() {
               select
               label="Department"
               fullWidth
-              defaultValue={departments[0]._id}
-              error={errors.department ? true : false}
-              helperText={errors.department && "Department is required"}
+              defaultValue=""
+              error={errors.departmentId ? true : false}
+              helperText={errors.departmentId && "Department is required"}
             >
               {departments.map((option: any) => (
                 <MenuItem key={option._id} value={option._id}>

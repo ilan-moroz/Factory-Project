@@ -101,3 +101,12 @@ export const fetchGetAllEmployees = async () => {
     console.log(err);
   }
 };
+
+export const fetchDeleteEmployee = async (id: string) => {
+  try {
+    const response = await api.delete(`/employees/deleteEmployee/${id}`);
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
