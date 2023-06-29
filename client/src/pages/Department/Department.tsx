@@ -24,6 +24,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
 import "./Department.css";
+import Tooltip from "@mui/material/Tooltip";
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -90,7 +91,17 @@ function fixedHeaderContent() {
             backgroundColor: "background.paper",
           }}
         >
-          {column.label}
+          <Tooltip title={column.label}>
+            <div
+              style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {column.label}
+            </div>
+          </Tooltip>
         </TableCell>
       ))}
     </TableRow>
@@ -131,7 +142,17 @@ function rowContent(_index: number, row: Department) {
               key={column.dataKey}
               align={column.numeric || false ? "right" : "left"}
             >
-              {row[column.dataKey as keyof Department]}
+              <Tooltip title={row[column.dataKey as keyof Department]}>
+                <div
+                  style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {row[column.dataKey as keyof Department]}
+                </div>
+              </Tooltip>
             </TableCell>
           );
         }
