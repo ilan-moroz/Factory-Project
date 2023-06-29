@@ -23,6 +23,7 @@ import { Department } from "../../models/Department";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
+import "./Department.css";
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -164,7 +165,10 @@ export default function ReactVirtualizedTable() {
   }, []);
 
   return (
-    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+    <div
+      className="department"
+      style={{ height: "100%", display: "flex", flexDirection: "column" }}
+    >
       <div style={{ marginTop: 10 }}>
         <FormDialog />
       </div>
