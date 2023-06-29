@@ -203,7 +203,7 @@ export default function ReactVirtualizedTable() {
           justifyContent: "center",
           alignItems: "center",
           flex: 1,
-          marginBottom: 350,
+          marginBottom: 400,
         }}
       >
         <Paper style={{ height: 450, width: "70%" }}>
