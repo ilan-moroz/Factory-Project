@@ -26,7 +26,6 @@ import IconButton from "@mui/material/IconButton";
 import "./Department.css";
 import Tooltip from "@mui/material/Tooltip";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 
 const darkTheme = createTheme({
   palette: {
