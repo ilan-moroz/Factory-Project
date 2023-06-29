@@ -9,13 +9,16 @@ import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
 import { Box, IconButton } from "@mui/material";
 import { Employee } from "../models/Employee";
-import { RootState } from "../redux/Store";
+import { RootState, store } from "../redux/Store";
 import { useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import AddEmployeeFormDialog from "../components/AddEmployee";
 import { Department } from "../models/Department";
+import { fetchGetAllEmployees } from "../utils/fetchData";
+import { getAllEmployeesAction } from "../redux/EmployeeReducer";
+import { useEffect } from "react";
 
 interface ColumnData {
   dataKey: keyof Employee;
@@ -162,6 +165,25 @@ export default function ReactVirtualizedTable() {
       </React.Fragment>
     );
   }
+
+  // get data from database and save in redux
+  const fetchDepartments = () => {
+    console.log("getting departments from backend....");
+    fetchGetAllEmployees()
+      .then((response) => {
+        store.dispatch(getAllEmployeesAction(response));
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  };
+
+  //if employees is empty get all departments from database and save in redux
+  useEffect(() => {
+    if (store.getState().employees.employees.length < 1) {
+      fetchDepartments();
+    }
+  }, []);
 
   return (
     <Box
