@@ -25,6 +25,14 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
 import "./Department.css";
 import Tooltip from "@mui/material/Tooltip";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -186,31 +194,33 @@ export default function ReactVirtualizedTable() {
   }, []);
 
   return (
-    <div
-      className="department"
-      style={{ height: "100%", display: "flex", flexDirection: "column" }}
-    >
-      <div style={{ marginTop: 10 }}>
-        <FormDialog />
-      </div>
+    <ThemeProvider theme={darkTheme}>
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          flex: 1,
-        }}
+        className="department"
+        style={{ height: "100%", display: "flex", flexDirection: "column" }}
       >
-        <Paper style={{ height: 400, width: "70%" }}>
-          <TableVirtuoso
-            data={departments}
-            components={VirtuosoTableComponents}
-            fixedHeaderContent={fixedHeaderContent}
-            itemContent={rowContent}
-          />
-        </Paper>
+        <div style={{ marginTop: 10 }}>
+          <FormDialog />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 1,
+          }}
+        >
+          <Paper style={{ height: 400, width: "70%" }}>
+            <TableVirtuoso
+              data={departments}
+              components={VirtuosoTableComponents}
+              fixedHeaderContent={fixedHeaderContent}
+              itemContent={rowContent}
+            />
+          </Paper>
+        </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
