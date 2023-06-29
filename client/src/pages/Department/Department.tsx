@@ -26,6 +26,7 @@ import IconButton from "@mui/material/IconButton";
 import "./Department.css";
 import Tooltip from "@mui/material/Tooltip";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 
 const darkTheme = createTheme({
   palette: {
@@ -196,13 +197,13 @@ export default function ReactVirtualizedTable() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <div
+      <Box
         className="department"
         style={{ height: "100%", display: "flex", flexDirection: "column" }}
       >
-        <div style={{ marginTop: 10 }}>
+        <Box sx={{ p: 3 }}>
           <FormDialog />
-        </div>
+        </Box>
         <div
           style={{
             display: "flex",
@@ -210,9 +211,10 @@ export default function ReactVirtualizedTable() {
             justifyContent: "center",
             alignItems: "center",
             flex: 1,
+            marginBottom: 350,
           }}
         >
-          <Paper style={{ height: 400, width: "70%" }}>
+          <Paper style={{ height: 450, width: "70%" }}>
             <TableVirtuoso
               data={departments}
               components={VirtuosoTableComponents}
@@ -221,7 +223,7 @@ export default function ReactVirtualizedTable() {
             />
           </Paper>
         </div>
-      </div>
+      </Box>
     </ThemeProvider>
   );
 }

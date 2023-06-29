@@ -172,7 +172,7 @@ export default function ReactVirtualizedTable() {
         justifyContent: "center",
       }}
     >
-      <Box sx={{ p: 5 }}>
+      <Box sx={{ p: 3 }}>
         <AddEmployeeFormDialog />
       </Box>
       <Paper style={{ height: 400, width: "90%" }}>
