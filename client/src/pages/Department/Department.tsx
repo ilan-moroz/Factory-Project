@@ -96,6 +96,7 @@ function fixedHeaderContent() {
           style={{ width: column.width }}
           sx={{
             backgroundColor: "background.paper",
+            color: "lightBlue",
           }}
         >
           <Tooltip title={column.label}>
@@ -130,7 +131,7 @@ function rowContent(_index: number, row: Department) {
               align={column.numeric || false ? "right" : "left"}
             >
               <IconButton onClick={() => handleDelete(row._id)}>
-                <DeleteForeverIcon color="warning" />
+                <DeleteForeverIcon color="error" />
               </IconButton>
             </TableCell>
           );
@@ -140,7 +141,7 @@ function rowContent(_index: number, row: Department) {
               key={column.dataKey}
               align={column.numeric || false ? "right" : "left"}
             >
-              <EditIcon />
+              <EditIcon color="secondary" />
             </TableCell>
           );
         } else {
@@ -155,6 +156,7 @@ function rowContent(_index: number, row: Department) {
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
+                    color: "smoke",
                   }}
                 >
                   {row[column.dataKey as keyof Department]}
