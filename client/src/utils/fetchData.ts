@@ -66,3 +66,20 @@ export const fetchDeleteDepartment = async (id: string) => {
     console.log(err);
   }
 };
+
+export const fetchUpdateDepartment = async (
+  departmentId: string,
+  departmentName: string
+) => {
+  try {
+    const response = await api.put(
+      `/departments/updateDepartment/${departmentId}`,
+      {
+        name: departmentName,
+      }
+    );
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
