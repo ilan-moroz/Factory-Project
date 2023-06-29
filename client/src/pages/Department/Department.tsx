@@ -196,7 +196,7 @@ export default function ReactVirtualizedTable() {
       <Box sx={{ p: 3 }}>
         <FormDialog />
       </Box>
-      <div
+      <Box
         style={{
           display: "flex",
           flexDirection: "column",
@@ -214,7 +214,7 @@ export default function ReactVirtualizedTable() {
             itemContent={rowContent}
           />
         </Paper>
-      </div>
+      </Box>
     </Box>
   );
 }

@@ -165,24 +165,31 @@ export default function ReactVirtualizedTable() {
 
   return (
     <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      className="department"
+      style={{ height: "100%", display: "flex", flexDirection: "column" }}
     >
       <Box sx={{ p: 3 }}>
         <AddEmployeeFormDialog />
       </Box>
-      <Paper style={{ height: 400, width: "90%" }}>
-        <TableVirtuoso
-          data={employeesWithDepartmentNames} // Use the new array here
-          components={VirtuosoTableComponents}
-          fixedHeaderContent={fixedHeaderContent}
-          itemContent={rowContent}
-        />
-      </Paper>
+      <Box
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          flex: 1,
+          marginBottom: 400,
+        }}
+      >
+        <Paper style={{ height: 400, width: "70%" }}>
+          <TableVirtuoso
+            data={employeesWithDepartmentNames} // Use the new array here
+            components={VirtuosoTableComponents}
+            fixedHeaderContent={fixedHeaderContent}
+            itemContent={rowContent}
+          />
+        </Paper>
+      </Box>
     </Box>
   );
 }
