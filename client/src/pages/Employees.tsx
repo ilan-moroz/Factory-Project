@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-// import AddEmployeeFormDialog from "../components/AddEmployeeForm";
+import AddEmployeeFormDialog from "../components/AddEmployee";
 import { Department } from "../models/Department";
 
 interface ColumnData {
@@ -172,7 +172,9 @@ export default function ReactVirtualizedTable() {
         justifyContent: "center",
       }}
     >
-      <Box sx={{ p: 5 }}>{/* <AddEmployeeFormDialog /> */}</Box>
+      <Box sx={{ p: 5 }}>
+        <AddEmployeeFormDialog />
+      </Box>
       <Paper style={{ height: 400, width: "90%" }}>
         <TableVirtuoso
           data={employeesWithDepartmentNames} // Use the new array here
