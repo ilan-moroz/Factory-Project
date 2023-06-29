@@ -24,7 +24,7 @@ import {
 import { useEffect } from "react";
 
 interface ColumnData {
-  dataKey: keyof Employee;
+  dataKey: keyof Employee | string;
   label: string;
   numeric?: boolean;
   width: number;
@@ -74,7 +74,12 @@ function fixedHeaderContent() {
   return (
     <TableRow>
       <TableCell
-        sx={{ width: 30, backgroundColor: "background.paper" }}
+        sx={{
+          width: 30,
+          backgroundColor: "background.paper",
+          color: "InfoText",
+          fontWeight: "bold",
+        }}
         variant="head"
       >
         No.
@@ -87,25 +92,42 @@ function fixedHeaderContent() {
           style={{ width: column.width }}
           sx={{
             backgroundColor: "background.paper",
+            color: "InfoText",
+            fontWeight: "bold",
           }}
         >
           {column.label}
         </TableCell>
       ))}
       <TableCell
-        sx={{ width: 30, backgroundColor: "background.paper" }}
+        sx={{
+          width: 30,
+          backgroundColor: "background.paper",
+          color: "InfoText",
+          fontWeight: "bold",
+        }}
         variant="head"
       >
         Add shift
       </TableCell>
       <TableCell
-        sx={{ width: 30, backgroundColor: "background.paper" }}
+        sx={{
+          width: 30,
+          backgroundColor: "background.paper",
+          color: "InfoText",
+          fontWeight: "bold",
+        }}
         variant="head"
       >
         Edit
       </TableCell>
       <TableCell
-        sx={{ width: 30, backgroundColor: "background.paper" }}
+        sx={{
+          width: 30,
+          backgroundColor: "background.paper",
+          color: "InfoText",
+          fontWeight: "bold",
+        }}
         variant="head"
       >
         Delete
