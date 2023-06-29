@@ -25,14 +25,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
 import "./Department.css";
 import Tooltip from "@mui/material/Tooltip";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -97,7 +90,8 @@ function fixedHeaderContent() {
           style={{ width: column.width }}
           sx={{
             backgroundColor: "background.paper",
-            color: "lightBlue",
+            color: "InfoText",
+            fontWeight: "bold",
           }}
         >
           <Tooltip title={column.label}>
@@ -157,7 +151,6 @@ function rowContent(_index: number, row: Department) {
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
-                    color: "smoke",
                   }}
                 >
                   {row[column.dataKey as keyof Department]}
@@ -196,34 +189,32 @@ export default function ReactVirtualizedTable() {
   }, []);
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <Box
-        className="department"
-        style={{ height: "100%", display: "flex", flexDirection: "column" }}
-      >
-        <Box sx={{ p: 3 }}>
-          <FormDialog />
-        </Box>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            flex: 1,
-            marginBottom: 350,
-          }}
-        >
-          <Paper style={{ height: 450, width: "70%" }}>
-            <TableVirtuoso
-              data={departments}
-              components={VirtuosoTableComponents}
-              fixedHeaderContent={fixedHeaderContent}
-              itemContent={rowContent}
-            />
-          </Paper>
-        </div>
+    <Box
+      className="department"
+      style={{ height: "100%", display: "flex", flexDirection: "column" }}
+    >
+      <Box sx={{ p: 3 }}>
+        <FormDialog />
       </Box>
-    </ThemeProvider>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          flex: 1,
+          marginBottom: 350,
+        }}
+      >
+        <Paper style={{ height: 450, width: "70%" }}>
+          <TableVirtuoso
+            data={departments}
+            components={VirtuosoTableComponents}
+            fixedHeaderContent={fixedHeaderContent}
+            itemContent={rowContent}
+          />
+        </Paper>
+      </div>
+    </Box>
   );
 }
