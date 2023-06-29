@@ -20,12 +20,12 @@ import {
 } from "../../utils/fetchData";
 import { useSelector } from "react-redux";
 import { Department } from "../../models/Department";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
 import "./Department.css";
 import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
+import EditDepartment from "../../components/EditDepartment";
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -136,7 +136,7 @@ function rowContent(_index: number, row: Department) {
               key={column.dataKey}
               align={column.numeric || false ? "right" : "left"}
             >
-              <EditIcon color="secondary" />
+              <EditDepartment departmentId={row._id} />
             </TableCell>
           );
         } else {
