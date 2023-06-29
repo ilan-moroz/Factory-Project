@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar";
 import { useLocation } from "react-router-dom";
 import Department from "./pages/Department/Department";
 import Page404 from "./pages/page404/page404";
-import Shifts from "./pages/shifts";
+import Shifts from "./pages/Shifts";
 import Employees from "./pages/Employees";
 
 function App() {
