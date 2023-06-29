@@ -94,7 +94,7 @@ export default function AddEmployeeFormDialog() {
               autoFocus
               margin="dense"
               id="startWorkYear"
-              label="Start work year"
+              label="Start Year of Employment"
               type="number"
               fullWidth
               variant="standard"
