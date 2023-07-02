@@ -105,7 +105,7 @@ export default function ReactVirtualizedTable() {
 
   // get data from database and save in redux
   const fetchShifts = () => {
-    console.log("getting departments from backend....");
+    console.log("getting shifts from backend....");
     fetchGetAllShifts()
       .then((response) => {
         store.dispatch(getAllShiftsAction(response));
