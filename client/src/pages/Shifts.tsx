@@ -68,7 +68,12 @@ function fixedHeaderContent() {
   return (
     <TableRow>
       <TableCell
-        sx={{ width: 30, backgroundColor: "background.paper" }}
+        sx={{
+          width: 30,
+          backgroundColor: "background.paper",
+          color: "InfoText",
+          fontWeight: "bold",
+        }}
         variant="head"
       >
         No.
