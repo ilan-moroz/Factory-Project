@@ -8,8 +8,8 @@ import {
 
 const router = express.Router();
 
-router.get("/", verifyToken, getAllShifts);
-router.post("/", verifyToken, createShift);
+router.get("/getAllShifts", verifyToken, getAllShifts);
+router.post("/createShift", verifyToken, createShift);
 router.get("/:id/employees", verifyToken, getShiftEmployees);
 
 export default router;

@@ -110,3 +110,21 @@ export const fetchDeleteEmployee = async (id: string) => {
     console.log(err);
   }
 };
+
+export const fetchGetAllShifts = async () => {
+  try {
+    const response = await api.get("/shifts/getAllShifts");
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const fetchAddShift = async (data = {}) => {
+  try {
+    const response = await api.post("/shifts/createShift", data);
+    if (response.status === 201) return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
