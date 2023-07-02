@@ -8,7 +8,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
 import { Box } from "@mui/material";
-import { Employee } from "../models/Employee";
 import { RootState, store } from "../redux/Store";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -47,7 +46,7 @@ const columns: ColumnData[] = [
   },
 ];
 
-const VirtuosoTableComponents: TableComponents<Employee> = {
+const VirtuosoTableComponents: TableComponents<Shift> = {
   Scroller: React.forwardRef<HTMLDivElement>((props, ref) => (
     <TableContainer component={Paper} {...props} ref={ref} />
   )),
@@ -89,7 +88,7 @@ function fixedHeaderContent() {
 export default function ReactVirtualizedTable() {
   const shifts = useSelector((state: RootState) => state.shifts.allShifts);
 
-  function rowContent(index: number, row: Employee) {
+  function rowContent(index: number, row: Shift) {
     return (
       <React.Fragment>
         {columns.map((column) => (
@@ -97,11 +96,7 @@ export default function ReactVirtualizedTable() {
             key={column.dataKey}
             align={column.numeric || false ? "right" : "left"}
           >
-            {
-              row[
-                column.dataKey as keyof (Employee & { departmentName: string })
-              ]
-            }
+            {row[column.dataKey as keyof Shift]}
           </TableCell>
         ))}
       </React.Fragment>

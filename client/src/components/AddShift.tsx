@@ -6,17 +6,14 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Box, Fab, InputLabel, MenuItem } from "@mui/material";
+import { Box, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { RootState, store } from "../redux/Store";
 import { fetchAddShift } from "../utils/fetchData";
 import { addShiftAction } from "../redux/ShiftReducer";
-import { Label } from "@mui/icons-material";
+import { store } from "../redux/Store";
 
 export default function AddShiftFormDialog() {
-  const shifts = useSelector((state: RootState) => state.shifts.allShifts);
   const [open, setOpen] = React.useState(false);
   const {
     reset,
