@@ -19,7 +19,6 @@ if (!process.env.MONGO_URL) {
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
