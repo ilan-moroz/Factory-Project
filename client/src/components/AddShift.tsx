@@ -91,7 +91,7 @@ export default function AddShiftFormDialog() {
             <DialogContentText>Add new Shift to the factory</DialogContentText>
             <InputLabel
               htmlFor="date"
-              sx={{ display: "flex", justifyContent: "start", marginTop: 2 }}
+              sx={{ display: "flex", justifyContent: "start", mt: 2 }}
             >
               Date
             </InputLabel>
@@ -108,7 +108,7 @@ export default function AddShiftFormDialog() {
             />
             <InputLabel
               htmlFor="startTime"
-              sx={{ display: "flex", justifyContent: "start", marginTop: 2 }}
+              sx={{ display: "flex", justifyContent: "start", mt: 2 }}
             >
               Start Time
             </InputLabel>
@@ -125,7 +125,7 @@ export default function AddShiftFormDialog() {
             />
             <InputLabel
               htmlFor="endTime"
-              sx={{ display: "flex", justifyContent: "start", marginTop: 2 }}
+              sx={{ display: "flex", justifyContent: "start", mt: 2 }}
             >
               End Time
             </InputLabel>
@@ -140,12 +140,19 @@ export default function AddShiftFormDialog() {
               fullWidth
               variant="standard"
             />
+            <InputLabel
+              htmlFor="employeesNames"
+              sx={{ display: "flex", justifyContent: "start", mt: 2 }}
+            >
+              Choose Employees
+            </InputLabel>
             <Select
               id="employeesNames"
               multiple
               value={employeeIds}
               onChange={handleChange}
-              input={<OutlinedInput label="Tag" />}
+              input={<OutlinedInput />}
+              fullWidth
               renderValue={(selected) =>
                 selected.map((value) => employeeNameMap[value]).join(", ")
               }
