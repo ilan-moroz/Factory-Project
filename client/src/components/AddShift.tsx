@@ -6,14 +6,28 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Box, Fab } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  Fab,
+  ListItemText,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
 import { fetchAddShift } from "../utils/fetchData";
 import { addShiftAction } from "../redux/ShiftReducer";
-import { store } from "../redux/Store";
+import { RootState, store } from "../redux/Store";
+import { useSelector } from "react-redux";
 
 export default function AddShiftFormDialog() {
+  const employees = useSelector(
+    (state: RootState) => state.employees.employees
+  );
+
   const [open, setOpen] = React.useState(false);
   const {
     reset,
@@ -41,6 +55,19 @@ export default function AddShiftFormDialog() {
     handleClose();
   };
 
+  const [employeeIds, setEmployeeIds] = React.useState<string[]>([]);
+  const handleChange = (event: SelectChangeEvent<string[]>) => {
+    setEmployeeIds(event.target.value as string[]);
+  };
+
+  // Create a map of employee ids to employee names
+  const employeeNameMap: { [key: string]: string } = {};
+  employees.forEach((employee) => {
+    employeeNameMap[
+      employee._id
+    ] = `${employee.firstName} ${employee.lastName}`;
+  });
+
   return (
     <div>
       <Fab
@@ -54,7 +81,11 @@ export default function AddShiftFormDialog() {
       </Fab>
       <Dialog sx={{ mb: 20 }} open={open} onClose={handleClose}>
         <DialogTitle>Add Shift</DialogTitle>
-        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ width: 500 }}
+        >
           <DialogContent>
             <DialogContentText>Add new Shift to the factory</DialogContentText>
             <TextField
@@ -90,6 +121,25 @@ export default function AddShiftFormDialog() {
               fullWidth
               variant="standard"
             />
+            <Select
+              id="employeesNames"
+              multiple
+              value={employeeIds}
+              onChange={handleChange}
+              input={<OutlinedInput label="Tag" />}
+              renderValue={(selected) =>
+                selected.map((value) => employeeNameMap[value]).join(", ")
+              }
+            >
+              {employees.map((employee) => (
+                <MenuItem key={employee._id} value={employee._id}>
+                  <Checkbox checked={employeeIds.indexOf(employee._id) > -1} />
+                  <ListItemText
+                    primary={`${employee.firstName} ${employee.lastName}`}
+                  />
+                </MenuItem>
+              ))}
+            </Select>
           </DialogContent>
           <DialogActions>
             <Button type="reset" onClick={handleClose}>
