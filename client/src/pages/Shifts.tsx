@@ -15,6 +15,7 @@ import AddShiftFormDialog from "../components/AddShift";
 import { Shift } from "../models/Shifts";
 import { getAllShiftsAction } from "../redux/ShiftReducer";
 import { fetchGetAllShifts } from "../utils/fetchData";
+import { Employee } from "../models/Employee";
 
 interface ColumnData {
   dataKey: keyof Shift;
@@ -66,6 +67,12 @@ const VirtuosoTableComponents: TableComponents<Shift> = {
 function fixedHeaderContent() {
   return (
     <TableRow>
+      <TableCell
+        sx={{ width: 30, backgroundColor: "background.paper" }}
+        variant="head"
+      >
+        No.
+      </TableCell>
       {columns.map((column) => (
         <TableCell
           key={column.dataKey}
@@ -87,18 +94,40 @@ function fixedHeaderContent() {
 
 export default function ReactVirtualizedTable() {
   const shifts = useSelector((state: RootState) => state.shifts.allShifts);
+  const employees = useSelector(
+    (state: RootState) => state.employees.employees
+  );
+
+  const employeeIdNameMap: { [key: string]: string } = {};
+  employees.forEach((employee: Employee) => {
+    employeeIdNameMap[
+      employee._id
+    ] = `${employee.firstName} ${employee.lastName}`;
+  });
+
+  const shiftsWithEmployeeNames = shifts.map((shift) => ({
+    ...shift,
+    employeeNames: shift.employeeIds.map((id) => employeeIdNameMap[id]),
+  }));
 
   function rowContent(index: number, row: Shift) {
     return (
       <React.Fragment>
-        {columns.map((column) => (
-          <TableCell
-            key={column.dataKey}
-            align={column.numeric || false ? "right" : "left"}
-          >
-            {row[column.dataKey as keyof Shift]}
-          </TableCell>
-        ))}
+        <TableCell>{index + 1}</TableCell>
+        {columns.map((column) => {
+          const cellContent =
+            column.dataKey === "employeeIds"
+              ? row.employeeNames.join(", ")
+              : row[column.dataKey];
+          return (
+            <TableCell
+              key={column.dataKey}
+              align={column.numeric || false ? "right" : "left"}
+            >
+              {cellContent}
+            </TableCell>
+          );
+        })}
       </React.Fragment>
     );
   }
@@ -142,7 +171,7 @@ export default function ReactVirtualizedTable() {
       >
         <Paper style={{ height: 400, width: "70%" }}>
           <TableVirtuoso
-            data={shifts}
+            data={shiftsWithEmployeeNames}
             components={VirtuosoTableComponents}
             fixedHeaderContent={fixedHeaderContent}
             itemContent={rowContent}
