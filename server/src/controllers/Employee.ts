@@ -6,7 +6,7 @@ export const getAllEmployees = async (req: Request, res: Response) => {
   try {
     const employees = await Employee.find()
       .populate("departmentId")
-      .populate("shifts");
+      .populate("shiftIds");
     res.status(200).json(employees);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
