@@ -89,10 +89,9 @@ export default function AddShiftFormDialog() {
         >
           <DialogContent>
             <DialogContentText>Add new Shift to the factory</DialogContentText>
-            <br />
             <InputLabel
               htmlFor="date"
-              sx={{ display: "flex", justifyContent: "start" }}
+              sx={{ display: "flex", justifyContent: "start", marginTop: 2 }}
             >
               Date
             </InputLabel>
@@ -109,7 +108,7 @@ export default function AddShiftFormDialog() {
             />
             <InputLabel
               htmlFor="startTime"
-              sx={{ display: "flex", justifyContent: "start" }}
+              sx={{ display: "flex", justifyContent: "start", marginTop: 2 }}
             >
               Start Time
             </InputLabel>
@@ -126,7 +125,7 @@ export default function AddShiftFormDialog() {
             />
             <InputLabel
               htmlFor="endTime"
-              sx={{ display: "flex", justifyContent: "start" }}
+              sx={{ display: "flex", justifyContent: "start", marginTop: 2 }}
             >
               End Time
             </InputLabel>
