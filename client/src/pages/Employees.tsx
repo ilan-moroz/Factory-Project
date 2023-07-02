@@ -108,6 +108,17 @@ function fixedHeaderContent() {
         }}
         variant="head"
       >
+        Shifts
+      </TableCell>
+      <TableCell
+        sx={{
+          width: 30,
+          backgroundColor: "background.paper",
+          color: "InfoText",
+          fontWeight: "bold",
+        }}
+        variant="head"
+      >
         Add shift
       </TableCell>
       <TableCell
@@ -174,6 +185,7 @@ export default function ReactVirtualizedTable() {
             }
           </TableCell>
         ))}
+        <TableCell>shifts</TableCell>
         <TableCell>
           <IconButton>
             <AddIcon color="success" />
