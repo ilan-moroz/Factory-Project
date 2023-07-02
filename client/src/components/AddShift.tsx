@@ -10,6 +10,7 @@ import {
   Box,
   Checkbox,
   Fab,
+  InputLabel,
   ListItemText,
   MenuItem,
   OutlinedInput,
@@ -88,6 +89,13 @@ export default function AddShiftFormDialog() {
         >
           <DialogContent>
             <DialogContentText>Add new Shift to the factory</DialogContentText>
+            <br />
+            <InputLabel
+              htmlFor="date"
+              sx={{ display: "flex", justifyContent: "start" }}
+            >
+              Date
+            </InputLabel>
             <TextField
               {...register("date", { required: true })}
               error={errors.date ? true : false}
@@ -99,6 +107,12 @@ export default function AddShiftFormDialog() {
               fullWidth
               variant="standard"
             />
+            <InputLabel
+              htmlFor="startTime"
+              sx={{ display: "flex", justifyContent: "start" }}
+            >
+              Start Time
+            </InputLabel>
             <TextField
               {...register("startTime", { required: true })}
               error={errors.startTime ? true : false}
@@ -110,6 +124,12 @@ export default function AddShiftFormDialog() {
               fullWidth
               variant="standard"
             />
+            <InputLabel
+              htmlFor="endTime"
+              sx={{ display: "flex", justifyContent: "start" }}
+            >
+              End Time
+            </InputLabel>
             <TextField
               {...register("endTime", { required: true })}
               error={errors.endTime ? true : false}
