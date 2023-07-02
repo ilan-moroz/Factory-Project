@@ -154,6 +154,19 @@ export default function ReactVirtualizedTable() {
   const departments = useSelector(
     (state: RootState) => state.departments.departments
   );
+  const shifts = useSelector((state: RootState) => state.shifts.allShifts);
+
+  function getEmployeeShifts(employeeId: string) {
+    const employeeShifts = shifts.filter((shift) =>
+      shift.employeeIds.includes(employeeId)
+    );
+    return employeeShifts
+      .map(
+        (shift) =>
+          `${shift.date.split("T")[0]}, ${shift.startTime}-${shift.endTime}`
+      )
+      .join("; ");
+  }
 
   const handleDelete = (id: string) => {
     fetchDeleteEmployee(id);
@@ -185,7 +198,7 @@ export default function ReactVirtualizedTable() {
             }
           </TableCell>
         ))}
-        <TableCell>shifts</TableCell>
+        <TableCell>{getEmployeeShifts(row._id)}</TableCell>
         <TableCell>
           <IconButton>
             <AddIcon color="success" />
