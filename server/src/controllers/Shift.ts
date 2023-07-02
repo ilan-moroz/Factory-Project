@@ -15,6 +15,7 @@ export const getAllShifts = async (req: Request, res: Response) => {
 export const createShift = async (req: Request, res: Response) => {
   try {
     const { date, startTime, endTime, employeeIds } = req.body;
+    console.log(employeeIds);
     const employees = await Employee.find({ _id: { $in: employeeIds } });
     if (employees.length !== employeeIds.length) {
       return res.status(404).json({ error: "One or more employees not found" });
@@ -27,6 +28,11 @@ export const createShift = async (req: Request, res: Response) => {
       employeeIds,
     });
     const savedShift = await newShift.save();
+
+    await Employee.updateMany(
+      { _id: { $in: employeeIds } },
+      { $push: { shiftIds: savedShift._id } }
+    );
 
     res.status(201).json(savedShift);
   } catch (err: any) {

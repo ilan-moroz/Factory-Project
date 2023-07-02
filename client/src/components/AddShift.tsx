@@ -48,9 +48,13 @@ export default function AddShiftFormDialog() {
   };
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+    const formData = {
+      ...data,
+      date: new Date(data.date),
+    };
+    console.log(formData);
     try {
-      const response = await fetchAddShift(data);
+      const response = await fetchAddShift(formData);
       store.dispatch(addShiftAction(response));
     } catch (error) {
       console.log(error);
@@ -149,14 +153,14 @@ export default function AddShiftFormDialog() {
               Choose Employees
             </InputLabel>
             <Select
-              {...register("employees", { required: true })}
+              {...register("employeeIds", { required: true })}
               id="employeesNames"
               multiple
               value={employeeIds}
               onChange={handleChange}
               input={<OutlinedInput />}
               fullWidth
-              error={errors.employees ? true : false}
+              error={errors.employeeIds ? true : false}
               renderValue={(selected) =>
                 selected.map((value) => employeeNameMap[value]).join(", ")
               }
@@ -170,7 +174,7 @@ export default function AddShiftFormDialog() {
                 </MenuItem>
               ))}
             </Select>
-            {errors.employees && (
+            {errors.employeeIds && (
               <Typography
                 variant="body2"
                 color="error"
