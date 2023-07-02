@@ -16,6 +16,7 @@ import {
   OutlinedInput,
   Select,
   SelectChangeEvent,
+  Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
@@ -147,12 +148,14 @@ export default function AddShiftFormDialog() {
               Choose Employees
             </InputLabel>
             <Select
+              {...register("employees", { required: true })}
               id="employeesNames"
               multiple
               value={employeeIds}
               onChange={handleChange}
               input={<OutlinedInput />}
               fullWidth
+              error={errors.employees ? true : false}
               renderValue={(selected) =>
                 selected.map((value) => employeeNameMap[value]).join(", ")
               }
@@ -166,6 +169,15 @@ export default function AddShiftFormDialog() {
                 </MenuItem>
               ))}
             </Select>
+            {errors.employees && (
+              <Typography
+                variant="body2"
+                color="error"
+                sx={{ display: "flex", justifyContent: "start", fontSize: 12 }}
+              >
+                Choose at least one employee
+              </Typography>
+            )}
           </DialogContent>
           <DialogActions>
             <Button type="reset" onClick={handleClose}>
