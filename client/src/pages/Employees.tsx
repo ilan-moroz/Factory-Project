@@ -161,10 +161,11 @@ export default function ReactVirtualizedTable() {
       shift.employeeIds.includes(employeeId)
     );
     return employeeShifts
-      .map(
-        (shift) =>
-          `${shift.date.split("T")[0]}, ${shift.startTime}-${shift.endTime}`
-      )
+      .map((shift) => {
+        const dateParts = shift.date.split("T")[0].split("-"); // ['yyyy', 'mm', 'dd']
+        const rearrangedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // 'dd/mm/yyyy'
+        return `${rearrangedDate}, ${shift.startTime}-${shift.endTime}`;
+      })
       .join("; ");
   }
 
