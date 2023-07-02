@@ -120,6 +120,20 @@ export default function ReactVirtualizedTable() {
       <React.Fragment>
         <TableCell>{index + 1}</TableCell>
         {columns.map((column) => {
+          if (column.dataKey === "date") {
+            const dateParts = String(row[column.dataKey])
+              .split("T")[0]
+              .split("-"); // ['yyyy', 'mm', 'dd']
+            const rearrangedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // 'dd-mm-yyyy'
+            return (
+              <TableCell
+                key={column.dataKey}
+                align={column.numeric || false ? "right" : "left"}
+              >
+                {rearrangedDate}
+              </TableCell>
+            );
+          }
           const cellContent =
             column.dataKey === "employeeIds"
               ? row.employeeNames.join(", ")
