@@ -37,8 +37,8 @@ interface ColumnData {
 const columns: ColumnData[] = [
   {
     width: 120,
-    label: "Department ID",
-    dataKey: "_id",
+    label: "No.",
+    dataKey: "id" as keyof Department,
   },
   {
     width: 120,
@@ -137,6 +137,15 @@ function rowContent(_index: number, row: Department) {
               align={column.numeric || false ? "right" : "left"}
             >
               <EditDepartment departmentId={row._id} />
+            </TableCell>
+          );
+        } else if (column.dataKey === "id") {
+          return (
+            <TableCell
+              key={column.dataKey}
+              align={column.numeric || false ? "right" : "left"}
+            >
+              {_index + 1}
             </TableCell>
           );
         } else {
