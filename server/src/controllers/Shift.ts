@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Shift, Employee } from "../models/Factory";
 
-// GET /shifts
+// GET /shifts/getAllShifts
 export const getAllShifts = async (req: Request, res: Response) => {
   try {
     const shifts = await Shift.find().populate("employeeIds");
@@ -11,7 +11,7 @@ export const getAllShifts = async (req: Request, res: Response) => {
   }
 };
 
-// POST /shifts
+// POST /shifts/createShift
 export const createShift = async (req: Request, res: Response) => {
   try {
     const { date, startTime, endTime, employeeIds } = req.body;
