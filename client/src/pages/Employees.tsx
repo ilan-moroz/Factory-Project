@@ -174,10 +174,18 @@ export default function ReactVirtualizedTable() {
     departmentIdNameMap[department._id] = department.name;
   });
 
-  const employeesWithDepartmentNames = employees.map((employee) => ({
-    ...employee,
-    departmentName: departmentIdNameMap[employee.departmentId],
-  }));
+  const employeesWithDepartmentNames = employees.map((employee) => {
+    let departmentName;
+    if (typeof employee.departmentId === "string") {
+      departmentName = departmentIdNameMap[employee.departmentId];
+    } else {
+      departmentName = (employee.departmentId as any).name;
+    }
+    return {
+      ...employee,
+      departmentName,
+    };
+  });
 
   function rowContent(index: number, row: Employee) {
     return (
