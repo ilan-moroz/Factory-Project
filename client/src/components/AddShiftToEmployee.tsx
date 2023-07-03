@@ -37,8 +37,7 @@ export default function ShiftEmployeeFormDialog() {
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await fetchAddDepartment(data.name, data.manager);
-      store.dispatch(addDepartmentAction(response));
+      console.log(data);
       handleClose();
     } catch (error) {
       console.error("Error:", error);
@@ -72,7 +71,7 @@ export default function ShiftEmployeeFormDialog() {
               fullWidth
               defaultValue=""
               error={errors.shift ? true : false}
-              helperText={errors.shift && "Manager is required"}
+              helperText={errors.shift && "Shift is required"}
             >
               {shifts.map((option: any) => (
                 <MenuItem key={option._id} value={option._id}>
