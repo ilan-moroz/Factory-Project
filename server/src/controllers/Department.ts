@@ -32,12 +32,18 @@ export const createDepartment = async (req: Request, res: Response) => {
 export const updateDepartment = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, manager } = req.body;
+    // Check if the new manager is a valid employee
+    const newManager = await Employee.findById(manager);
+    if (!newManager) {
+      return res.status(404).json({ error: "New manager not found" });
+    }
     const department = await Department.findById(id);
     if (!department) {
       return res.status(404).json({ error: "Department not found" });
     }
     department.name = name;
+    department.manager = manager;
     const updatedDepartment = await department.save();
     res.status(200).json(updatedDepartment);
   } catch (err: any) {

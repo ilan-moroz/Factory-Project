@@ -57,8 +57,11 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
 
   const onSubmit = async (data: any) => {
     try {
-      console.log(data._id);
-      const response = await fetchUpdateDepartment(data._id, data.name);
+      const response = await fetchUpdateDepartment(
+        data._id,
+        data.name,
+        data.manager
+      );
       store.dispatch(updateDepartmentAction(response));
 
       handleClose();

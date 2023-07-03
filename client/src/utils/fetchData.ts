@@ -69,13 +69,15 @@ export const fetchDeleteDepartment = async (id: string) => {
 
 export const fetchUpdateDepartment = async (
   departmentId: string,
-  departmentName: string
+  departmentName: string,
+  manager: string
 ) => {
   try {
     const response = await api.put(
       `/departments/updateDepartment/${departmentId}`,
       {
         name: departmentName,
+        manager: manager,
       }
     );
     if (response.status === 200) return response.data;
