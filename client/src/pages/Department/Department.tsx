@@ -9,7 +9,6 @@ import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
 import FormDialog from "../../components/AddDepartment";
 import { RootState, store } from "../../redux/Store";
-import { deleteDepartmentAction } from "../../redux/DepartmentReducer";
 import { fetchDeleteDepartment } from "../../utils/fetchData";
 import { useSelector } from "react-redux";
 import { Department } from "../../models/Department";
@@ -19,6 +18,7 @@ import "./Department.css";
 import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
 import EditDepartment from "../../components/EditDepartment";
+import { deleteDepartmentAction } from "../../redux/DepartmentReducer";
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -106,9 +106,18 @@ function fixedHeaderContent() {
 
 function rowContent(_index: number, row: Department) {
   const handleDelete = (id: string) => {
-    fetchDeleteDepartment(id);
-    store.dispatch(deleteDepartmentAction(id));
+    fetchDeleteDepartment(id)
+      .then((response) => {
+        if (!response) {
+          return;
+        }
+        store.dispatch(deleteDepartmentAction(id));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
   return (
     <React.Fragment>
       {columns.map((column) => {
