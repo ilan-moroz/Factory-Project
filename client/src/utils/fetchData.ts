@@ -38,10 +38,14 @@ export const fetchLogin = async (data: {
   }
 };
 
-export const fetchAddDepartment = async (departmentName: string) => {
+export const fetchAddDepartment = async (
+  departmentName: string,
+  manager: string
+) => {
   try {
     const response = await api.post("/departments/addDepartment", {
       name: departmentName,
+      manager: manager,
     });
     if (response.status === 201) return response.data;
   } catch (err) {

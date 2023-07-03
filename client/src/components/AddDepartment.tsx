@@ -6,15 +6,20 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Box, Fab } from "@mui/material";
+import { Box, Fab, MenuItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
 import { fetchAddDepartment } from "../utils/fetchData";
-import { store } from "../redux/Store";
+import { RootState, store } from "../redux/Store";
 import { addDepartmentAction } from "../redux/DepartmentReducer";
+import { useSelector } from "react-redux";
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+
+  const employees = useSelector(
+    (state: RootState) => state.employees.employees
+  );
 
   const {
     register,
@@ -34,7 +39,7 @@ export default function FormDialog() {
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await fetchAddDepartment(data.name);
+      const response = await fetchAddDepartment(data.name, data.manager);
       store.dispatch(addDepartmentAction(response));
       handleClose();
     } catch (error) {
@@ -67,6 +72,23 @@ export default function FormDialog() {
               error={Boolean(errors.name)}
               helperText={errors.name && "Department Name is required"}
             />
+            <TextField
+              sx={{ mt: 2 }}
+              {...register("manager", { required: true })}
+              id="manager"
+              select
+              label="manager"
+              fullWidth
+              defaultValue=""
+              error={errors.employeesIds ? true : false}
+              helperText={errors.employeesIds && "Manager is required"}
+            >
+              {employees.map((option: any) => (
+                <MenuItem key={option._id} value={option._id}>
+                  {option.firstName} {option.lastName}
+                </MenuItem>
+              ))}
+            </TextField>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>

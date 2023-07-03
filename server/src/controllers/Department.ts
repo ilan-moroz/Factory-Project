@@ -14,13 +14,13 @@ export const getAllDepartments = async (req: Request, res: Response) => {
 // POST /departments/addDepartment
 export const createDepartment = async (req: Request, res: Response) => {
   try {
-    const { name } = req.body;
+    const { name, manager } = req.body;
     // Check if department with the same name already exists
     const existingDepartment = await Department.findOne({ name });
     if (existingDepartment) {
       return res.status(400).json({ error: "Department already exists" });
     }
-    const newDepartment = new Department({ name });
+    const newDepartment = new Department({ name, manager });
     newDepartment.save();
     res.status(201).json(newDepartment);
   } catch (err: any) {
