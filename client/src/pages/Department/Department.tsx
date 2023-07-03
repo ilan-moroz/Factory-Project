@@ -19,6 +19,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
 import EditDepartment from "../../components/EditDepartment";
 import { deleteDepartmentAction } from "../../redux/DepartmentReducer";
+import { Employee } from "../../models/Employee";
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -180,6 +181,25 @@ export default function ReactVirtualizedTable() {
     (state: RootState) => state.departments.departments
   );
 
+  const employees = useSelector(
+    (state: RootState) => state.employees.employees
+  );
+
+  const employeeIdNameMap: { [key: string]: string } = {};
+  employees.forEach((employee: Employee) => {
+    employeeIdNameMap[
+      employee._id
+    ] = `${employee.firstName} ${employee.lastName}`;
+  });
+
+  const departmentsWithManagerNames = departments.map(
+    (department: Department) => ({
+      ...department,
+      manager: Array.isArray(department.manager)
+        ? department.manager.map((id) => employeeIdNameMap[id])
+        : [employeeIdNameMap[department.manager]],
+    })
+  );
   return (
     <Box
       className="department"
@@ -200,7 +220,7 @@ export default function ReactVirtualizedTable() {
       >
         <Paper style={{ height: 450, width: "70%" }}>
           <TableVirtuoso
-            data={departments}
+            data={departmentsWithManagerNames}
             components={VirtuosoTableComponents}
             fixedHeaderContent={fixedHeaderContent}
             itemContent={rowContent}
