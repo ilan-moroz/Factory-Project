@@ -16,12 +16,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import AddEmployeeFormDialog from "../components/AddEmployee";
 import { Department } from "../models/Department";
-import { fetchDeleteEmployee, fetchGetAllEmployees } from "../utils/fetchData";
-import {
-  deleteEmployeeAction,
-  getAllEmployeesAction,
-} from "../redux/EmployeeReducer";
-import { useEffect } from "react";
+import { fetchDeleteEmployee } from "../utils/fetchData";
+import { deleteEmployeeAction } from "../redux/EmployeeReducer";
 
 interface ColumnData {
   dataKey: keyof Employee | string;
@@ -218,25 +214,6 @@ export default function ReactVirtualizedTable() {
       </React.Fragment>
     );
   }
-
-  // get data from database and save in redux
-  const fetchDepartments = () => {
-    console.log("getting employees from backend....");
-    fetchGetAllEmployees()
-      .then((response) => {
-        store.dispatch(getAllEmployeesAction(response));
-      })
-      .catch((error) => {
-        console.error("Error fetching data: ", error);
-      });
-  };
-
-  //if employees is empty get all departments from database and save in redux
-  useEffect(() => {
-    if (store.getState().employees.employees.length < 1) {
-      fetchDepartments();
-    }
-  }, []);
 
   return (
     <Box

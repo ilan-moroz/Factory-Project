@@ -9,15 +9,8 @@ import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
 import FormDialog from "../../components/AddDepartment";
 import { RootState, store } from "../../redux/Store";
-import { useEffect } from "react";
-import {
-  deleteDepartmentAction,
-  getAllDepartmentsAction,
-} from "../../redux/DepartmentReducer";
-import {
-  fetchDeleteDepartment,
-  fetchGetAllDepartments,
-} from "../../utils/fetchData";
+import { deleteDepartmentAction } from "../../redux/DepartmentReducer";
+import { fetchDeleteDepartment } from "../../utils/fetchData";
 import { useSelector } from "react-redux";
 import { Department } from "../../models/Department";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -177,25 +170,6 @@ export default function ReactVirtualizedTable() {
   const departments = useSelector(
     (state: RootState) => state.departments.departments
   );
-
-  // get data from database and save in redux
-  const fetchDepartments = () => {
-    console.log("getting departments from backend....");
-    fetchGetAllDepartments()
-      .then((response) => {
-        store.dispatch(getAllDepartmentsAction(response));
-      })
-      .catch((error) => {
-        console.error("Error fetching data: ", error);
-      });
-  };
-
-  //if departments is empty get all departments from database and save in redux
-  useEffect(() => {
-    if (store.getState().departments.departments.length < 1) {
-      fetchDepartments();
-    }
-  }, []);
 
   return (
     <Box
