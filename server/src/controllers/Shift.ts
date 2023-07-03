@@ -5,7 +5,17 @@ import { Shift, Employee } from "../models/Factory";
 export const getAllShifts = async (req: Request, res: Response) => {
   try {
     const shifts = await Shift.find().populate("employeeIds");
-    res.status(200).json(shifts);
+    const processedShifts = shifts.map((shift) => {
+      const shiftObject = shift.toObject();
+      const employeeIds = shiftObject.employeeIds.map((employee: any) =>
+        employee._id.toString()
+      );
+      return {
+        ...shiftObject,
+        employeeIds,
+      };
+    });
+    res.status(200).json(processedShifts);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
