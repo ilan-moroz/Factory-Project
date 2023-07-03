@@ -18,6 +18,7 @@ interface IEmployee extends Document {
   lastName: string;
   startWorkYear: number;
   departmentId: Schema.Types.ObjectId;
+  shiftIds: Schema.Types.ObjectId[];
 }
 
 interface IShift extends Document {

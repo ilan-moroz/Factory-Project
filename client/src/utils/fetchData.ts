@@ -134,3 +134,18 @@ export const fetchAddShift = async (data = {}) => {
     console.log(err);
   }
 };
+
+export const fetchAddShiftToEmployee = async (
+  shiftId: string,
+  employeeId: string
+) => {
+  try {
+    const response = await api.post("/shifts/addShiftToEmployee", {
+      shiftId,
+      employeeId,
+    });
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

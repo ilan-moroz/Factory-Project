@@ -11,14 +11,13 @@ import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
 import { RootState } from "../redux/Store";
 import { useSelector } from "react-redux";
+import { fetchAddShiftToEmployee } from "../utils/fetchData";
 
 type shiftProps = {
   employeeId: string;
 };
 
 export default function ShiftEmployeeFormDialog(props: shiftProps) {
-  const { employeeId } = props;
-
   const [open, setOpen] = React.useState(false);
 
   const shifts = useSelector((state: RootState) => state.shifts.allShifts);
@@ -40,14 +39,16 @@ export default function ShiftEmployeeFormDialog(props: shiftProps) {
   };
 
   const onSubmit = async (data: any) => {
+    const { employeeId } = props;
     try {
-      console.log(data.shift);
-      console.log(employeeId);
-      //   handleClose();
+      const response = await fetchAddShiftToEmployee(data.shift, employeeId);
+      console.log(response);
+      handleClose();
     } catch (error) {
       console.error("Error:", error);
     }
   };
+
   function formatDate(dateString: string) {
     const dateParts = dateString.split("T")[0].split("-");
     const rearrangedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;

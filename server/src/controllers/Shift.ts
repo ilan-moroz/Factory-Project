@@ -65,3 +65,34 @@ export const getShiftEmployees = async (req: Request, res: Response) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const addShiftToEmployee = async (req: Request, res: Response) => {
+  try {
+    const { shiftId, employeeId } = req.body;
+
+    // Find the shift by ID
+    const shift = await Shift.findById(shiftId);
+    const employee = await Employee.findById(employeeId);
+
+    if (!shift) {
+      return res.status(404).json({ message: "Shift not found" });
+    }
+
+    if (!employee) {
+      return res.status(404).json({ message: "Employee not found" });
+    }
+
+    // Add the employee ID to the shift's employeeIds array
+    shift.employeeIds.push(employeeId);
+    employee.shiftIds.push(shiftId);
+
+    // Save the updated shift
+    await shift.save();
+    await employee.save();
+
+    res.status(200).json({ message: "Employee added to shift successfully" });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
