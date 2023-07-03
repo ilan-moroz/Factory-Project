@@ -6,7 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, MenuItem } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { fetchUpdateDepartment } from "../utils/fetchData";
 import { RootState, store } from "../redux/Store";
@@ -31,6 +31,9 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
 
   const departments = useSelector(
     (state: RootState) => state.departments.departments
+  );
+  const employees = useSelector(
+    (state: RootState) => state.employees.employees
   );
   const departmentToEdit = departments.find(
     (dep: any) => dep._id === departmentId
@@ -87,6 +90,23 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
               fullWidth
               variant="standard"
             />
+            <TextField
+              sx={{ mt: 2 }}
+              {...register("manager", { required: true })}
+              id="manager"
+              select
+              label="manager"
+              fullWidth
+              defaultValue=""
+              error={errors.employeesIds ? true : false}
+              helperText={errors.employeesIds && "Manager is required"}
+            >
+              {employees.map((option: any) => (
+                <MenuItem key={option._id} value={option._id}>
+                  {option.firstName} {option.lastName}
+                </MenuItem>
+              ))}
+            </TextField>
           </DialogContent>
           <DialogActions>
             <Button type="reset" onClick={handleClose}>
