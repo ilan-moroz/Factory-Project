@@ -9,12 +9,16 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Box, IconButton, MenuItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
-import { fetchAddDepartment } from "../utils/fetchData";
-import { RootState, store } from "../redux/Store";
-import { addDepartmentAction } from "../redux/DepartmentReducer";
+import { RootState } from "../redux/Store";
 import { useSelector } from "react-redux";
 
-export default function ShiftEmployeeFormDialog() {
+type shiftProps = {
+  employeeId: string;
+};
+
+export default function ShiftEmployeeFormDialog(props: shiftProps) {
+  const { employeeId } = props;
+
   const [open, setOpen] = React.useState(false);
 
   const shifts = useSelector((state: RootState) => state.shifts.allShifts);
@@ -37,8 +41,9 @@ export default function ShiftEmployeeFormDialog() {
 
   const onSubmit = async (data: any) => {
     try {
-      console.log(data);
-      handleClose();
+      console.log(data.shift);
+      console.log(employeeId);
+      //   handleClose();
     } catch (error) {
       console.error("Error:", error);
     }

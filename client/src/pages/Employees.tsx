@@ -205,7 +205,7 @@ export default function ReactVirtualizedTable() {
         ))}
         <TableCell>{getEmployeeShifts(row._id)}</TableCell>
         <TableCell>
-          <ShiftEmployeeFormDialog />
+          <ShiftEmployeeFormDialog employeeId={row._id} />
         </TableCell>
         <TableCell>
           <IconButton>
