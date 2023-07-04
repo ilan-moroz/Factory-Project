@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Popper, Paper, Button, Typography } from "@mui/material";
+import {
+  Popper,
+  Paper,
+  Button,
+  Typography,
+  ClickAwayListener,
+} from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/Store";
 
@@ -35,32 +41,40 @@ const EmployeeShiftsPopper: React.FC<EmployeeShiftsPopperProps> = ({
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
+  const handleClickAway = () => {
+    setAnchorEl(null);
+  };
+
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
 
   return (
     <div>
-      <Button
-        variant="outlined"
-        aria-describedby={id}
-        size="small"
-        onClick={handleClick}
-        sx={{
-          borderColor: "black",
-          color: "black",
-        }}
-      >
-        Open shifts
-      </Button>
-      <Popper id={id} open={open} anchorEl={anchorEl}>
-        <Paper
-          sx={{
-            p: 1,
-          }}
-        >
-          {getEmployeeShifts()}
-        </Paper>
-      </Popper>
+      <ClickAwayListener onClickAway={handleClickAway}>
+        <div>
+          <Button
+            variant="outlined"
+            aria-describedby={id}
+            size="small"
+            onClick={handleClick}
+            sx={{
+              borderColor: "black",
+              color: "black",
+            }}
+          >
+            Open shifts
+          </Button>
+          <Popper id={id} open={open} anchorEl={anchorEl}>
+            <Paper
+              sx={{
+                p: 1,
+              }}
+            >
+              {getEmployeeShifts()}
+            </Paper>
+          </Popper>
+        </div>
+      </ClickAwayListener>
     </div>
   );
 };
