@@ -17,11 +17,11 @@ const EmployeeShiftsPopper: React.FC<EmployeeShiftsPopperProps> = ({
     const employeeShifts = shifts.filter((shift) =>
       shift.employeeIds.includes(employeeId)
     );
-    return employeeShifts.map((shift, index) => {
+    return employeeShifts.map((shift) => {
       const dateParts = shift.date.split("T")[0].split("-"); // ['yyyy', 'mm', 'dd']
       const rearrangedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // 'dd/mm/yyyy'
       return (
-        <Typography key={index}>
+        <Typography>
           {`${rearrangedDate} : ${shift.startTime}-${shift.endTime}`}
         </Typography>
       );
@@ -56,9 +56,6 @@ const EmployeeShiftsPopper: React.FC<EmployeeShiftsPopperProps> = ({
         <Paper
           sx={{
             p: 1,
-            backgroundColor: "black",
-            color: "white",
-            overflow: "auto",
           }}
         >
           {getEmployeeShifts()}
