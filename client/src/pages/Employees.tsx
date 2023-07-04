@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Popper, Typography } from "@mui/material";
 import { Employee } from "../models/Employee";
 import { RootState, store } from "../redux/Store";
 import { useSelector } from "react-redux";
@@ -152,19 +152,6 @@ export default function ReactVirtualizedTable() {
   );
   const shifts = useSelector((state: RootState) => state.shifts.allShifts);
 
-  function getEmployeeShifts(employeeId: string) {
-    const employeeShifts = shifts.filter((shift) =>
-      shift.employeeIds.includes(employeeId)
-    );
-    return employeeShifts
-      .map((shift) => {
-        const dateParts = shift.date.split("T")[0].split("-"); // ['yyyy', 'mm', 'dd']
-        const rearrangedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // 'dd/mm/yyyy'
-        return `${rearrangedDate}, ${shift.startTime}-${shift.endTime}`;
-      })
-      .join("; ");
-  }
-
   const handleDelete = (id: string) => {
     fetchDeleteEmployee(id);
     store.dispatch(deleteEmployeeAction(id));
@@ -187,6 +174,38 @@ export default function ReactVirtualizedTable() {
     };
   });
 
+  // get all employee shifts
+  function getEmployeeShifts(employeeId: string) {
+    const employeeShifts = shifts.filter((shift) =>
+      shift.employeeIds.includes(employeeId)
+    );
+    return employeeShifts.map((shift, index) => {
+      const dateParts = shift.date.split("T")[0].split("-"); // ['yyyy', 'mm', 'dd']
+      const rearrangedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // 'dd/mm/yyyy'
+      return (
+        <Typography>
+          {`${rearrangedDate} : ${shift.startTime}-${shift.endTime}`}
+        </Typography>
+      );
+    });
+  }
+
+  // for the popper to display the shifts
+  const [anchorEls, setAnchorEls] = React.useState<{
+    [key: string]: null | HTMLElement;
+  }>({});
+
+  const handleClick =
+    (id: string) => (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEls((prev) => ({
+        ...prev,
+        [id]: prev[id] ? null : event.currentTarget,
+      }));
+    };
+
+  const open = Boolean(anchorEls);
+  const id = open ? "simple-popper" : undefined;
+
   function rowContent(index: number, row: Employee) {
     return (
       <React.Fragment>
@@ -203,7 +222,31 @@ export default function ReactVirtualizedTable() {
             }
           </TableCell>
         ))}
-        <TableCell>{getEmployeeShifts(row._id)}</TableCell>
+        <TableCell>
+          <button
+            aria-describedby={id}
+            type="button"
+            onClick={handleClick(row._id)}
+          >
+            Open shifts
+          </button>
+          <Popper
+            id={id}
+            open={Boolean(anchorEls[row._id])}
+            anchorEl={anchorEls[row._id]}
+          >
+            <Paper
+              sx={{
+                p: 1,
+                backgroundColor: "black",
+                color: "white",
+                overflow: "auto",
+              }}
+            >
+              {getEmployeeShifts(row._id)}
+            </Paper>
+          </Popper>
+        </TableCell>
         <TableCell>
           <ShiftEmployeeFormDialog employeeId={row._id} />
         </TableCell>
