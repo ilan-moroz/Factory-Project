@@ -12,7 +12,7 @@ export const useEmployeeShifts = (employeeId: string) => {
       const dateParts = shift.date.split("T")[0].split("-"); // ['yyyy', 'mm', 'dd']
       const rearrangedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // 'dd/mm/yyyy'
       return (
-        <Typography>
+        <Typography key={shift._id}>
           {`${rearrangedDate} : ${shift.startTime}-${shift.endTime}`}
         </Typography>
       );
