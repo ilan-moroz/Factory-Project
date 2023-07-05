@@ -8,9 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
 import FormDialog from "../../components/AddDepartment";
-import { RootState, store } from "../../redux/Store";
+import { store } from "../../redux/Store";
 import { fetchDeleteDepartment } from "../../utils/fetchData";
-import { useSelector } from "react-redux";
 import { Department } from "../../models/Department";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
@@ -19,7 +18,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
 import EditDepartment from "../../components/EditDepartment";
 import { deleteDepartmentAction } from "../../redux/DepartmentReducer";
-import { Employee } from "../../models/Employee";
+import { ManagerNames } from "../../hooks/useManagerNames";
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -177,29 +176,7 @@ function rowContent(_index: number, row: Department) {
 }
 
 export default function ReactVirtualizedTable() {
-  const departments = useSelector(
-    (state: RootState) => state.departments.departments
-  );
-
-  const employees = useSelector(
-    (state: RootState) => state.employees.employees
-  );
-
-  const employeeIdNameMap: { [key: string]: string } = {};
-  employees.forEach((employee: Employee) => {
-    employeeIdNameMap[
-      employee._id
-    ] = `${employee.firstName} ${employee.lastName}`;
-  });
-
-  const departmentsWithManagerNames = departments.map(
-    (department: Department) => ({
-      ...department,
-      manager: Array.isArray(department.manager)
-        ? department.manager.map((id) => employeeIdNameMap[id])
-        : [employeeIdNameMap[department.manager]],
-    })
-  );
+  const departmentsWithManagerNames = ManagerNames();
   return (
     <Box
       className="department"
