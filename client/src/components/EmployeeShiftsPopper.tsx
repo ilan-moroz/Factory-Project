@@ -1,13 +1,6 @@
 import * as React from "react";
-import {
-  Popper,
-  Paper,
-  Button,
-  Typography,
-  ClickAwayListener,
-} from "@mui/material";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/Store";
+import { Popper, Paper, Button, ClickAwayListener } from "@mui/material";
+import { useEmployeeShifts } from "../hooks/useEmployeeShifts";
 
 interface EmployeeShiftsPopperProps {
   employeeId: string;
@@ -16,23 +9,7 @@ interface EmployeeShiftsPopperProps {
 const EmployeeShiftsPopper: React.FC<EmployeeShiftsPopperProps> = ({
   employeeId,
 }) => {
-  const shifts = useSelector((state: RootState) => state.shifts.allShifts);
-
-  // get all employee shifts
-  const getEmployeeShifts = () => {
-    const employeeShifts = shifts.filter((shift) =>
-      shift.employeeIds.includes(employeeId)
-    );
-    return employeeShifts.map((shift) => {
-      const dateParts = shift.date.split("T")[0].split("-"); // ['yyyy', 'mm', 'dd']
-      const rearrangedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // 'dd/mm/yyyy'
-      return (
-        <Typography>
-          {`${rearrangedDate} : ${shift.startTime}-${shift.endTime}`}
-        </Typography>
-      );
-    });
-  };
+  const employeeShifts = useEmployeeShifts(employeeId);
 
   // for the popper to display the shifts
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
@@ -70,7 +47,7 @@ const EmployeeShiftsPopper: React.FC<EmployeeShiftsPopperProps> = ({
                 p: 1,
               }}
             >
-              {getEmployeeShifts()}
+              {employeeShifts}
             </Paper>
           </Popper>
         </div>
