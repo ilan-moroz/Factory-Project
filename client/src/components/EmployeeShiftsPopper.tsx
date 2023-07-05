@@ -15,6 +15,7 @@ interface EmployeeShiftsPopperProps {
 const EmployeeShiftsPopper: React.FC<EmployeeShiftsPopperProps> = ({
   employeeId,
 }) => {
+  // get all shifts from the hook
   const employeeShifts = useEmployeeShifts(employeeId);
 
   // for the popper to display the shifts
