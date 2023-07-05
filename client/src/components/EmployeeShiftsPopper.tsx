@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Popper, Paper, Button, ClickAwayListener } from "@mui/material";
+import {
+  Popper,
+  Paper,
+  Button,
+  ClickAwayListener,
+  Typography,
+} from "@mui/material";
 import { useEmployeeShifts } from "../hooks/useEmployeeShifts";
 
 interface EmployeeShiftsPopperProps {
@@ -47,7 +53,11 @@ const EmployeeShiftsPopper: React.FC<EmployeeShiftsPopperProps> = ({
                 p: 1,
               }}
             >
-              {employeeShifts}
+              {employeeShifts.map((shift) => (
+                <Typography key={shift.id}>
+                  {`${shift.date} : ${shift.startTime}-${shift.endTime}`}
+                </Typography>
+              ))}
             </Paper>
           </Popper>
         </div>
