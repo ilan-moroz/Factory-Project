@@ -9,16 +9,15 @@ import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
 import { Box, IconButton } from "@mui/material";
 import { Employee } from "../models/Employee";
-import { RootState, store } from "../redux/Store";
-import { useSelector } from "react-redux";
+import { store } from "../redux/Store";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import AddEmployeeFormDialog from "../components/AddEmployee";
-import { Department } from "../models/Department";
 import { fetchDeleteEmployee } from "../utils/fetchData";
 import { deleteEmployeeAction } from "../redux/EmployeeReducer";
 import ShiftEmployeeFormDialog from "../components/AddShiftToEmployee";
 import EmployeeShiftsPopper from "../components/EmployeeShiftsPopper";
+import { useEmployeeDepartmentNames } from "../hooks/useEmployeeDepartmentNames";
 
 interface ColumnData {
   dataKey: keyof Employee | string;
@@ -145,34 +144,10 @@ function fixedHeaderContent() {
 }
 
 export default function ReactVirtualizedTable() {
-  const employees = useSelector(
-    (state: RootState) => state.employees.employees
-  );
-  const departments = useSelector(
-    (state: RootState) => state.departments.departments
-  );
-
   const handleDelete = (id: string) => {
     fetchDeleteEmployee(id);
     store.dispatch(deleteEmployeeAction(id));
   };
-  const departmentIdNameMap: { [key: string]: string } = {};
-  departments.forEach((department: Department) => {
-    departmentIdNameMap[department._id] = department.name;
-  });
-
-  const employeesWithDepartmentNames = employees.map((employee) => {
-    let departmentName;
-    if (typeof employee.departmentId === "string") {
-      departmentName = departmentIdNameMap[employee.departmentId];
-    } else {
-      departmentName = (employee.departmentId as any).name;
-    }
-    return {
-      ...employee,
-      departmentName,
-    };
-  });
 
   function rowContent(index: number, row: Employee) {
     return (
@@ -210,6 +185,8 @@ export default function ReactVirtualizedTable() {
     );
   }
 
+  const employeesWithDepartmentNames = useEmployeeDepartmentNames();
+
   return (
     <Box
       className="department"
@@ -230,7 +207,7 @@ export default function ReactVirtualizedTable() {
       >
         <Paper style={{ height: 400, width: "70%" }}>
           <TableVirtuoso
-            data={employeesWithDepartmentNames} // Use the new array here
+            data={employeesWithDepartmentNames}
             components={VirtuosoTableComponents}
             fixedHeaderContent={fixedHeaderContent}
             itemContent={rowContent}
