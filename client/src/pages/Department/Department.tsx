@@ -18,7 +18,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
 import EditDepartment from "../../components/EditDepartment";
 import { deleteDepartmentAction } from "../../redux/DepartmentReducer";
-import { ManagerNames } from "../../hooks/useManagerNames";
+import { useManagerNames } from "../../hooks/useManagerNames";
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -176,7 +176,7 @@ function rowContent(_index: number, row: Department) {
 }
 
 export default function ReactVirtualizedTable() {
-  const departmentsWithManagerNames = ManagerNames();
+  const departmentsWithManagerNames = useManagerNames();
   return (
     <Box
       className="department"

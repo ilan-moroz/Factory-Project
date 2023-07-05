@@ -3,7 +3,7 @@ import { RootState } from "../redux/Store";
 import { Employee } from "../models/Employee";
 import { Department } from "../models/Department";
 
-export function ManagerNames() {
+export function useManagerNames() {
   const departments = useSelector(
     (state: RootState) => state.departments.departments
   );
