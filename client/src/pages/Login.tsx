@@ -10,15 +10,15 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { fetchLogin } from "../../utils/fetchData";
+import { fetchLogin } from "../utils/fetchData";
 import { useForm } from "react-hook-form";
 import { InputAdornment } from "@mui/material";
 import { Password, Person } from "@mui/icons-material";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 import { useNavigate } from "react-router-dom";
-import { store } from "../../redux/Store";
-import { setLoginAction } from "../../redux/UserReducer";
+import { store } from "../redux/Store";
+import { setLoginAction } from "../redux/UserReducer";
 
 function Copyright(props: any) {
   return (
