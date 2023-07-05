@@ -54,9 +54,10 @@ const EmployeeShiftsPopper: React.FC<EmployeeShiftsPopperProps> = ({
                 p: 1,
               }}
             >
-              {employeeShifts.map((shift) => (
+              {employeeShifts.map((shift, index) => (
                 <Typography key={shift.id}>
-                  {`${shift.date} : ${shift.startTime}-${shift.endTime}`}
+                  <b>{index + 1}</b>. {shift.date} : {shift.startTime}-
+                  {shift.endTime}
                 </Typography>
               ))}
             </Paper>
