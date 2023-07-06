@@ -1,197 +1,131 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import {
-  Box,
   Checkbox,
-  Fab,
   InputLabel,
   ListItemText,
   MenuItem,
   OutlinedInput,
   Select,
-  SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import { useForm } from "react-hook-form";
 import { fetchAddShift } from "../utils/fetchData";
 import { addShiftAction } from "../redux/ShiftReducer";
-import { RootState, store } from "../redux/Store";
-import { useSelector } from "react-redux";
+import { store } from "../redux/Store";
+import { FormDialogBase } from "./FormDialogBase";
+import { useEmployeeIdToName } from "../hooks/useEmployeeIdToName";
 
-export default function AddShiftFormDialog() {
-  const employees = useSelector(
-    (state: RootState) => state.employees.employees
-  );
-
-  const [open, setOpen] = React.useState(false);
-  const {
-    reset,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    reset();
-    setOpen(false);
-  };
-
+export default function AddEmployee() {
   const onSubmit = async (data: any) => {
     const formData = {
       ...data,
       date: new Date(data.date),
     };
-    console.log(formData);
-    try {
-      const response = await fetchAddShift(formData);
-      store.dispatch(addShiftAction(response));
-    } catch (error) {
-      console.log(error);
-    }
-    handleClose();
+    const response = await fetchAddShift(formData);
+    store.dispatch(addShiftAction(response));
   };
 
-  const [employeeIds, setEmployeeIds] = React.useState<string[]>([]);
-  const handleChange = (event: SelectChangeEvent<string[]>) => {
-    setEmployeeIds(event.target.value as string[]);
-  };
-
-  // Create a map of employee ids to employee names
-  const employeeNameMap: { [key: string]: string } = {};
-  employees.forEach((employee) => {
-    employeeNameMap[
-      employee._id
-    ] = `${employee.firstName} ${employee.lastName}`;
-  });
+  const { employeeIds, employeeNameMap, handleChange, employees } =
+    useEmployeeIdToName();
 
   return (
-    <div>
-      <Fab
-        variant="extended"
-        size="medium"
-        aria-label="add"
-        onClick={handleClickOpen}
-      >
-        <AddIcon sx={{ mr: 1 }} />
-        Add Shift
-      </Fab>
-      <Dialog sx={{ mb: 20 }} open={open} onClose={handleClose}>
-        <DialogTitle>Add Shift</DialogTitle>
-        <Box
-          component="form"
-          onSubmit={handleSubmit(onSubmit)}
-          sx={{ width: 500 }}
-        >
-          <DialogContent>
-            <DialogContentText>Add new Shift to the factory</DialogContentText>
-            <InputLabel
-              htmlFor="date"
-              sx={{ display: "flex", justifyContent: "start", mt: 2 }}
+    <FormDialogBase
+      title="Add Shift"
+      contentText="To add a new Shift, please fill up all the fields."
+      onSubmit={onSubmit}
+    >
+      {(register, errors) => (
+        <>
+          <InputLabel
+            htmlFor="date"
+            sx={{ display: "flex", justifyContent: "start", mt: 2 }}
+          >
+            Date
+          </InputLabel>
+          <TextField
+            {...register("date", { required: true })}
+            error={errors.date ? true : false}
+            helperText={errors.date && "Date is required"}
+            autoFocus
+            margin="dense"
+            id="date"
+            type="date"
+            fullWidth
+            variant="standard"
+          />
+          <InputLabel
+            htmlFor="startTime"
+            sx={{ display: "flex", justifyContent: "start", mt: 2 }}
+          >
+            Start Time
+          </InputLabel>
+          <TextField
+            {...register("startTime", { required: true })}
+            error={errors.startTime ? true : false}
+            helperText={errors.startTime && "Start time is required"}
+            autoFocus
+            margin="dense"
+            id="startTime"
+            type="time"
+            fullWidth
+            variant="standard"
+          />
+          <InputLabel
+            htmlFor="endTime"
+            sx={{ display: "flex", justifyContent: "start", mt: 2 }}
+          >
+            End Time
+          </InputLabel>
+          <TextField
+            {...register("endTime", { required: true })}
+            error={errors.endTime ? true : false}
+            helperText={errors.endTime && "End time year is required"}
+            autoFocus
+            margin="dense"
+            id="endTime"
+            type="time"
+            fullWidth
+            variant="standard"
+          />
+          <InputLabel
+            htmlFor="employeesNames"
+            sx={{ display: "flex", justifyContent: "start", mt: 2 }}
+          >
+            Choose Employees
+          </InputLabel>
+          <Select
+            {...register("employeeIds", { required: true })}
+            id="employeesNames"
+            multiple
+            value={employeeIds}
+            onChange={handleChange}
+            input={<OutlinedInput />}
+            fullWidth
+            error={errors.employeeIds ? true : false}
+            renderValue={(selected: string[]) =>
+              selected.map((value: string) => employeeNameMap[value]).join(", ")
+            }
+          >
+            {employees.map((employee) => (
+              <MenuItem key={employee._id} value={employee._id}>
+                <Checkbox checked={employeeIds.indexOf(employee._id) > -1} />
+                <ListItemText
+                  primary={`${employee.firstName} ${employee.lastName}`}
+                />
+              </MenuItem>
+            ))}
+          </Select>
+          {errors.employeeIds && (
+            <Typography
+              variant="body2"
+              color="error"
+              sx={{ display: "flex", justifyContent: "start", fontSize: 12 }}
             >
-              Date
-            </InputLabel>
-            <TextField
-              {...register("date", { required: true })}
-              error={errors.date ? true : false}
-              helperText={errors.date && "Date is required"}
-              autoFocus
-              margin="dense"
-              id="date"
-              type="date"
-              fullWidth
-              variant="standard"
-            />
-            <InputLabel
-              htmlFor="startTime"
-              sx={{ display: "flex", justifyContent: "start", mt: 2 }}
-            >
-              Start Time
-            </InputLabel>
-            <TextField
-              {...register("startTime", { required: true })}
-              error={errors.startTime ? true : false}
-              helperText={errors.startTime && "Start time is required"}
-              autoFocus
-              margin="dense"
-              id="startTime"
-              type="time"
-              fullWidth
-              variant="standard"
-            />
-            <InputLabel
-              htmlFor="endTime"
-              sx={{ display: "flex", justifyContent: "start", mt: 2 }}
-            >
-              End Time
-            </InputLabel>
-            <TextField
-              {...register("endTime", { required: true })}
-              error={errors.endTime ? true : false}
-              helperText={errors.endTime && "End time year is required"}
-              autoFocus
-              margin="dense"
-              id="endTime"
-              type="time"
-              fullWidth
-              variant="standard"
-            />
-            <InputLabel
-              htmlFor="employeesNames"
-              sx={{ display: "flex", justifyContent: "start", mt: 2 }}
-            >
-              Choose Employees
-            </InputLabel>
-            <Select
-              {...register("employeeIds", { required: true })}
-              id="employeesNames"
-              multiple
-              value={employeeIds}
-              onChange={handleChange}
-              input={<OutlinedInput />}
-              fullWidth
-              error={errors.employeeIds ? true : false}
-              renderValue={(selected) =>
-                selected.map((value) => employeeNameMap[value]).join(", ")
-              }
-            >
-              {employees.map((employee) => (
-                <MenuItem key={employee._id} value={employee._id}>
-                  <Checkbox checked={employeeIds.indexOf(employee._id) > -1} />
-                  <ListItemText
-                    primary={`${employee.firstName} ${employee.lastName}`}
-                  />
-                </MenuItem>
-              ))}
-            </Select>
-            {errors.employeeIds && (
-              <Typography
-                variant="body2"
-                color="error"
-                sx={{ display: "flex", justifyContent: "start", fontSize: 12 }}
-              >
-                Choose at least one employee
-              </Typography>
-            )}
-          </DialogContent>
-          <DialogActions>
-            <Button type="reset" onClick={handleClose}>
-              Cancel
-            </Button>
-            <Button type="submit">Add</Button>
-          </DialogActions>
-        </Box>
-      </Dialog>
-    </div>
+              Choose at least one employee
+            </Typography>
+          )}
+        </>
+      )}
+    </FormDialogBase>
   );
 }
