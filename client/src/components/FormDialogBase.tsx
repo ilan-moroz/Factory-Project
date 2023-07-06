@@ -8,6 +8,7 @@ import {
   Fab,
   IconButton,
 } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -60,7 +61,7 @@ export function FormDialogBase({
         <IconButton onClick={handleClickOpen}>{icon}</IconButton>
       ) : (
         <Fab variant="extended" size="medium" onClick={handleClickOpen}>
-          {icon}
+          <AddIcon sx={{ mr: 1 }} />
           {title}
         </Fab>
       )}
