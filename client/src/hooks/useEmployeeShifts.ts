@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/Store";
+import { rearrangeDate } from "../utils/rearrangeDate";
 
 export const useEmployeeShifts = (employeeId: string) => {
   const shifts = useSelector((state: RootState) => state.shifts.allShifts);
@@ -8,8 +9,7 @@ export const useEmployeeShifts = (employeeId: string) => {
   const getEmployeeShifts = shifts
     .filter((shift) => shift.employeeIds.includes(employeeId))
     .map((shift) => {
-      const dateParts = shift.date.split("T")[0].split("-"); // ['yyyy', 'mm', 'dd']
-      const rearrangedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // 'dd/mm/yyyy'
+      const rearrangedDate = rearrangeDate(shift.date);
       return {
         id: shift._id,
         date: rearrangedDate,

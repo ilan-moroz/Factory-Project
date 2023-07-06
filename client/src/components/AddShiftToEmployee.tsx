@@ -5,6 +5,7 @@ import { RootState } from "../redux/Store";
 import { useSelector } from "react-redux";
 import { fetchAddShiftToEmployee } from "../utils/fetchData";
 import { FormDialogBase } from "./FormDialogBase";
+import { rearrangeDate } from "../utils/rearrangeDate";
 
 type shiftProps = {
   employeeId: string;
@@ -18,12 +19,6 @@ export default function ShiftEmployeeFormDialog(props: shiftProps) {
     const response = await fetchAddShiftToEmployee(data.shift, employeeId);
     console.log(response);
   };
-
-  function formatDate(dateString: string) {
-    const dateParts = dateString.split("T")[0].split("-");
-    const rearrangedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
-    return rearrangedDate;
-  }
 
   return (
     <FormDialogBase
@@ -47,7 +42,8 @@ export default function ShiftEmployeeFormDialog(props: shiftProps) {
           >
             {shifts.map((option: any) => (
               <MenuItem key={option._id} value={option._id}>
-                {formatDate(option.date)} : {option.startTime}-{option.endTime}
+                {rearrangeDate(option.date)} : {option.startTime}-
+                {option.endTime}
               </MenuItem>
             ))}
           </TextField>
