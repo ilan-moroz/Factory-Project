@@ -25,6 +25,7 @@ const useDataFetching = () => {
     }
   }, []);
 
+  // fetch the employees
   const fetchEmployees = () => {
     console.log("getting employees from backend....");
     fetchGetAllEmployees()
@@ -36,6 +37,7 @@ const useDataFetching = () => {
       });
   };
 
+  // fetch the shifts
   const fetchShifts = () => {
     console.log("getting shifts from backend....");
     fetchGetAllShifts()
@@ -47,6 +49,7 @@ const useDataFetching = () => {
       });
   };
 
+  // fetch the deparments
   const fetchDepartments = () => {
     console.log("getting departments from backend....");
     fetchGetAllDepartments()
