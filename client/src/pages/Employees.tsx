@@ -12,7 +12,7 @@ import { Employee } from "../models/Employee";
 import { store } from "../redux/Store";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
-import AddEmployeeFormDialog from "../components/AddEmployee";
+import AddEmployee from "../components/AddEmployee";
 import { fetchDeleteEmployee } from "../utils/fetchData";
 import { deleteEmployeeAction } from "../redux/EmployeeReducer";
 import ShiftEmployeeFormDialog from "../components/AddShiftToEmployee";
@@ -193,7 +193,7 @@ export default function ReactVirtualizedTable() {
       style={{ height: "100%", display: "flex", flexDirection: "column" }}
     >
       <Box sx={{ p: 3 }}>
-        <AddEmployeeFormDialog />
+        <AddEmployee />
       </Box>
       <Box
         style={{
