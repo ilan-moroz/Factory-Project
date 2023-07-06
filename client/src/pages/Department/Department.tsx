@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
-import FormDialog from "../../components/AddDepartment";
+import AddDepartment from "../../components/AddDepartment";
 import { store } from "../../redux/Store";
 import { fetchDeleteDepartment } from "../../utils/fetchData";
 import { Department } from "../../models/Department";
@@ -183,7 +183,7 @@ export default function ReactVirtualizedTable() {
       style={{ height: "100%", display: "flex", flexDirection: "column" }}
     >
       <Box sx={{ p: 3 }}>
-        <FormDialog />
+        <AddDepartment />
       </Box>
       <Box
         style={{
