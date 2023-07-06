@@ -12,7 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import FactoryIcon from "@mui/icons-material/Factory";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { RootState, store } from "../redux/Store";
 import { setLogoutAction } from "../redux/UserReducer";
 import { useSelector } from "react-redux";
@@ -66,6 +66,8 @@ function ResponsiveAppBar() {
 
   //if redux states are empty get all from database and save in redux
   useDataFetching();
+
+  const location = useLocation();
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -126,7 +128,14 @@ function ResponsiveAppBar() {
                     style={{ textDecoration: "none" }}
                   >
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center" color="white">
+                      <Typography
+                        textAlign="center"
+                        color={
+                          location.pathname === `/${page.toLowerCase()}`
+                            ? "primary"
+                            : "white"
+                        }
+                      >
                         {page}
                       </Typography>
                     </MenuItem>
@@ -165,7 +174,10 @@ function ResponsiveAppBar() {
                     onClick={handleCloseNavMenu}
                     sx={{
                       my: 2,
-                      color: "white",
+                      color:
+                        location.pathname === `/${page.toLowerCase()}`
+                          ? "primary"
+                          : "white",
                       display: "block",
                     }}
                   >
