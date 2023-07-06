@@ -19,7 +19,7 @@ export default function AddDepartment() {
   return (
     <FormDialogBase
       title="Add Department"
-      contentText="To add a new department, please enter the department name here and choose the manager."
+      contentText="To add a new department, please fill up all the fields."
       onSubmit={onSubmit}
     >
       {(register, errors) => (
