@@ -1,18 +1,12 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Box, IconButton, MenuItem } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { MenuItem } from "@mui/material";
 import { fetchUpdateDepartment } from "../utils/fetchData";
 import { RootState, store } from "../redux/Store";
 import { updateDepartmentAction } from "../redux/DepartmentReducer";
 import EditIcon from "@mui/icons-material/Edit";
 import { useSelector } from "react-redux";
+import { FormDialogBase } from "./FormDialogBase";
 
 interface EditDepartmentFormDialogProps {
   departmentId: string;
@@ -21,14 +15,6 @@ interface EditDepartmentFormDialogProps {
 const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
   departmentId,
 }) => {
-  const [open, setOpen] = React.useState(false);
-  const {
-    reset,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
   const departments = useSelector(
     (state: RootState) => state.departments.departments
   );
@@ -39,87 +25,61 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
     (dep: any) => dep._id === departmentId
   );
 
-  if (!departmentToEdit) return null;
-
-  const handleClickOpen = () => {
-    reset({
-      _id: departmentToEdit?._id ?? "",
-      name: departmentToEdit?.name ?? "",
-    });
-
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    reset();
-    setOpen(false);
-  };
-
   const onSubmit = async (data: any) => {
-    try {
-      const response = await fetchUpdateDepartment(
-        data._id,
-        data.name,
-        data.manager
-      );
-      store.dispatch(updateDepartmentAction(response));
-
-      handleClose();
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    const response = await fetchUpdateDepartment(
+      data._id,
+      data.name,
+      data.manager
+    );
+    store.dispatch(updateDepartmentAction(response));
   };
 
   return (
-    <div>
-      <IconButton onClick={handleClickOpen}>
-        <EditIcon color="secondary" />
-      </IconButton>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Edit Department</DialogTitle>
-        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-          <DialogContent>
-            <DialogContentText>Edit the chosen department</DialogContentText>
-            <TextField
-              {...register("name", { required: true })}
-              defaultValue={departmentToEdit?.name ?? ""} // set the default value
-              error={errors.name ? true : false}
-              helperText={errors.name && "Department name is required"}
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Department Name"
-              type="Text"
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              sx={{ mt: 2 }}
-              {...register("manager", { required: true })}
-              id="manager"
-              select
-              label="manager"
-              fullWidth
-              defaultValue=""
-              error={errors.employeesIds ? true : false}
-              helperText={errors.employeesIds && "Manager is required"}
-            >
-              {employees.map((option: any) => (
-                <MenuItem key={option._id} value={option._id}>
-                  {option.firstName} {option.lastName}
-                </MenuItem>
-              ))}
-            </TextField>
-          </DialogContent>
-          <DialogActions>
-            <Button type="reset" onClick={handleClose}>
-              Cancel
-            </Button>
-            <Button type="submit">edit</Button>
-          </DialogActions>
-        </Box>
-      </Dialog>
-    </div>
+    <FormDialogBase
+      title="Edit Department"
+      contentText="To edit the department, change the desired fields."
+      onSubmit={onSubmit}
+      icon={<EditIcon color="secondary" />}
+      initialData={{
+        _id: departmentToEdit?._id ?? "",
+        name: departmentToEdit?.name ?? "",
+      }}
+    >
+      {(register, errors) => (
+        <>
+          <TextField
+            {...register("name", { required: true })}
+            defaultValue={departmentToEdit?.name ?? ""} // set the default value
+            error={errors.name ? true : false}
+            helperText={errors.name && "Department name is required"}
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Department Name"
+            type="Text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            sx={{ mt: 2 }}
+            {...register("manager", { required: true })}
+            id="manager"
+            select
+            label="manager"
+            fullWidth
+            defaultValue=""
+            error={errors.employeesIds ? true : false}
+            helperText={errors.employeesIds && "Manager is required"}
+          >
+            {employees.map((option: any) => (
+              <MenuItem key={option._id} value={option._id}>
+                {option.firstName} {option.lastName}
+              </MenuItem>
+            ))}
+          </TextField>
+        </>
+      )}
+    </FormDialogBase>
   );
 };
 
