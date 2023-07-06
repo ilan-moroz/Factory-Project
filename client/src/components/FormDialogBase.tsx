@@ -6,8 +6,8 @@ import {
   DialogContentText,
   DialogTitle,
   Fab,
+  IconButton,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -17,6 +17,7 @@ interface FormDialogProps {
   contentText: string;
   children: (register: any, errors: any) => React.ReactNode;
   onSubmit: (data: any) => Promise<void>;
+  icon?: React.ReactNode;
 }
 
 export function FormDialogBase({
@@ -24,6 +25,7 @@ export function FormDialogBase({
   contentText,
   children,
   onSubmit,
+  icon,
 }: FormDialogProps) {
   const [open, setOpen] = useState(false);
 
@@ -54,10 +56,14 @@ export function FormDialogBase({
 
   return (
     <div>
-      <Fab variant="extended" size="medium" onClick={handleClickOpen}>
-        <AddIcon sx={{ mr: 1 }} />
-        {title}
-      </Fab>
+      {icon ? (
+        <IconButton onClick={handleClickOpen}>{icon}</IconButton>
+      ) : (
+        <Fab variant="extended" size="medium" onClick={handleClickOpen}>
+          {icon}
+          {title}
+        </Fab>
+      )}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
