@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
-import Home from "./pages/Home/Home";
+import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
 import { useLocation } from "react-router-dom";
-import Department from "./pages/Department/Department";
+import Department from "./pages/Department";
 import Page404 from "./pages/page404/page404";
 import Shifts from "./pages/Shifts";
 import Employees from "./pages/Employees";

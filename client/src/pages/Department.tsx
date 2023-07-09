@@ -7,18 +7,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
-import AddDepartment from "../../components/AddDepartment";
-import { store } from "../../redux/Store";
-import { fetchDeleteDepartment } from "../../utils/fetchData";
-import { Department } from "../../models/Department";
+import AddDepartment from "../components/AddDepartment";
+import { store } from "../redux/Store";
+import { fetchDeleteDepartment } from "../utils/fetchData";
+import { Department } from "../models/Department";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
-import "./Department.css";
 import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
-import EditDepartment from "../../components/EditDepartment";
-import { deleteDepartmentAction } from "../../redux/DepartmentReducer";
-import { useManagerNames } from "../../hooks/useManagerNames";
+import EditDepartment from "../components/EditDepartment";
+import { deleteDepartmentAction } from "../redux/DepartmentReducer";
+import { useManagerNames } from "../hooks/useManagerNames";
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -179,7 +178,7 @@ export default function ReactVirtualizedTable() {
   const departmentsWithManagerNames = useManagerNames();
   return (
     <Box
-      className="department"
+      className="background"
       style={{ height: "100%", display: "flex", flexDirection: "column" }}
     >
       <Box sx={{ p: 3 }}>

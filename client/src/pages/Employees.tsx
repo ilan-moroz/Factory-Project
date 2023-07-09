@@ -189,7 +189,7 @@ export default function ReactVirtualizedTable() {
 
   return (
     <Box
-      className="department"
+      className="background"
       style={{ height: "100%", display: "flex", flexDirection: "column" }}
     >
       <Box sx={{ p: 3 }}>
