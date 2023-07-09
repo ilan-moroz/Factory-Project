@@ -24,7 +24,7 @@ export default function AddDepartment() {
       contentText="To add a new department, please fill up all the fields."
       onSubmit={onSubmit}
     >
-      {(register, errors) => (
+      {(register, errors, trigger) => (
         <>
           {/* Department Name input */}
           <TextField
@@ -50,6 +50,10 @@ export default function AddDepartment() {
             defaultValue=""
             error={errors.manager ? true : false}
             helperText={errors.manager && "Manager is required"}
+            onChange={async (e) => {
+              await register("manager").onChange(e); // update the form state
+              trigger("manager"); // manually trigger validation
+            }}
           >
             {/* map all the employees */}
             {employees.map((option: any) => (

@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 interface FormDialogProps {
   title: string;
   contentText: string;
-  children: (register: any, errors: any) => React.ReactNode;
+  children: (register: any, errors: any, trigger: any) => React.ReactNode;
   onSubmit: (data: any) => Promise<void>;
   icon?: React.ReactNode;
   initialData?: any;
@@ -36,6 +36,7 @@ export function FormDialogBase({
     register,
     handleSubmit,
     reset,
+    trigger,
     formState: { errors },
   } = useForm();
 
@@ -75,7 +76,7 @@ export function FormDialogBase({
         <DialogContent>
           <DialogContentText>{contentText}</DialogContentText>
           <form onSubmit={handleSubmit(submitForm)}>
-            {children(register, errors)}
+            {children(register, errors, trigger)}
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
               <Button type="submit">Add</Button>
