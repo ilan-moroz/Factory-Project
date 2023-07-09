@@ -25,6 +25,7 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
     (dep: any) => dep._id === departmentId
   );
 
+  // onSubmit function to update the department in backend and dispatch change to redux
   const onSubmit = async (data: any) => {
     const response = await fetchUpdateDepartment(
       data._id,
@@ -64,12 +65,12 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
             sx={{ mt: 2 }}
             {...register("manager", { required: true })}
             id="manager"
+            defaultValue={departmentToEdit?.manager ?? ""} // set the default value
             select
             label="manager"
             fullWidth
-            defaultValue=""
-            error={errors.employeesIds ? true : false}
-            helperText={errors.employeesIds && "Manager is required"}
+            error={errors.manager ? true : false}
+            helperText={errors.manager && "Manager is required"}
           >
             {employees.map((option: any) => (
               <MenuItem key={option._id} value={option._id}>
