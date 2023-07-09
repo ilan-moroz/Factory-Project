@@ -15,8 +15,10 @@ import { store } from "../redux/Store";
 import { FormDialogBase } from "./FormDialogBase";
 import { useEmployeeIdToName } from "../hooks/useEmployeeIdToName";
 
-export default function AddEmployee() {
+export default function AddShift() {
+  // onSubmit function to add the shift to backend and dispatch to redux
   const onSubmit = async (data: any) => {
+    // transform the date string to date
     const formData = {
       ...data,
       date: new Date(data.date),
@@ -25,6 +27,7 @@ export default function AddEmployee() {
     store.dispatch(addShiftAction(response));
   };
 
+  // useEmployeeIdToName hook manages employee selection and ID-name mapping for the form.
   const { employeeIds, employeeNameMap, handleChange, employees } =
     useEmployeeIdToName();
 
@@ -34,8 +37,9 @@ export default function AddEmployee() {
       contentText="To add a new Shift, please fill up all the fields."
       onSubmit={onSubmit}
     >
-      {(register, errors) => (
+      {(register, errors, trigger) => (
         <>
+          {/* date of shift input */}
           <InputLabel
             htmlFor="date"
             sx={{ display: "flex", justifyContent: "start", mt: 2 }}
@@ -53,6 +57,7 @@ export default function AddEmployee() {
             fullWidth
             variant="standard"
           />
+          {/* start time of shift input */}
           <InputLabel
             htmlFor="startTime"
             sx={{ display: "flex", justifyContent: "start", mt: 2 }}
@@ -70,6 +75,7 @@ export default function AddEmployee() {
             fullWidth
             variant="standard"
           />
+          {/* end time of shift input */}
           <InputLabel
             htmlFor="endTime"
             sx={{ display: "flex", justifyContent: "start", mt: 2 }}
@@ -87,6 +93,7 @@ export default function AddEmployee() {
             fullWidth
             variant="standard"
           />
+          {/* select employees for shift input */}
           <InputLabel
             htmlFor="employeesNames"
             sx={{ display: "flex", justifyContent: "start", mt: 2 }}
