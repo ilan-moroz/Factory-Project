@@ -12,6 +12,7 @@ export function useManagerNames() {
     (state: RootState) => state.employees.employees
   );
 
+  // Create a map to easily lookup employee names using employee id as key
   const employeeIdNameMap: { [key: string]: string } = {};
   employees.forEach((employee: Employee) => {
     employeeIdNameMap[
@@ -19,6 +20,8 @@ export function useManagerNames() {
     ] = `${employee.firstName} ${employee.lastName}`;
   });
 
+  // Create a new array of departments where each department's manager property
+  // is replaced with the corresponding manager's name(s) from the employeeIdNameMap
   const departmentsWithManagerNames = departments.map(
     (department: Department) => ({
       ...department,

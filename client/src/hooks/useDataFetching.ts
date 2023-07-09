@@ -10,7 +10,7 @@ import {
 } from "../utils/fetchData";
 
 const useDataFetching = () => {
-  //if redux states are empty get all from database and save in redux
+  //if redux states are empty get all data from database and save in redux
   useEffect(() => {
     if (store.getState().employees.employees.length < 1) {
       fetchEmployees();

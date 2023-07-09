@@ -8,6 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { FormDialogBase } from "./FormDialogBase";
 import { useEditDepartment } from "../hooks/useEditDepartment";
 
+//  what data we need from the main component
 interface EditDepartmentFormDialogProps {
   departmentId: string;
 }
@@ -34,6 +35,7 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
       contentText="To edit the department, change the desired fields."
       onSubmit={onSubmit}
       icon={<EditIcon color="secondary" />}
+      // initialize the inputs
       initialData={{
         _id: departmentToEdit?._id ?? "",
         name: departmentToEdit?.name ?? "",

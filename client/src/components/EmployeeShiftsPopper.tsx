@@ -18,7 +18,7 @@ const EmployeeShiftsPopper: React.FC<EmployeeShiftsPopperProps> = ({
   // get all shifts from the hook
   const employeeShifts = useEmployeeShifts(employeeId);
 
-  // for the popper to display the shifts
+  // popper to display the shifts
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {

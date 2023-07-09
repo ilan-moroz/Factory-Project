@@ -11,11 +11,15 @@ export const useEmployeeDepartmentNames = (): Employee[] => {
     (state: RootState) => state.departments.departments
   );
 
+  // map each department's id to its name for display
   const departmentIdNameMap: { [key: string]: string } = {};
   departments.forEach((department: Department) => {
     departmentIdNameMap[department._id] = department.name;
   });
 
+  //new array of employees with added departmentName
+  //departmentName is either taken from the departmentIdNameMap (when departmentId is a string)
+  // or directly from the departmentId (when it's an object with a name property)
   const employeesWithDepartmentNames = employees.map((employee) => {
     let departmentName;
     if (typeof employee.departmentId === "string") {
