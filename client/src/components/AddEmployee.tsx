@@ -7,11 +7,13 @@ import { addEmployeeAction } from "../redux/EmployeeReducer";
 import { FormDialogBase } from "./FormDialogBase";
 
 export default function AddEmployee() {
+  // onSubmit function to add the employee to backend and dispatch to redux
   const onSubmit = async (data: any) => {
     const response = await fetchAddEmployee(data);
     store.dispatch(addEmployeeAction(response));
   };
 
+  // departments state
   const departments = useSelector(
     (state: RootState) => state.departments.departments
   );
@@ -24,6 +26,7 @@ export default function AddEmployee() {
     >
       {(register, errors, trigger) => (
         <>
+          {/* first name input */}
           <TextField
             {...register("firstName", { required: true })}
             error={errors.firstName ? true : false}
@@ -36,6 +39,7 @@ export default function AddEmployee() {
             fullWidth
             variant="standard"
           />
+          {/* last name input */}
           <TextField
             {...register("lastName", { required: true })}
             error={errors.lastName ? true : false}
@@ -48,10 +52,13 @@ export default function AddEmployee() {
             fullWidth
             variant="standard"
           />
+          {/* "Start Year of Employment input */}
           <TextField
             {...register("startWorkYear", { required: true })}
             error={errors.startWorkYear ? true : false}
-            helperText={errors.startWorkYear && "Start work year is required"}
+            helperText={
+              errors.startWorkYear && "Start Year of Employment is required"
+            }
             autoFocus
             margin="dense"
             id="startWorkYear"
@@ -60,6 +67,7 @@ export default function AddEmployee() {
             fullWidth
             variant="standard"
           />
+          {/* department select */}
           <TextField
             sx={{ mt: 2 }}
             {...register("departmentId", { required: true })}
