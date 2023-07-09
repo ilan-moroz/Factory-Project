@@ -18,7 +18,7 @@ import { useEmployeeIdToName } from "../hooks/useEmployeeIdToName";
 export default function AddShift() {
   // onSubmit function to add the shift to backend and dispatch to redux
   const onSubmit = async (data: any) => {
-    // transform the date string to date
+    // transform the date string to date object
     const formData = {
       ...data,
       date: new Date(data.date),
@@ -60,7 +60,7 @@ export default function AddShift() {
           {/* start time of shift input */}
           <InputLabel
             htmlFor="startTime"
-            sx={{ display: "flex", justifyContent: "start", mt: 2 }}
+            sx={{ display: "flex", justifyContent: "start", mt: 1 }}
           >
             Start Time
           </InputLabel>
@@ -78,7 +78,7 @@ export default function AddShift() {
           {/* end time of shift input */}
           <InputLabel
             htmlFor="endTime"
-            sx={{ display: "flex", justifyContent: "start", mt: 2 }}
+            sx={{ display: "flex", justifyContent: "start", mt: 1 }}
           >
             End Time
           </InputLabel>
@@ -96,7 +96,7 @@ export default function AddShift() {
           {/* select employees for shift input */}
           <InputLabel
             htmlFor="employeesNames"
-            sx={{ display: "flex", justifyContent: "start", mt: 2 }}
+            sx={{ display: "flex", justifyContent: "start", mt: 1 }}
           >
             Choose Employees
           </InputLabel>
@@ -110,6 +110,7 @@ export default function AddShift() {
             fullWidth
             error={errors.employeeIds ? true : false}
             renderValue={(selected: string[]) =>
+              // Instead of showing ids, it shows corresponding employee names.
               selected.map((value: string) => employeeNameMap[value]).join(", ")
             }
           >
