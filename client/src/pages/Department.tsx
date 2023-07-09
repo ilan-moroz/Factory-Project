@@ -13,7 +13,6 @@ import { fetchDeleteDepartment } from "../utils/fetchData";
 import { Department } from "../models/Department";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
 import EditDepartment from "../components/EditDepartment";
 import { deleteDepartmentAction } from "../redux/DepartmentReducer";
@@ -28,27 +27,27 @@ interface ColumnData {
 
 const columns: ColumnData[] = [
   {
-    width: 120,
+    width: 10,
     label: "No.",
     dataKey: "id" as keyof Department,
   },
   {
-    width: 120,
+    width: 60,
     label: "Department Name",
     dataKey: "name",
   },
   {
-    width: 120,
+    width: 60,
     label: "Manger Name",
     dataKey: "manager",
   },
   {
-    width: 120,
+    width: 10,
     label: "Edit",
     dataKey: "edit" as keyof Department,
   },
   {
-    width: 120,
+    width: 10,
     label: "Delete",
     dataKey: "delete" as keyof Department,
   },
@@ -86,17 +85,7 @@ function fixedHeaderContent() {
             fontWeight: "bold",
           }}
         >
-          <Tooltip title={column.label}>
-            <div
-              style={{
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {column.label}
-            </div>
-          </Tooltip>
+          <div>{column.label}</div>
         </TableCell>
       ))}
     </TableRow>
@@ -155,17 +144,7 @@ function rowContent(_index: number, row: Department) {
               key={column.dataKey}
               align={column.numeric || false ? "right" : "left"}
             >
-              <Tooltip title={row[column.dataKey as keyof Department]}>
-                <div
-                  style={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {row[column.dataKey as keyof Department]}
-                </div>
-              </Tooltip>
+              <div>{row[column.dataKey as keyof Department]}</div>
             </TableCell>
           );
         }
