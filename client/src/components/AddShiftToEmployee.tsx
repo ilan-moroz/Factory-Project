@@ -1,11 +1,13 @@
 import TextField from "@mui/material/TextField";
 import { MenuItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { RootState } from "../redux/Store";
+import { RootState, store } from "../redux/Store";
 import { useSelector } from "react-redux";
 import { fetchAddShiftToEmployee } from "../utils/fetchData";
 import { FormDialogBase } from "./FormDialogBase";
 import { rearrangeDate } from "../utils/rearrangeDate";
+import { addEmployeeToShiftAction } from "../redux/ShiftReducer";
+import { addShiftToEmployeeAction } from "../redux/EmployeeReducer";
 
 type shiftProps = {
   employeeId: string;
@@ -16,8 +18,10 @@ export default function ShiftEmployeeFormDialog(props: shiftProps) {
 
   const onSubmit = async (data: any) => {
     const { employeeId } = props;
-    const response = await fetchAddShiftToEmployee(data.shift, employeeId);
-    console.log(response);
+    console.log(data);
+    await fetchAddShiftToEmployee(data.shift, employeeId);
+    store.dispatch(addEmployeeToShiftAction(employeeId, data.shift));
+    store.dispatch(addShiftToEmployeeAction(employeeId, data.shift));
   };
 
   return (

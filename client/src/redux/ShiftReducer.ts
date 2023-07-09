@@ -7,6 +7,7 @@ export interface ShiftState {
 export enum ShiftActionType {
   getAllShifts = "getAllShifts",
   addShift = "addShift",
+  addEmployeeToShift = "addEmployeeToShift",
 }
 
 export interface ShiftAction {
@@ -22,6 +23,16 @@ export const addShiftAction = (shift: Shift): ShiftAction => {
   return { type: ShiftActionType.addShift, payload: shift };
 };
 
+export const addEmployeeToShiftAction = (
+  employeeId: string,
+  shiftId: string
+): ShiftAction => {
+  return {
+    type: ShiftActionType.addEmployeeToShift,
+    payload: { shiftId, employeeId },
+  };
+};
+
 export const shiftReducer = (
   currentState: ShiftState = { allShifts: [] },
   action: ShiftAction
@@ -35,6 +46,17 @@ export const shiftReducer = (
 
     case ShiftActionType.addShift:
       state.allShifts = [...state.allShifts, action.payload];
+      break;
+
+    case ShiftActionType.addEmployeeToShift:
+      state.allShifts = state.allShifts.map((shift) =>
+        shift._id === action.payload.shiftId
+          ? {
+              ...shift,
+              employeeIds: [...shift.employeeIds, action.payload.employeeId],
+            }
+          : shift
+      );
       break;
 
     default:
