@@ -7,11 +7,13 @@ import { useSelector } from "react-redux";
 import { FormDialogBase } from "./FormDialogBase";
 
 export default function AddDepartment() {
+  // onSubmit function to add the department to backend and dispatch to redux
   const onSubmit = async (data: any) => {
     const response = await fetchAddDepartment(data.name, data.manager);
     store.dispatch(addDepartmentAction(response));
   };
 
+  // state of the employees
   const employees = useSelector(
     (state: RootState) => state.employees.employees
   );
@@ -24,6 +26,7 @@ export default function AddDepartment() {
     >
       {(register, errors) => (
         <>
+          {/* Department Name input */}
           <TextField
             autoFocus
             margin="dense"
@@ -36,6 +39,7 @@ export default function AddDepartment() {
             error={Boolean(errors.name)}
             helperText={errors.name && "Department Name is required"}
           />
+          {/* manager select */}
           <TextField
             sx={{ mt: 2 }}
             {...register("manager", { required: true })}
@@ -47,6 +51,7 @@ export default function AddDepartment() {
             error={errors.manager ? true : false}
             helperText={errors.manager && "Manager is required"}
           >
+            {/* map all the employees */}
             {employees.map((option: any) => (
               <MenuItem key={option._id} value={option._id}>
                 {option.firstName} {option.lastName}
