@@ -44,10 +44,13 @@ const EmployeeShiftsPopper: React.FC<EmployeeShiftsPopperProps> = ({
             sx={{
               borderColor: "black",
               color: "black",
+              whiteSpace: "nowrap",
+              fontSize: "0.75rem",
             }}
           >
             Open shifts
           </Button>
+
           <Popper id={id} open={open} anchorEl={anchorEl}>
             <Paper
               sx={{

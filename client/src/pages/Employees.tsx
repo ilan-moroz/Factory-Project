@@ -28,22 +28,22 @@ interface ColumnData {
 
 const columns: ColumnData[] = [
   {
-    width: 80,
+    width: 60,
     label: "First Name",
     dataKey: "firstName",
   },
   {
-    width: 80,
+    width: 60,
     label: "Last Name",
     dataKey: "lastName",
   },
   {
-    width: 120,
+    width: 60,
     label: "Department",
     dataKey: "departmentName",
   },
   {
-    width: 50,
+    width: 40,
     label: "Year Started",
     dataKey: "startWorkYear",
   },
@@ -71,7 +71,7 @@ function fixedHeaderContent() {
     <TableRow>
       <TableCell
         sx={{
-          width: 30,
+          width: 10,
           backgroundColor: "background.paper",
           color: "InfoText",
           fontWeight: "bold",
@@ -97,7 +97,7 @@ function fixedHeaderContent() {
       ))}
       <TableCell
         sx={{
-          width: 30,
+          width: 66,
           backgroundColor: "background.paper",
           color: "InfoText",
           fontWeight: "bold",
@@ -108,7 +108,7 @@ function fixedHeaderContent() {
       </TableCell>
       <TableCell
         sx={{
-          width: 30,
+          width: 10,
           backgroundColor: "background.paper",
           color: "InfoText",
           fontWeight: "bold",
@@ -119,7 +119,7 @@ function fixedHeaderContent() {
       </TableCell>
       <TableCell
         sx={{
-          width: 30,
+          width: 10,
           backgroundColor: "background.paper",
           color: "InfoText",
           fontWeight: "bold",
@@ -130,7 +130,7 @@ function fixedHeaderContent() {
       </TableCell>
       <TableCell
         sx={{
-          width: 30,
+          width: 10,
           backgroundColor: "background.paper",
           color: "InfoText",
           fontWeight: "bold",
