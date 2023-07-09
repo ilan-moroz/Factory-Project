@@ -41,10 +41,6 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
       contentText="To edit the department, change the desired fields."
       onSubmit={onSubmit}
       icon={<EditIcon color="secondary" />}
-      initialData={{
-        _id: departmentToEdit?._id ?? "",
-        name: departmentToEdit?.name ?? "",
-      }}
     >
       {(register, errors, trigger) => (
         <>
