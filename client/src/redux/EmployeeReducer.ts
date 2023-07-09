@@ -75,7 +75,10 @@ export const employeeReducer = (
     case EmployeeActionType.addShiftToEmployee:
       state.employees = state.employees.map((employee) =>
         employee._id === action.payload.employeeId
-          ? { ...employee, shiftIds: [action.payload.shiftId] }
+          ? {
+              ...employee,
+              shiftIds: [...(employee.shiftIds || []), action.payload.shiftId],
+            }
           : employee
       );
       break;
