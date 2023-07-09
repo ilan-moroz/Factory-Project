@@ -9,6 +9,7 @@ export enum EmployeeActionType {
   addEmployee = "addEmployee",
   updateEmployee = "updateEmployee",
   deleteEmployee = "deleteEmployee",
+  addShiftToEmployee = "addShiftToEmployee",
 }
 
 export interface EmployeeAction {
@@ -32,6 +33,16 @@ export const updateEmployeeAction = (employee: Employee): EmployeeAction => {
 
 export const deleteEmployeeAction = (id: string): EmployeeAction => {
   return { type: EmployeeActionType.deleteEmployee, payload: id };
+};
+
+export const addShiftToEmployeeAction = (
+  employeeId: string,
+  shiftId: string
+): EmployeeAction => {
+  return {
+    type: EmployeeActionType.addShiftToEmployee,
+    payload: { employeeId, shiftId },
+  };
 };
 
 export const employeeReducer = (
@@ -58,6 +69,14 @@ export const employeeReducer = (
     case EmployeeActionType.deleteEmployee:
       state.employees = state.employees.filter(
         (employee) => employee._id !== action.payload
+      );
+      break;
+
+    case EmployeeActionType.addShiftToEmployee:
+      state.employees = state.employees.map((employee) =>
+        employee._id === action.payload.employeeId
+          ? { ...employee, shiftIds: [action.payload.shiftId] }
+          : employee
       );
       break;
 

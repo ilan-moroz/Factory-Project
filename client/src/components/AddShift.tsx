@@ -14,6 +14,7 @@ import { addShiftAction } from "../redux/ShiftReducer";
 import { store } from "../redux/Store";
 import { FormDialogBase } from "./FormDialogBase";
 import { useEmployeeIdToName } from "../hooks/useEmployeeIdToName";
+import { addShiftToEmployeeAction } from "../redux/EmployeeReducer";
 
 export default function AddShift() {
   // onSubmit function to add the shift to backend and dispatch to redux
@@ -25,6 +26,9 @@ export default function AddShift() {
     };
     const response = await fetchAddShift(formData);
     store.dispatch(addShiftAction(response));
+    store.dispatch(
+      addShiftToEmployeeAction(response.employeeIds[0], response._id)
+    );
   };
 
   // useEmployeeIdToName hook manages employee selection and ID-name mapping for the form.
