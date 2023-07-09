@@ -1,47 +1,47 @@
+import React from "react";
 import "./page404.css";
 import { useNavigate } from "react-router-dom";
 
 function Page404(): JSX.Element {
   const navigate = useNavigate();
 
+  const goToHomePage = () => {
+    navigate("/home");
+  };
+
   return (
-    <div className="page404">
-      <div className="container">
-        <div className="error">
-          <p className="p">4</p>
-          <span className="dracula">
-            <div className="con">
-              <div className="hair"></div>
-              <div className="hair-r"></div>
-              <div className="head"></div>
-              <div className="eye"></div>
-              <div className="eye eye-r"></div>
-              <div className="mouth"></div>
-              <div className="blod"></div>
-              <div className="blod blod2"></div>
-            </div>
+    <div className="wrap">
+      <video
+        className="video"
+        poster="https://knife.media/wp-content/themes/knife/assets/images/poster-error.jpg"
+        autoPlay
+        preload="true"
+        loop
+        muted
+      >
+        <source
+          src="https://knife.media/wp-content/themes/knife/assets/video/video-error.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      <div className="message">
+        <br />
+        <br />
+        <br />
+        <h1 className="header">This page doesn't exist</h1>
+        <p className="text2">
+          Please go back to the{" "}
+          <span
+            className="text"
+            onClick={goToHomePage}
+            style={{ cursor: "pointer", color: "blue" }}
+          >
+            main page.
           </span>
-          <p className="p">4</p>
-
-          <div className="page-ms">
-            <p className="page-msg">
-              {" "}
-              Oops, the page you're looking for Disappeared{" "}
-            </p>
-            <button className="go-back" onClick={() => navigate(-1)}>
-              Go Back
-            </button>
-          </div>
-        </div>
+          <br />
+        </p>
       </div>
-
-      <iframe
-        style={{ width: 0, height: 0, border: "none" }}
-        scrolling="no"
-        frameBorder="no"
-        allow="autoplay"
-        src="https://instaud.io/_/2Vvu.mp3"
-      />
     </div>
   );
 }
