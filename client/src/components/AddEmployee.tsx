@@ -22,7 +22,7 @@ export default function AddEmployee() {
       contentText="To add a new employee, please fill up all the fields."
       onSubmit={onSubmit}
     >
-      {(register, errors) => (
+      {(register, errors, trigger) => (
         <>
           <TextField
             {...register("firstName", { required: true })}
@@ -70,6 +70,10 @@ export default function AddEmployee() {
             defaultValue=""
             error={errors.departmentId ? true : false}
             helperText={errors.departmentId && "Department is required"}
+            onChange={async (e) => {
+              await register("departmentId").onChange(e); // update the form state
+              trigger("departmentId"); // manually trigger validation
+            }}
           >
             {departments.map((option: any) => (
               <MenuItem key={option._id} value={option._id}>
