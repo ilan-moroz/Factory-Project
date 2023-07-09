@@ -23,22 +23,22 @@ interface ColumnData {
 
 const columns: ColumnData[] = [
   {
-    width: 80,
+    width: 50,
     label: "Date",
     dataKey: "date",
   },
   {
-    width: 80,
+    width: 50,
     label: "Start Time",
     dataKey: "startTime",
   },
   {
-    width: 120,
+    width: 50,
     label: "End Time",
     dataKey: "endTime",
   },
   {
-    width: 50,
+    width: 120,
     label: "Employees",
     dataKey: "employeeIds",
   },
@@ -66,7 +66,7 @@ function fixedHeaderContent() {
     <TableRow>
       <TableCell
         sx={{
-          width: 30,
+          width: 10,
           backgroundColor: "background.paper",
           color: "InfoText",
           fontWeight: "bold",
