@@ -19,6 +19,7 @@ interface FormDialogProps {
   children: (register: any, errors: any, trigger: any) => React.ReactNode;
   onSubmit: (data: any) => Promise<void>;
   icon?: React.ReactNode;
+  initialData?: any;
 }
 
 export function FormDialogBase({
@@ -27,6 +28,7 @@ export function FormDialogBase({
   children,
   onSubmit,
   icon,
+  initialData,
 }: FormDialogProps) {
   const [open, setOpen] = useState(false);
 
@@ -39,6 +41,9 @@ export function FormDialogBase({
   } = useForm();
 
   const handleClickOpen = () => {
+    if (initialData) {
+      reset(initialData);
+    }
     setOpen(true);
   };
 
