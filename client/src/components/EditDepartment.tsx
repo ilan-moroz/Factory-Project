@@ -46,7 +46,7 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
         name: departmentToEdit?.name ?? "",
       }}
     >
-      {(register, errors) => (
+      {(register, errors, trigger) => (
         <>
           <TextField
             {...register("name", { required: true })}
@@ -69,6 +69,10 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
             select
             label="manager"
             fullWidth
+            onChange={async (e) => {
+              await register("manager").onChange(e); // update the form state
+              trigger("manager"); // manually trigger validation
+            }}
             error={errors.manager ? true : false}
             helperText={errors.manager && "Manager is required"}
           >
