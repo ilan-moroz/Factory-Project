@@ -16,6 +16,7 @@ type shiftProps = {
 export default function ShiftEmployeeFormDialog(props: shiftProps) {
   const shifts = useSelector((state: RootState) => state.shifts.allShifts);
 
+  // onSubmit function to add shift to employee in database and dispatch change to redux
   const onSubmit = async (data: any) => {
     const { employeeId } = props;
     console.log(data);
@@ -33,6 +34,7 @@ export default function ShiftEmployeeFormDialog(props: shiftProps) {
     >
       {(register, errors) => (
         <>
+          {/* input for select the shift to add */}
           <TextField
             sx={{ mt: 2 }}
             {...register("shift", { required: true })}
