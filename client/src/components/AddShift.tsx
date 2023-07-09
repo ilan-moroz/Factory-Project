@@ -105,7 +105,11 @@ export default function AddShift() {
             id="employeesNames"
             multiple
             value={employeeIds}
-            onChange={handleChange}
+            onChange={async (e: React.ChangeEvent<any>) => {
+              handleChange(e);
+              await register("employeeIds").onChange(e); // update the form state
+              trigger("employeeIds"); // manually trigger validation
+            }}
             input={<OutlinedInput />}
             fullWidth
             error={errors.employeeIds ? true : false}
