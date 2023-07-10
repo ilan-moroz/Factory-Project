@@ -4,9 +4,8 @@ import { Employee, Department, Shift } from "../models/Factory";
 // GET /employees
 export const getAllEmployees = async (req: Request, res: Response) => {
   try {
-    const employees = await Employee.find()
-      .populate("departmentId")
-      .populate("shiftIds");
+    const employees = await Employee.find();
+
     res.status(200).json(employees);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
@@ -28,6 +27,7 @@ export const createEmployee = async (req: Request, res: Response) => {
       lastName,
       startWorkYear,
       departmentId,
+      departmentName: department.name,
     });
     const savedEmployee = await newEmployee.save();
 
@@ -37,7 +37,7 @@ export const createEmployee = async (req: Request, res: Response) => {
   }
 };
 
-// PUT /employees/:id
+// PUT /employees/updateEmployee/:id
 export const updateEmployee = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

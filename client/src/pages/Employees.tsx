@@ -11,13 +11,13 @@ import { Box, IconButton } from "@mui/material";
 import { Employee } from "../models/Employee";
 import { store } from "../redux/Store";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
 import AddEmployee from "../components/AddEmployee";
 import { fetchDeleteEmployee } from "../utils/fetchData";
 import { deleteEmployeeAction } from "../redux/EmployeeReducer";
 import ShiftEmployeeFormDialog from "../components/AddShiftToEmployee";
 import EmployeeShiftsPopper from "../components/EmployeeShiftsPopper";
 import { useEmployeeDepartmentNames } from "../hooks/useEmployeeDepartmentNames";
+import EditEmployee from "../components/EditEmployee";
 
 interface ColumnData {
   dataKey: keyof Employee | string;
@@ -173,7 +173,7 @@ export default function ReactVirtualizedTable() {
         </TableCell>
         <TableCell>
           <IconButton>
-            <EditIcon color="secondary" />
+            <EditEmployee employeeId={row._id} />
           </IconButton>
         </TableCell>
         <TableCell>

@@ -149,3 +149,23 @@ export const fetchAddShiftToEmployee = async (
     console.log(err);
   }
 };
+
+export const fetchUpdateEmployee = async (
+  employeeId: string,
+  firstName: string,
+  lastName: string,
+  startWorkYear: number,
+  departmentId: string
+) => {
+  try {
+    const response = await api.put(`/employees/updateEmployee/${employeeId}`, {
+      firstName: firstName,
+      lastName: lastName,
+      startWorkYear: startWorkYear,
+      departmentId: departmentId,
+    });
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
