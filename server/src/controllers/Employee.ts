@@ -103,28 +103,3 @@ export const getEmployeeShifts = async (req: Request, res: Response) => {
     res.status(500).json({ error: err.message });
   }
 };
-
-// POST /employees/:id/shifts
-export const addShiftToEmployee = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const { date, startTime, endTime } = req.body;
-
-    const employee = await Employee.findById(id);
-    if (!employee) {
-      return res.status(404).json({ error: "Employee not found" });
-    }
-
-    const newShift = new Shift({
-      date,
-      startTime,
-      endTime,
-      employeeId: id,
-    });
-    const savedShift = await newShift.save();
-
-    res.status(201).json(savedShift);
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
-  }
-};
