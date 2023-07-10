@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/Store";
 
 export const useEditEmployee = (employeeId: string) => {
+  const shifts = useSelector((state: RootState) => state.shifts.allShifts);
   const departments = useSelector(
     (state: RootState) => state.departments.departments
   );
@@ -16,15 +17,25 @@ export const useEditEmployee = (employeeId: string) => {
   const [department, setDepartment] = useState(
     employeeToEdit?.departmentId ?? ""
   );
+  const [shift, setShift] = useState(employeeToEdit?.shiftIds ?? []);
+
+  // Map to store shifts information with their ids as keys
+  const shiftsMap = new Map(shifts.map((shift) => [shift._id, shift]));
 
   // Update the employee state when the initial value changes
   useEffect(() => {
     setDepartment(employeeToEdit?.departmentId ?? "");
-  }, [employeeToEdit?.departmentId]);
+    setShift(employeeToEdit?.shiftIds ?? []);
+  }, [employeeToEdit?.departmentId, employeeToEdit?.shiftIds]);
 
-  // Handle manager selection change
+  // Handle department selection change
   const handleDepartmentChange = (event: any) => {
     setDepartment(event.target.value);
+  };
+
+  // Handle shift selection change
+  const handleShiftChange = (event: any) => {
+    setShift(event.target.value);
   };
 
   return {
@@ -32,5 +43,9 @@ export const useEditEmployee = (employeeId: string) => {
     department,
     handleDepartmentChange,
     departments,
+    handleShiftChange,
+    shift,
+    shifts,
+    shiftsMap,
   };
 };

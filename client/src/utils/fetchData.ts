@@ -155,7 +155,8 @@ export const fetchUpdateEmployee = async (
   firstName: string,
   lastName: string,
   startWorkYear: number,
-  departmentId: string
+  departmentId: string,
+  shiftIds: [string]
 ) => {
   try {
     const response = await api.put(`/employees/updateEmployee/${employeeId}`, {
@@ -163,6 +164,7 @@ export const fetchUpdateEmployee = async (
       lastName: lastName,
       startWorkYear: startWorkYear,
       departmentId: departmentId,
+      shiftIds: shiftIds,
     });
     if (response.status === 200) return response.data;
   } catch (err) {

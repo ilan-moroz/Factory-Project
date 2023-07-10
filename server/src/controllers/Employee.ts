@@ -41,7 +41,8 @@ export const createEmployee = async (req: Request, res: Response) => {
 export const updateEmployee = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { firstName, lastName, startWorkYear, departmentId } = req.body;
+    const { firstName, lastName, startWorkYear, departmentId, shiftIds } =
+      req.body;
 
     const employee = await Employee.findById(id);
     if (!employee) {
@@ -57,6 +58,7 @@ export const updateEmployee = async (req: Request, res: Response) => {
     employee.lastName = lastName;
     employee.startWorkYear = startWorkYear;
     employee.departmentId = departmentId;
+    employee.shiftIds = shiftIds;
 
     const updatedEmployee = await employee.save();
 

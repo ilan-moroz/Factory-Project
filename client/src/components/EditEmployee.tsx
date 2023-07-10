@@ -1,12 +1,13 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
-import { MenuItem } from "@mui/material";
+import { Checkbox, ListItemText, MenuItem } from "@mui/material";
 import { fetchUpdateEmployee } from "../utils/fetchData";
 import EditIcon from "@mui/icons-material/Edit";
 import { FormDialogBase } from "./FormDialogBase";
 import { useEditEmployee } from "../hooks/useEditEmployee";
 import { store } from "../redux/Store";
 import { updateEmployeeAction } from "../redux/EmployeeReducer";
+import { rearrangeDate } from "../utils/rearrangeDate";
 
 //  what data we need from the main component
 interface EditEmployeeProps {
@@ -14,8 +15,16 @@ interface EditEmployeeProps {
 }
 
 const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
-  const { employeeToEdit, department, handleDepartmentChange, departments } =
-    useEditEmployee(employeeId);
+  const {
+    employeeToEdit,
+    department,
+    handleDepartmentChange,
+    departments,
+    shift,
+    shifts,
+    shiftsMap,
+    handleShiftChange,
+  } = useEditEmployee(employeeId);
 
   // onSubmit function to update the employee in backend and dispatch change to redux
   const onSubmit = async (data: any) => {
@@ -24,7 +33,8 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
       data.firstName,
       data.lastName,
       data.startWorkYear,
-      data.departmentId
+      data.departmentId,
+      data.shiftIds
     );
     store.dispatch(updateEmployeeAction(response));
   };
@@ -100,6 +110,40 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
             {departments.map((option: any) => (
               <MenuItem key={option._id} value={option._id}>
                 {option.name}
+              </MenuItem>
+            ))}
+          </TextField>
+          {/* shift select */}
+          <TextField
+            sx={{ mt: 2 }}
+            {...register("shiftIds")}
+            id="shifts"
+            select
+            label="Shifts"
+            fullWidth
+            value={shift}
+            SelectProps={{
+              multiple: true,
+              renderValue: (selected: any) =>
+                selected
+                  .map((shiftId: string) => {
+                    const shiftInfo = shiftsMap.get(shiftId);
+                    return `${rearrangeDate(shiftInfo!.date)} - ${
+                      shiftInfo!.startTime
+                    }:${shiftInfo!.endTime}`;
+                  })
+                  .join(", "),
+            }}
+            onChange={handleShiftChange}
+          >
+            {shifts.map((option: any) => (
+              <MenuItem key={option._id} value={option._id}>
+                <Checkbox checked={shift.indexOf(option._id) > -1} />
+                <ListItemText
+                  primary={`${rearrangeDate(option.date)} - ${
+                    option.startTime
+                  }:${option.endTime}`}
+                />
               </MenuItem>
             ))}
           </TextField>
