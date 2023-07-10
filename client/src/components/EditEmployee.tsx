@@ -8,6 +8,7 @@ import { useEditEmployee } from "../hooks/useEditEmployee";
 import { store } from "../redux/Store";
 import { updateEmployeeAction } from "../redux/EmployeeReducer";
 import { rearrangeDate } from "../utils/rearrangeDate";
+import { removeEmployeeFromShiftAction } from "../redux/ShiftReducer";
 
 //  what data we need from the main component
 interface EditEmployeeProps {
@@ -36,7 +37,16 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
       data.departmentId,
       data.shiftIds
     );
-    store.dispatch(updateEmployeeAction(response));
+    if (response) {
+      store.dispatch(updateEmployeeAction(response));
+      // Get the shift IDs that were removed
+      const removedShifts = shifts.filter(
+        (shift) => !data.shiftIds.includes(shift._id)
+      );
+      removedShifts.forEach((shift) => {
+        store.dispatch(removeEmployeeFromShiftAction(data._id, shift._id));
+      });
+    }
   };
 
   return (

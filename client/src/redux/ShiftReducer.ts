@@ -8,7 +8,7 @@ export enum ShiftActionType {
   getAllShifts = "getAllShifts",
   addShift = "addShift",
   addEmployeeToShift = "addEmployeeToShift",
-  updateShift = "updateShift",
+  removeEmployeeFromShift = "removeEmployeeFromShift",
 }
 
 export interface ShiftAction {
@@ -34,6 +34,16 @@ export const addEmployeeToShiftAction = (
   };
 };
 
+export const removeEmployeeFromShiftAction = (
+  employeeId: string,
+  shiftId: string
+): ShiftAction => {
+  return {
+    type: ShiftActionType.removeEmployeeFromShift,
+    payload: { shiftId, employeeId },
+  };
+};
+
 export const shiftReducer = (
   currentState: ShiftState = { allShifts: [] },
   action: ShiftAction
@@ -55,6 +65,19 @@ export const shiftReducer = (
           ? {
               ...shift,
               employeeIds: [...shift.employeeIds, action.payload.employeeId],
+            }
+          : shift
+      );
+      break;
+
+    case ShiftActionType.removeEmployeeFromShift:
+      state.allShifts = state.allShifts.map((shift) =>
+        shift._id === action.payload.shiftId
+          ? {
+              ...shift,
+              employeeIds: shift.employeeIds.filter(
+                (id) => id !== action.payload.employeeId
+              ),
             }
           : shift
       );
