@@ -133,7 +133,7 @@ export default function ReactVirtualizedTable() {
           }
           const cellContent =
             column.dataKey === "employeeIds"
-              ? row.employeeNames.join(", ")
+              ? row.employeeNames!.join(", ")
               : row[column.dataKey];
           return (
             <TableCell

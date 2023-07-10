@@ -8,6 +8,7 @@ export enum ShiftActionType {
   getAllShifts = "getAllShifts",
   addShift = "addShift",
   addEmployeeToShift = "addEmployeeToShift",
+  updateShift = "updateShift",
 }
 
 export interface ShiftAction {
