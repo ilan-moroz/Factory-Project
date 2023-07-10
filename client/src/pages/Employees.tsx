@@ -172,9 +172,7 @@ export default function ReactVirtualizedTable() {
           <ShiftEmployeeFormDialog employeeId={row._id} />
         </TableCell>
         <TableCell>
-          <IconButton>
-            <EditEmployee employeeId={row._id} />
-          </IconButton>
+          <EditEmployee employeeId={row._id} />
         </TableCell>
         <TableCell>
           <IconButton onClick={() => handleDelete(row._id)}>

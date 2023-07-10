@@ -26,7 +26,6 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
       data.startWorkYear,
       data.departmentId
     );
-    console.log(response);
     store.dispatch(updateEmployeeAction(response));
   };
 
@@ -42,7 +41,6 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
         firstName: employeeToEdit?.firstName ?? "",
         lastName: employeeToEdit?.lastName ?? "",
         startWorkYear: employeeToEdit?.startWorkYear ?? "",
-        department: employeeToEdit?.departmentName ?? "",
       }}
     >
       {(register, errors) => (
