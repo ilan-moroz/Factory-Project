@@ -17,7 +17,7 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
   const { employeeToEdit, department, handleDepartmentChange, departments } =
     useEditEmployee(employeeId);
 
-  // onSubmit function to update the department in backend and dispatch change to redux
+  // onSubmit function to update the employee in backend and dispatch change to redux
   const onSubmit = async (data: any) => {
     const response = await fetchUpdateEmployee(
       data._id,
