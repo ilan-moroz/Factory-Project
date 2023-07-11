@@ -226,6 +226,9 @@ function ResponsiveAppBar() {
                 ))}
               </Menu>
             </Box>
+            <span style={{ marginLeft: 10 }}>
+              Actions left for today: {user?.numOfActions}
+            </span>
           </Toolbar>
         </Container>
       </AppBar>

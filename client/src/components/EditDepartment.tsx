@@ -7,6 +7,7 @@ import { updateDepartmentAction } from "../redux/DepartmentReducer";
 import EditIcon from "@mui/icons-material/Edit";
 import { FormDialogBase } from "./FormDialogBase";
 import { useEditDepartment } from "../hooks/useEditDepartment";
+import { decreaseActionNumberAction } from "../redux/UserReducer";
 
 //  what data we need from the main component
 interface EditDepartmentFormDialogProps {
@@ -26,7 +27,10 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
       data.name,
       data.manager
     );
-    store.dispatch(updateDepartmentAction(response));
+    if (response) {
+      store.dispatch(updateDepartmentAction(response));
+      store.dispatch(decreaseActionNumberAction());
+    }
   };
 
   return (

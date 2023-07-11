@@ -8,6 +8,7 @@ import { FormDialogBase } from "./FormDialogBase";
 import { rearrangeDate } from "../utils/rearrangeDate";
 import { addEmployeeToShiftAction } from "../redux/ShiftReducer";
 import { addShiftToEmployeeAction } from "../redux/EmployeeReducer";
+import { decreaseActionNumberAction } from "../redux/UserReducer";
 
 type shiftProps = {
   employeeId: string;
@@ -22,6 +23,7 @@ export default function ShiftEmployeeFormDialog(props: shiftProps) {
     await fetchAddShiftToEmployee(data.shift, employeeId);
     store.dispatch(addEmployeeToShiftAction(employeeId, data.shift));
     store.dispatch(addShiftToEmployeeAction(employeeId, data.shift));
+    store.dispatch(decreaseActionNumberAction());
   };
 
   return (

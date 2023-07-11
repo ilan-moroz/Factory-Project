@@ -12,6 +12,7 @@ import {
   addEmployeeToShiftAction,
   removeEmployeeFromShiftAction,
 } from "../redux/ShiftReducer";
+import { decreaseActionNumberAction } from "../redux/UserReducer";
 
 //  what data we need from the main component
 interface EditEmployeeProps {
@@ -45,6 +46,7 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
     if (response) {
       // Dispatch the updated employee to redux
       store.dispatch(updateEmployeeAction(response));
+      store.dispatch(decreaseActionNumberAction());
 
       // Get the shift IDs that were removed and dispatch the change
       const removedShifts = initialShiftsArray.filter(
