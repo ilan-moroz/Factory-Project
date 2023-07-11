@@ -5,6 +5,7 @@ interface CustomRequest extends Request {
   user?: any;
 }
 
+// a middleware function the decrease the user action count for each action he does
 export const userActionLimit = async (
   req: CustomRequest,
   res: Response,
