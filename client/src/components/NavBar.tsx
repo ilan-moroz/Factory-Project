@@ -18,6 +18,7 @@ import { setLogoutAction } from "../redux/UserReducer";
 import { useSelector } from "react-redux";
 import { Chip } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
+import { EmployeeSearch } from "./EmployeeSearch";
 
 const pages = ["Departments", "Employees", "Shifts"];
 const settings = ["Logout"];
@@ -65,6 +66,7 @@ function ResponsiveAppBar() {
   });
 
   const location = useLocation();
+  const employeePage: boolean = location.pathname === "/employees";
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -183,6 +185,8 @@ function ResponsiveAppBar() {
                 </NavLink>
               ))}
             </Box>
+            {/* only for employees page */}
+            {employeePage && <EmployeeSearch />}
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <Chip
