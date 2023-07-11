@@ -3,29 +3,6 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { User } from "../models/Factory";
 
-export const createNewUser = async (req: Request, res: Response) => {
-  try {
-    const { fullName, userName, password } = req.body;
-
-    // if (!isAdmin)
-    //   return res.status(400).json({ error: "Only admin can create new users" });
-
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    const newUser = new User({
-      fullName,
-      userName,
-      password: hashedPassword,
-    });
-
-    const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
 export const login = async (req: Request, res: Response) => {
   try {
     const { userName, password } = req.body;
