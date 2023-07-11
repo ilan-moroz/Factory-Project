@@ -86,20 +86,3 @@ export const deleteEmployee = async (req: Request, res: Response) => {
     res.status(500).json({ error: err.message });
   }
 };
-
-// GET /employees/:id/shifts
-export const getEmployeeShifts = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-
-    const employee = await Employee.findById(id);
-    if (!employee) {
-      return res.status(404).json({ error: "Employee not found" });
-    }
-
-    const shifts = await Shift.find({ employeeId: id });
-    res.status(200).json(shifts);
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
-  }
-};
