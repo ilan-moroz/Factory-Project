@@ -1,9 +1,12 @@
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 
 export function EmployeeSearch() {
+  // search function activated on change of the search input and searches for employees based first/last name and department
+  const searchEmployee = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+  };
   return (
     <Paper
       component="form"
@@ -13,10 +16,9 @@ export function EmployeeSearch() {
         sx={{ ml: 1, flex: 1 }}
         placeholder="Search Employee"
         inputProps={{ "aria-label": "search employee" }}
+        onChange={searchEmployee}
       />
-      <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-        <SearchIcon />
-      </IconButton>
+      <SearchIcon sx={{ p: "10px" }} />
     </Paper>
   );
 }

@@ -18,6 +18,7 @@ import ShiftEmployeeFormDialog from "../components/AddShiftToEmployee";
 import EmployeeShiftsPopper from "../components/EmployeeShiftsPopper";
 import { useEmployeeDepartmentNames } from "../hooks/useEmployeeDepartmentNames";
 import EditEmployee from "../components/EditEmployee";
+import { EmployeeSearch } from "../components/EmployeeSearch";
 
 interface ColumnData {
   dataKey: keyof Employee | string;
@@ -203,6 +204,9 @@ export default function ReactVirtualizedTable() {
           marginBottom: 400,
         }}
       >
+        <Box sx={{ mb: 3 }}>
+          <EmployeeSearch />
+        </Box>
         <Paper style={{ height: 400, width: "70%" }}>
           <TableVirtuoso
             data={employeesWithDepartmentNames}
