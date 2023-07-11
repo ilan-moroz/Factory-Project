@@ -24,7 +24,7 @@ const settings = ["Logout"];
 
 function ResponsiveAppBar() {
   const user = useSelector((state: RootState) => state.users.user);
-  console.log(user?.numOfActions);
+  const admin = user?.isAdmin;
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -222,9 +222,12 @@ function ResponsiveAppBar() {
                 ))}
               </Menu>
             </Box>
-            <span style={{ marginLeft: 10 }}>
-              Actions left for today: {user?.numOfActions}
-            </span>
+            {/* display only for users */}
+            {!admin && (
+              <span style={{ marginLeft: 10 }}>
+                Actions left for today: {user?.numOfActions}
+              </span>
+            )}
           </Toolbar>
         </Container>
       </AppBar>
