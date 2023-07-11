@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyToken } from "../middlewares/Auth";
+import { verifyToken } from "../middleware/Auth";
 import {
   getAllShifts,
   createShift,
