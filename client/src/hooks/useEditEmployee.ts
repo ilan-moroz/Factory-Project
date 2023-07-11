@@ -14,18 +14,24 @@ export const useEditEmployee = (employeeId: string) => {
     (employee: any) => employee._id === employeeId
   );
 
-  const [department, setDepartment] = useState(
+  const [department, setDepartment] = useState<string>(
     employeeToEdit?.departmentId ?? ""
   );
-  const [shift, setShift] = useState(employeeToEdit?.shiftIds ?? []);
+  const [shiftsArray, setShiftsArray] = useState<string[]>(
+    employeeToEdit?.shiftIds ?? []
+  );
+  const [initialShiftsArray, setInitialShiftsArray] = useState<string[]>(
+    employeeToEdit?.shiftIds ?? []
+  );
 
   // Map to store shifts information with their ids as keys
   const shiftsMap = new Map(shifts.map((shift) => [shift._id, shift]));
 
-  // Update the employee state when the initial value changes
+  // Update the initial state
   useEffect(() => {
     setDepartment(employeeToEdit?.departmentId ?? "");
-    setShift(employeeToEdit?.shiftIds ?? []);
+    setShiftsArray(employeeToEdit?.shiftIds ?? []);
+    setInitialShiftsArray(employeeToEdit?.shiftIds ?? []);
   }, [employeeToEdit?.departmentId, employeeToEdit?.shiftIds]);
 
   // Handle department selection change
@@ -35,7 +41,7 @@ export const useEditEmployee = (employeeId: string) => {
 
   // Handle shift selection change
   const handleShiftChange = (event: any) => {
-    setShift(event.target.value);
+    setShiftsArray(event.target.value);
   };
 
   return {
@@ -44,8 +50,9 @@ export const useEditEmployee = (employeeId: string) => {
     handleDepartmentChange,
     departments,
     handleShiftChange,
-    shift,
+    shiftsArray,
     shifts,
     shiftsMap,
+    initialShiftsArray,
   };
 };

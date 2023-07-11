@@ -8,7 +8,10 @@ import { useEditEmployee } from "../hooks/useEditEmployee";
 import { store } from "../redux/Store";
 import { updateEmployeeAction } from "../redux/EmployeeReducer";
 import { rearrangeDate } from "../utils/rearrangeDate";
-import { removeEmployeeFromShiftAction } from "../redux/ShiftReducer";
+import {
+  addEmployeeToShiftAction,
+  removeEmployeeFromShiftAction,
+} from "../redux/ShiftReducer";
 
 //  what data we need from the main component
 interface EditEmployeeProps {
@@ -21,10 +24,11 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
     department,
     handleDepartmentChange,
     departments,
-    shift,
+    shiftsArray,
     shifts,
     shiftsMap,
     handleShiftChange,
+    initialShiftsArray,
   } = useEditEmployee(employeeId);
 
   // onSubmit function to update the employee in backend and dispatch change to redux
@@ -39,12 +43,20 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
     );
     if (response) {
       store.dispatch(updateEmployeeAction(response));
-      // Get the shift IDs that were removed
-      const removedShifts = shifts.filter(
-        (shift) => !data.shiftIds.includes(shift._id)
+      // Get the shift IDs that were removed and dispatch the change
+      const removedShifts = initialShiftsArray.filter(
+        (shiftId) => !data.shiftIds.includes(shiftId)
       );
-      removedShifts.forEach((shift) => {
-        store.dispatch(removeEmployeeFromShiftAction(data._id, shift._id));
+      removedShifts.forEach((shiftId) => {
+        store.dispatch(removeEmployeeFromShiftAction(data._id, shiftId));
+      });
+
+      // Get the shift IDs that were added and dispatch the change
+      const addedShiftIds = data.shiftIds.filter(
+        (id: string) => !initialShiftsArray.includes(id)
+      );
+      addedShiftIds.forEach((shiftId: string) => {
+        store.dispatch(addEmployeeToShiftAction(data._id, shiftId));
       });
     }
   };
@@ -131,7 +143,7 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
             select
             label="Shifts"
             fullWidth
-            value={shift}
+            value={shiftsArray}
             SelectProps={{
               multiple: true,
               renderValue: (selected: any) =>
@@ -148,7 +160,7 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
           >
             {shifts.map((option: any) => (
               <MenuItem key={option._id} value={option._id}>
-                <Checkbox checked={shift.indexOf(option._id) > -1} />
+                <Checkbox checked={shiftsArray.indexOf(option._id) > -1} />
                 <ListItemText
                   primary={`${rearrangeDate(option.date)} - ${
                     option.startTime
