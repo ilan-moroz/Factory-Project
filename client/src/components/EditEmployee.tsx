@@ -31,8 +31,9 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
     initialShiftsArray,
   } = useEditEmployee(employeeId);
 
-  // onSubmit function to update the employee in backend and dispatch change to redux
+  // onSubmit function to update the employee
   const onSubmit = async (data: any) => {
+    // Update employee in the backend
     const response = await fetchUpdateEmployee(
       data._id,
       data.firstName,
@@ -42,7 +43,9 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
       data.shiftIds
     );
     if (response) {
+      // Dispatch the updated employee to redux
       store.dispatch(updateEmployeeAction(response));
+
       // Get the shift IDs that were removed and dispatch the change
       const removedShifts = initialShiftsArray.filter(
         (shiftId) => !data.shiftIds.includes(shiftId)
