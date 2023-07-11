@@ -1,3 +1,4 @@
+import { userActionLimit } from "./../middleware/userActionLimit";
 import express from "express";
 import { verifyToken } from "../middleware/Auth";
 import {
@@ -10,8 +11,13 @@ import {
 const router = express.Router();
 
 router.get("/getAllEmployees", verifyToken, getAllEmployees);
-router.post("/createEmployee", verifyToken, createEmployee);
-router.put("/updateEmployee/:id", verifyToken, updateEmployee);
-router.delete("/deleteEmployee/:id", verifyToken, deleteEmployee);
+router.post("/createEmployee", verifyToken, userActionLimit, createEmployee);
+router.put("/updateEmployee/:id", verifyToken, userActionLimit, updateEmployee);
+router.delete(
+  "/deleteEmployee/:id",
+  verifyToken,
+  userActionLimit,
+  deleteEmployee
+);
 
 export default router;

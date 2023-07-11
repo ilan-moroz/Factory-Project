@@ -5,11 +5,17 @@ import {
   createShift,
   addShiftToEmployee,
 } from "../controllers/shift";
+import { userActionLimit } from "../middleware/userActionLimit";
 
 const router = express.Router();
 
 router.get("/getAllShifts", verifyToken, getAllShifts);
-router.post("/createShift", verifyToken, createShift);
-router.post("/addShiftToEmployee", verifyToken, addShiftToEmployee);
+router.post("/createShift", verifyToken, userActionLimit, createShift);
+router.post(
+  "/addShiftToEmployee",
+  verifyToken,
+  userActionLimit,
+  addShiftToEmployee
+);
 
 export default router;
