@@ -49,23 +49,6 @@ export const createShift = async (req: Request, res: Response) => {
   }
 };
 
-// GET /shifts/:id/employees
-export const getShiftEmployees = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-
-    const shift = await Shift.findById(id);
-    if (!shift) {
-      return res.status(404).json({ error: "Shift not found" });
-    }
-
-    const employees = await Employee.find({ _id: { $in: shift.employeeIds } });
-    res.status(200).json(employees);
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
 export const addShiftToEmployee = async (req: Request, res: Response) => {
   try {
     const { shiftId, employeeId } = req.body;

@@ -31,7 +31,7 @@ export const fetchLogin = async (data: {
   password: string;
 }) => {
   try {
-    const response = await axios.post(`${baseUrl}/auth/login`, data);
+    const response = await api.post("/auth/login", data);
     if (response.status === 200) return response.data;
   } catch (err) {
     console.log(err);

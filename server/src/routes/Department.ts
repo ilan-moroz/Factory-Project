@@ -12,7 +12,17 @@ const router = express.Router();
 
 router.post("/addDepartment", verifyToken, userActionLimit, createDepartment);
 router.get("/getAllDepartments", verifyToken, getAllDepartments);
-router.put("/updateDepartment/:id", verifyToken, updateDepartment);
-router.delete("/deleteDepartment/:id", verifyToken, deleteDepartment);
+router.put(
+  "/updateDepartment/:id",
+  verifyToken,
+  userActionLimit,
+  updateDepartment
+);
+router.delete(
+  "/deleteDepartment/:id",
+  verifyToken,
+  userActionLimit,
+  deleteDepartment
+);
 
 export default router;
