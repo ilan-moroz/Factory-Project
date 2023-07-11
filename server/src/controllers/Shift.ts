@@ -70,7 +70,7 @@ export const addShiftToEmployee = async (req: Request, res: Response) => {
   try {
     const { shiftId, employeeId } = req.body;
 
-    // Find the shift by ID
+    // Find the shift and employee by ID
     const shift = await Shift.findById(shiftId);
     const employee = await Employee.findById(employeeId);
 
@@ -82,11 +82,11 @@ export const addShiftToEmployee = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "Employee not found" });
     }
 
-    // Add the employee ID to the shift's employeeIds array
+    // Add the employee ID to the shift's employeeIds array and same for the shift
     shift.employeeIds.push(employeeId);
     employee.shiftIds.push(shiftId);
 
-    // Save the updated shift
+    // Save the updates
     await shift.save();
     await employee.save();
 
