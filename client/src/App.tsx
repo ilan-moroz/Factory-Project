@@ -7,10 +7,14 @@ import Department from "./pages/Department";
 import Page404 from "./pages/page404/page404";
 import Shifts from "./pages/Shifts";
 import Employees from "./pages/Employees";
+import useDataFetching from "./hooks/useDataFetching";
 
 function App() {
   const location = useLocation();
   const hideNavbar = location.pathname !== "/";
+
+  //if redux states are empty get all from database and save in redux
+  useDataFetching();
 
   return (
     <div className="App">

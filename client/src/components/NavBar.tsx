@@ -18,7 +18,6 @@ import { setLogoutAction } from "../redux/UserReducer";
 import { useSelector } from "react-redux";
 import { Chip } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
-import useDataFetching from "../hooks/useDataFetching";
 
 const pages = ["Departments", "Employees", "Shifts"];
 const settings = ["Logout"];
@@ -64,9 +63,6 @@ function ResponsiveAppBar() {
       },
     },
   });
-
-  //if redux states are empty get all from database and save in redux
-  useDataFetching();
 
   const location = useLocation();
 
