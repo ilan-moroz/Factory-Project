@@ -5,12 +5,16 @@ import { RootState, store } from "../redux/Store";
 import { addDepartmentAction } from "../redux/DepartmentReducer";
 import { useSelector } from "react-redux";
 import { FormDialogBase } from "./FormDialogBase";
+import { decreaseActionNumberAction } from "../redux/UserReducer";
 
 export default function AddDepartment() {
   // onSubmit function to add the department to backend and dispatch to redux
   const onSubmit = async (data: any) => {
     const response = await fetchAddDepartment(data.name, data.manager);
-    store.dispatch(addDepartmentAction(response));
+    if (response) {
+      store.dispatch(addDepartmentAction(response));
+      store.dispatch(decreaseActionNumberAction());
+    }
   };
 
   // state of the employees

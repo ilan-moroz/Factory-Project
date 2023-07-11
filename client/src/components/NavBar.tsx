@@ -25,6 +25,7 @@ const settings = ["Logout"];
 
 function ResponsiveAppBar() {
   const user = useSelector((state: RootState) => state.users.user);
+  console.log(user?.numOfActions);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null

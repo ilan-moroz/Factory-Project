@@ -8,6 +8,7 @@ export interface UserState {
 export enum UserActionType {
   setLogout = "setLogout",
   setLogin = "setLogin",
+  decreaseActionsNumber = "decreaseActionsNumber",
 }
 
 export interface UserAction {
@@ -21,6 +22,10 @@ export const setLogoutAction = (): UserAction => {
 
 export const setLoginAction = (user: User, token: string): UserAction => {
   return { type: UserActionType.setLogin, payload: { user, token } };
+};
+
+export const decreaseActionNumberAction = () => {
+  return { type: UserActionType.decreaseActionsNumber };
 };
 
 export const userReducer = (
@@ -41,6 +46,14 @@ export const userReducer = (
     case UserActionType.setLogin:
       newState.user = action.payload.user;
       newState.token = action.payload.token;
+      break;
+
+    case UserActionType.decreaseActionsNumber:
+      if (newState.user)
+        newState.user = {
+          ...newState.user,
+          numOfActions: newState.user.numOfActions - 1,
+        };
       break;
 
     default:
