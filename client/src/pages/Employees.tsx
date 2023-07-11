@@ -185,6 +185,9 @@ export default function ReactVirtualizedTable() {
   }
 
   const employeesWithDepartmentNames = useEmployeeDepartmentNames();
+  const [filteredEmployees, setFilteredEmployees] = React.useState(
+    employeesWithDepartmentNames
+  );
 
   return (
     <Box
@@ -205,11 +208,14 @@ export default function ReactVirtualizedTable() {
         }}
       >
         <Box sx={{ mb: 3 }}>
-          <EmployeeSearch />
+          <EmployeeSearch
+            employees={employeesWithDepartmentNames}
+            setFilteredEmployees={setFilteredEmployees}
+          />
         </Box>
         <Paper style={{ height: 400, width: "70%" }}>
           <TableVirtuoso
-            data={employeesWithDepartmentNames}
+            data={filteredEmployees}
             components={VirtuosoTableComponents}
             fixedHeaderContent={fixedHeaderContent}
             itemContent={rowContent}

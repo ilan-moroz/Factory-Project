@@ -1,12 +1,35 @@
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import { Employee } from "../models/Employee";
 
-export function EmployeeSearch() {
+//  what data we need from the main component
+interface EmployeeSearchProps {
+  employees: Employee[];
+  setFilteredEmployees: React.Dispatch<React.SetStateAction<Employee[]>>;
+}
+
+export function EmployeeSearch({
+  employees,
+  setFilteredEmployees,
+}: EmployeeSearchProps) {
   // search function activated on change of the search input and searches for employees based first/last name and department
   const searchEmployee = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
+    const filteredEmployees = employees.filter(
+      (employee) =>
+        employee.firstName
+          .toLowerCase()
+          .includes(event.target.value.toLowerCase()) ||
+        employee.lastName
+          .toLowerCase()
+          .includes(event.target.value.toLowerCase()) ||
+        employee
+          .departmentName!.toLowerCase()
+          .includes(event.target.value.toLowerCase())
+    );
+    setFilteredEmployees(filteredEmployees); // Update the state with the filtered employees
   };
+
   return (
     <Paper
       component="form"
