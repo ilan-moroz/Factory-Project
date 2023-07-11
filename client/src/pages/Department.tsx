@@ -17,6 +17,7 @@ import Box from "@mui/material/Box";
 import EditDepartment from "../components/EditDepartment";
 import { deleteDepartmentAction } from "../redux/DepartmentReducer";
 import { useManagerNames } from "../hooks/useManagerNames";
+import { decreaseActionNumberAction } from "../redux/UserReducer";
 
 interface ColumnData {
   dataKey: keyof Department | string;
@@ -100,6 +101,7 @@ function rowContent(_index: number, row: Department) {
           return;
         }
         store.dispatch(deleteDepartmentAction(id));
+        store.dispatch(decreaseActionNumberAction());
       })
       .catch((error) => {
         console.log(error);

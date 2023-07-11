@@ -16,21 +16,24 @@ export const userActionLimit = async (
   // Retrieve the user's record from the database
   const user = await User.findById(userId);
 
-  // If the user doesn't exist or something went wrong, handle the error
-  if (!user) {
-    return res.status(500).json({ error: "User not found" });
-  }
+  // only for users
+  if (!user?.isAdmin) {
+    // If the user doesn't exist or something went wrong, handle the error
+    if (!user) {
+      return res.status(500).json({ error: "User not found" });
+    }
 
-  // Check the user's remaining actions
-  if (user.numOfActions <= 0) {
-    return res
-      .status(429)
-      .json({ error: "You have exceeded your daily action limit" });
-  }
+    // Check the user's remaining actions
+    if (user.numOfActions <= 0) {
+      return res
+        .status(429)
+        .json({ error: "You have exceeded your daily action limit" });
+    }
 
-  // If they still have actions remaining, decrement their actions count
-  user.numOfActions--;
-  await user.save();
+    // If they still have actions remaining, decrement their actions count
+    user.numOfActions--;
+    await user.save();
+  }
 
   // Proceed to the next middleware or route handler
   next();
