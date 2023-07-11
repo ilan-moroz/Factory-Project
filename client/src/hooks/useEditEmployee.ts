@@ -13,13 +13,15 @@ export const useEditEmployee = (employeeId: string) => {
   const employeeToEdit = employees.find(
     (employee: any) => employee._id === employeeId
   );
-
+  // handle the department state when changed
   const [department, setDepartment] = useState<string>(
     employeeToEdit?.departmentId ?? ""
   );
+  // handle the state of the selected shifts
   const [shiftsArray, setShiftsArray] = useState<string[]>(
     employeeToEdit?.shiftIds ?? []
   );
+  // the initial state of the employees shifts
   const [initialShiftsArray, setInitialShiftsArray] = useState<string[]>(
     employeeToEdit?.shiftIds ?? []
   );
