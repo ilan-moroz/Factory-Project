@@ -18,6 +18,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* hide navbar on main page(login) */}
       <header>{hideNavbar && <NavBar />}</header>
       <main>
         <Routes>
