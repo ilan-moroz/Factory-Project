@@ -9,6 +9,8 @@ import Shifts from "./pages/Shifts";
 import Employees from "./pages/Employees";
 import useDataFetching from "./hooks/useDataFetching";
 import { useUserActions } from "./hooks/useUserAction";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const location = useLocation();
@@ -33,6 +35,8 @@ function App() {
           <Route path="*" element={<Page404 />} />
         </Routes>
       </main>
+      {/* toast to show error message */}
+      <ToastContainer position={toast.POSITION.TOP_CENTER} />
     </div>
   );
 }
