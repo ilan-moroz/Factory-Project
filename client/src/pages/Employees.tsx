@@ -188,10 +188,14 @@ export default function ReactVirtualizedTable() {
 
   const employees = useEmployeeDepartmentNames();
   const [searchedEmployees, setSearchedEmployees] = React.useState(employees);
+  const [isSearchActive, setIsSearchActive] = React.useState(false);
 
   React.useEffect(() => {
-    setSearchedEmployees(employees);
-  }, [employees]); // When employeesWithDepartmentNames changes, update filteredEmployees
+    // Only update searchedEmployees if a search is not active
+    if (!isSearchActive) {
+      setSearchedEmployees(employees);
+    }
+  }, [employees, isSearchActive]); // When employees changes, update searchedEmployees
 
   return (
     <Box
@@ -214,7 +218,8 @@ export default function ReactVirtualizedTable() {
         <Box sx={{ mb: 3 }}>
           <EmployeeSearch
             employees={employees}
-            setFilteredEmployees={setSearchedEmployees}
+            setSearchedEmployees={setSearchedEmployees}
+            setIsSearchActive={setIsSearchActive}
           />
         </Box>
         <Paper style={{ height: 400, width: "70%" }}>

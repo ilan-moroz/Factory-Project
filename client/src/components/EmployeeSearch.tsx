@@ -6,23 +6,30 @@ import { Employee } from "../models/Employee";
 //  what data we need from the main component
 interface EmployeeSearchProps {
   employees: Employee[];
-  setFilteredEmployees: React.Dispatch<React.SetStateAction<Employee[]>>;
+  setSearchedEmployees: React.Dispatch<React.SetStateAction<Employee[]>>;
+  setIsSearchActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function EmployeeSearch({
   employees,
-  setFilteredEmployees,
+  setSearchedEmployees,
+  setIsSearchActive,
 }: EmployeeSearchProps) {
   // search function activated on change of the search input and searches for employees based first/last name and department
   const searchEmployee = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value.toLowerCase();
-    const filteredEmployees = employees.filter(
-      (employee) =>
-        employee.firstName.toLowerCase().includes(searchTerm) ||
-        employee.lastName.toLowerCase().includes(searchTerm) ||
-        employee.departmentName!.toLowerCase().includes(searchTerm)
-    );
-    setFilteredEmployees(filteredEmployees); // Update the state with the filtered employees
+    if (searchTerm === "") {
+      setIsSearchActive(false);
+    } else {
+      setIsSearchActive(true);
+      const filteredEmployees = employees.filter(
+        (employee) =>
+          employee.firstName.toLowerCase().includes(searchTerm) ||
+          employee.lastName.toLowerCase().includes(searchTerm) ||
+          employee.departmentName!.toLowerCase().includes(searchTerm)
+      );
+      setSearchedEmployees(filteredEmployees); // Update the state with the filtered employees
+    }
   };
 
   return (
