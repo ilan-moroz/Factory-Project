@@ -1,14 +1,12 @@
 import * as React from "react";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import { RootState } from "../redux/Store";
-import { useSelector } from "react-redux";
 import { Shift } from "../models/Shifts";
-import { Employee } from "../models/Employee";
 import { TableBase } from "../components/TableBase";
 import AddShiftFormDialog from "../components/AddShift";
 import { ColumnData } from "../models/ColumnData";
 import { rearrangeDate } from "../utils/rearrangeDate";
+import { useShiftsEmployeeNames } from "../hooks/useShiftsEmployeeNames";
 
 const columns: ColumnData<Shift>[] = [
   {
@@ -67,23 +65,6 @@ function fixedHeaderContent() {
 }
 
 export default function ReactVirtualizedTable() {
-  const shifts = useSelector((state: RootState) => state.shifts.allShifts);
-  const employees = useSelector(
-    (state: RootState) => state.employees.employees
-  );
-
-  const employeeIdNameMap: { [key: string]: string } = {};
-  employees.forEach((employee: Employee) => {
-    employeeIdNameMap[
-      employee._id
-    ] = `${employee.firstName} ${employee.lastName}`;
-  });
-
-  const shiftsWithEmployeeNames = shifts.map((shift) => ({
-    ...shift,
-    employeeNames: shift.employeeIds.map((id) => employeeIdNameMap[id]),
-  }));
-
   function rowContent(index: number, row: Shift) {
     return (
       <React.Fragment>
@@ -117,12 +98,14 @@ export default function ReactVirtualizedTable() {
     );
   }
 
+  const shifts = useShiftsEmployeeNames();
+
   return (
     <TableBase
       columns={columns}
       fixedHeaderContent={fixedHeaderContent}
       rowContent={rowContent}
-      data={shiftsWithEmployeeNames}
+      data={shifts}
       ExtraComponent={AddShiftFormDialog}
     />
   );
