@@ -1,13 +1,7 @@
 import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { TableVirtuoso, TableComponents } from "react-virtuoso";
-import { Box, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { Employee } from "../models/Employee";
 import { store } from "../redux/Store";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -20,15 +14,10 @@ import { useEmployeeDepartmentNames } from "../hooks/useEmployeeDepartmentNames"
 import EditEmployee from "../components/EditEmployee";
 import { EmployeeSearch } from "../components/EmployeeSearch";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
+import { ColumnData } from "../models/ColumnData";
+import { TableBase } from "../components/TableBase";
 
-interface ColumnData {
-  dataKey: keyof Employee | string;
-  label: string;
-  numeric?: boolean;
-  width: number;
-}
-
-const columns: ColumnData[] = [
+const columns: ColumnData<Employee>[] = [
   {
     width: 60,
     label: "First Name",
@@ -50,23 +39,6 @@ const columns: ColumnData[] = [
     dataKey: "startWorkYear",
   },
 ];
-
-const VirtuosoTableComponents: TableComponents<Employee> = {
-  Scroller: React.forwardRef<HTMLDivElement>((props, ref) => (
-    <TableContainer component={Paper} {...props} ref={ref} />
-  )),
-  Table: (props) => (
-    <Table
-      {...props}
-      sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
-    />
-  ),
-  TableHead,
-  TableRow: ({ item: _item, ...props }) => <TableRow {...props} />,
-  TableBody: React.forwardRef<HTMLTableSectionElement>((props, ref) => (
-    <TableBody {...props} ref={ref} />
-  )),
-};
 
 function fixedHeaderContent() {
   return (
@@ -146,6 +118,7 @@ function fixedHeaderContent() {
 }
 
 export default function ReactVirtualizedTable() {
+  // handle the delete of an employee
   const handleDelete = (id: string) => {
     fetchDeleteEmployee(id);
     store.dispatch(deleteEmployeeAction(id));
@@ -185,52 +158,43 @@ export default function ReactVirtualizedTable() {
       </React.Fragment>
     );
   }
-
+  // Get the employees using a custom hook that returns the employees with their department names
   const employees = useEmployeeDepartmentNames();
+  // Initialize the state for searched employees and search activity
   const [searchedEmployees, setSearchedEmployees] = React.useState(employees);
   const [isSearchActive, setIsSearchActive] = React.useState(false);
 
   React.useEffect(() => {
-    // Only update searchedEmployees if a search is not active
+    // Update searchedEmployees when the employees change, but only if a search is not active
     if (!isSearchActive) {
       setSearchedEmployees(employees);
     }
   }, [employees, isSearchActive]); // When employees changes, update searchedEmployees
 
+  // Memoize the EmployeeSearch component using React.memo
+  const MemoizedEmployeeSearch = React.memo(EmployeeSearch);
+
+  // Create the search component using React.useCallback
+  const searchComponent = React.useCallback(
+    () => (
+      <MemoizedEmployeeSearch
+        employees={employees}
+        setSearchedEmployees={setSearchedEmployees}
+        setIsSearchActive={setIsSearchActive}
+      />
+    ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
   return (
-    <Box
-      className="background"
-      style={{ height: "100%", display: "flex", flexDirection: "column" }}
-    >
-      <Box sx={{ p: 3 }}>
-        <AddEmployee />
-      </Box>
-      <Box
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          flex: 1,
-          marginBottom: 400,
-        }}
-      >
-        <Box sx={{ mb: 3 }}>
-          <EmployeeSearch
-            employees={employees}
-            setSearchedEmployees={setSearchedEmployees}
-            setIsSearchActive={setIsSearchActive}
-          />
-        </Box>
-        <Paper style={{ height: 400, width: "70%" }}>
-          <TableVirtuoso
-            data={searchedEmployees}
-            components={VirtuosoTableComponents}
-            fixedHeaderContent={fixedHeaderContent}
-            itemContent={rowContent}
-          />
-        </Paper>
-      </Box>
-    </Box>
+    <TableBase
+      columns={columns}
+      fixedHeaderContent={fixedHeaderContent}
+      rowContent={rowContent}
+      data={searchedEmployees}
+      ExtraComponent={AddEmployee}
+      SearchComp={searchComponent}
+    />
   );
 }

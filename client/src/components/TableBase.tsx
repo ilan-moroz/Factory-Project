@@ -21,6 +21,7 @@ interface TableBaseProps {
   rowContent: (index: number, row: any) => React.ReactNode;
   data: any[];
   ExtraComponent: React.ComponentType;
+  SearchComp?: React.ComponentType;
 }
 
 const VirtuosoTableComponents: TableComponents<any> = {
@@ -46,6 +47,7 @@ export const TableBase: React.FC<TableBaseProps> = ({
   rowContent,
   data,
   ExtraComponent,
+  SearchComp,
 }) => {
   return (
     <Box
@@ -65,6 +67,11 @@ export const TableBase: React.FC<TableBaseProps> = ({
           marginBottom: 400,
         }}
       >
+        {SearchComp && (
+          <Box sx={{ mb: 3 }}>
+            <SearchComp />
+          </Box>
+        )}
         <Paper style={{ height: 400, width: "70%" }}>
           <TableVirtuoso
             data={data}
