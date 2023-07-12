@@ -171,13 +171,10 @@ export default function ReactVirtualizedTable() {
     }
   }, [employees, isSearchActive]); // When employees changes, update searchedEmployees
 
-  // Memoize the EmployeeSearch component using React.memo
-  const MemoizedEmployeeSearch = React.memo(EmployeeSearch);
-
-  // Create the search component using React.useCallback
+  // Create a memoized search component using React.useCallback
   const searchComponent = React.useCallback(
     () => (
-      <MemoizedEmployeeSearch
+      <EmployeeSearch
         employees={employees}
         setSearchedEmployees={setSearchedEmployees}
         setIsSearchActive={setIsSearchActive}
