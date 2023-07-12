@@ -186,14 +186,12 @@ export default function ReactVirtualizedTable() {
     );
   }
 
-  const employeesWithDepartmentNames = useEmployeeDepartmentNames();
-  const [filteredEmployees, setFilteredEmployees] = React.useState(
-    employeesWithDepartmentNames
-  );
+  const employees = useEmployeeDepartmentNames();
+  const [filteredEmployees, setFilteredEmployees] = React.useState(employees);
 
   React.useEffect(() => {
-    setFilteredEmployees(employeesWithDepartmentNames);
-  }, [employeesWithDepartmentNames]); // When employeesWithDepartmentNames changes, update filteredEmployees
+    setFilteredEmployees(employees);
+  }, [employees]); // When employeesWithDepartmentNames changes, update filteredEmployees
 
   return (
     <Box
@@ -215,7 +213,7 @@ export default function ReactVirtualizedTable() {
       >
         <Box sx={{ mb: 3 }}>
           <EmployeeSearch
-            employees={employeesWithDepartmentNames}
+            employees={employees}
             setFilteredEmployees={setFilteredEmployees}
           />
         </Box>
