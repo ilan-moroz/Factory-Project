@@ -8,6 +8,7 @@ import { Employee } from "../models/Employee";
 import { TableBase } from "../components/TableBase";
 import AddShiftFormDialog from "../components/AddShift";
 import { ColumnData } from "../models/ColumnData";
+import { rearrangeDate } from "../utils/rearrangeDate";
 
 const columns: ColumnData<Shift>[] = [
   {
@@ -89,16 +90,13 @@ export default function ReactVirtualizedTable() {
         <TableCell>{index + 1}</TableCell>
         {columns.map((column) => {
           if (column.dataKey === "date") {
-            const dateParts = String(row[column.dataKey])
-              .split("T")[0]
-              .split("-"); // ['yyyy', 'mm', 'dd']
-            const rearrangedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // 'dd-mm-yyyy'
+            const date = rearrangeDate(row[column.dataKey]);
             return (
               <TableCell
                 key={column.dataKey}
                 align={column.numeric || false ? "right" : "left"}
               >
-                {rearrangedDate}
+                {date}
               </TableCell>
             );
           }
