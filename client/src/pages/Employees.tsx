@@ -191,6 +191,10 @@ export default function ReactVirtualizedTable() {
     employeesWithDepartmentNames
   );
 
+  React.useEffect(() => {
+    setFilteredEmployees(employeesWithDepartmentNames);
+  }, [employeesWithDepartmentNames]); // When employeesWithDepartmentNames changes, update filteredEmployees
+
   return (
     <Box
       className="background"
