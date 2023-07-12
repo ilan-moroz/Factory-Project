@@ -8,6 +8,7 @@ import Page404 from "./pages/page404/page404";
 import Shifts from "./pages/Shifts";
 import Employees from "./pages/Employees";
 import useDataFetching from "./hooks/useDataFetching";
+import { useUserActions } from "./hooks/useUserAction";
 
 function App() {
   const location = useLocation();
@@ -15,6 +16,8 @@ function App() {
 
   //if redux states are empty get all from database and save in redux
   useDataFetching();
+  // if user have no actions left then log them out
+  useUserActions();
 
   return (
     <div className="App">
