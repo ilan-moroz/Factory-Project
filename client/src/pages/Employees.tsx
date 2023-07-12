@@ -19,6 +19,7 @@ import EmployeeShiftsPopper from "../components/EmployeeShiftsPopper";
 import { useEmployeeDepartmentNames } from "../hooks/useEmployeeDepartmentNames";
 import EditEmployee from "../components/EditEmployee";
 import { EmployeeSearch } from "../components/EmployeeSearch";
+import { decreaseActionNumberAction } from "../redux/UserReducer";
 
 interface ColumnData {
   dataKey: keyof Employee | string;
@@ -148,6 +149,7 @@ export default function ReactVirtualizedTable() {
   const handleDelete = (id: string) => {
     fetchDeleteEmployee(id);
     store.dispatch(deleteEmployeeAction(id));
+    store.dispatch(decreaseActionNumberAction());
   };
 
   function rowContent(index: number, row: Employee) {
