@@ -35,6 +35,7 @@ export const fetchLogin = async (data: {
     if (response.status === 200) return response.data;
   } catch (err) {
     console.log(err);
+    throw err;
   }
 };
 

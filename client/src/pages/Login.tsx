@@ -14,11 +14,10 @@ import { fetchLogin } from "../utils/fetchData";
 import { useForm } from "react-hook-form";
 import { InputAdornment } from "@mui/material";
 import { Password, Person } from "@mui/icons-material";
-import { Notyf } from "notyf";
-import "notyf/notyf.min.css";
 import { useNavigate } from "react-router-dom";
 import { store } from "../redux/Store";
 import { setLoginAction } from "../redux/UserReducer";
+import { toast } from "react-toastify";
 
 function Copyright(props: any) {
   return (
@@ -89,13 +88,6 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const notyf = new Notyf({
-    position: {
-      x: "center",
-      y: "top",
-    },
-  });
-
   const navigate = useNavigate();
 
   const onSubmit = async (data: any) => {
@@ -103,16 +95,12 @@ export default function Login() {
     const loginData = { userName, password };
     try {
       const response = await fetchLogin(loginData);
-      if (!response) {
-        notyf.error(
-          "Invalid Username or password. Please check your credentials and try again"
-        );
-      } else {
+      if (response) {
         store.dispatch(setLoginAction(response.user, response.token));
         navigate("/home");
       }
-    } catch (err) {
-      console.error(err);
+    } catch (error: any) {
+      toast.error(error.response.data.error);
     }
   };
 
