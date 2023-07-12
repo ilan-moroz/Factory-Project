@@ -187,10 +187,10 @@ export default function ReactVirtualizedTable() {
   }
 
   const employees = useEmployeeDepartmentNames();
-  const [filteredEmployees, setFilteredEmployees] = React.useState(employees);
+  const [searchedEmployees, setSearchedEmployees] = React.useState(employees);
 
   React.useEffect(() => {
-    setFilteredEmployees(employees);
+    setSearchedEmployees(employees);
   }, [employees]); // When employeesWithDepartmentNames changes, update filteredEmployees
 
   return (
@@ -214,12 +214,12 @@ export default function ReactVirtualizedTable() {
         <Box sx={{ mb: 3 }}>
           <EmployeeSearch
             employees={employees}
-            setFilteredEmployees={setFilteredEmployees}
+            setFilteredEmployees={setSearchedEmployees}
           />
         </Box>
         <Paper style={{ height: 400, width: "70%" }}>
           <TableVirtuoso
-            data={filteredEmployees}
+            data={searchedEmployees}
             components={VirtuosoTableComponents}
             fixedHeaderContent={fixedHeaderContent}
             itemContent={rowContent}
