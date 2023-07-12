@@ -1,27 +1,15 @@
 import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { TableVirtuoso, TableComponents } from "react-virtuoso";
-import { Box } from "@mui/material";
 import { RootState } from "../redux/Store";
 import { useSelector } from "react-redux";
-import AddShiftFormDialog from "../components/AddShift";
 import { Shift } from "../models/Shifts";
 import { Employee } from "../models/Employee";
+import { TableBase } from "../components/TableBase";
+import AddShiftFormDialog from "../components/AddShift";
+import { ColumnData } from "../models/ColumnData";
 
-interface ColumnData {
-  dataKey: keyof Shift;
-  label: string;
-  numeric?: boolean;
-  width: number;
-}
-
-const columns: ColumnData[] = [
+const columns: ColumnData<Shift>[] = [
   {
     width: 50,
     label: "Date",
@@ -43,23 +31,6 @@ const columns: ColumnData[] = [
     dataKey: "employeeIds",
   },
 ];
-
-const VirtuosoTableComponents: TableComponents<Shift> = {
-  Scroller: React.forwardRef<HTMLDivElement>((props, ref) => (
-    <TableContainer component={Paper} {...props} ref={ref} />
-  )),
-  Table: (props) => (
-    <Table
-      {...props}
-      sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
-    />
-  ),
-  TableHead,
-  TableRow: ({ item: _item, ...props }) => <TableRow {...props} />,
-  TableBody: React.forwardRef<HTMLTableSectionElement>((props, ref) => (
-    <TableBody {...props} ref={ref} />
-  )),
-};
 
 function fixedHeaderContent() {
   return (
@@ -149,32 +120,12 @@ export default function ReactVirtualizedTable() {
   }
 
   return (
-    <Box
-      className="background"
-      style={{ height: "100%", display: "flex", flexDirection: "column" }}
-    >
-      <Box sx={{ p: 3 }}>
-        <AddShiftFormDialog />
-      </Box>
-      <Box
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          flex: 1,
-          marginBottom: 400,
-        }}
-      >
-        <Paper style={{ height: 400, width: "70%" }}>
-          <TableVirtuoso
-            data={shiftsWithEmployeeNames}
-            components={VirtuosoTableComponents}
-            fixedHeaderContent={fixedHeaderContent}
-            itemContent={rowContent}
-          />
-        </Paper>
-      </Box>
-    </Box>
+    <TableBase
+      columns={columns}
+      fixedHeaderContent={fixedHeaderContent}
+      rowContent={rowContent}
+      data={shiftsWithEmployeeNames}
+      ExtraComponent={AddShiftFormDialog}
+    />
   );
 }
