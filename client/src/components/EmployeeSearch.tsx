@@ -15,17 +15,12 @@ export function EmployeeSearch({
 }: EmployeeSearchProps) {
   // search function activated on change of the search input and searches for employees based first/last name and department
   const searchEmployee = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value.toLowerCase();
     const filteredEmployees = employees.filter(
       (employee) =>
-        employee.firstName
-          .toLowerCase()
-          .includes(event.target.value.toLowerCase()) ||
-        employee.lastName
-          .toLowerCase()
-          .includes(event.target.value.toLowerCase()) ||
-        employee
-          .departmentName!.toLowerCase()
-          .includes(event.target.value.toLowerCase())
+        employee.firstName.toLowerCase().includes(searchTerm) ||
+        employee.lastName.toLowerCase().includes(searchTerm) ||
+        employee.departmentName!.toLowerCase().includes(searchTerm)
     );
     setFilteredEmployees(filteredEmployees); // Update the state with the filtered employees
   };
