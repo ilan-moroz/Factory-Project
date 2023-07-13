@@ -19,7 +19,7 @@ interface EditEmployeeProps {
   employeeId: string;
 }
 
-const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
+const EditEmployee = (props: EditEmployeeProps) => {
   const {
     employeeToEdit,
     department,
@@ -30,7 +30,7 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
     shiftsMap,
     handleShiftChange,
     initialShiftsArray,
-  } = useEditEmployee(employeeId);
+  } = useEditEmployee(props.employeeId);
 
   // onSubmit function to update the employee
   const onSubmit = async (data: any) => {

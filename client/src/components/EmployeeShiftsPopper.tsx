@@ -12,11 +12,9 @@ interface EmployeeShiftsPopperProps {
   employeeId: string;
 }
 
-const EmployeeShiftsPopper: React.FC<EmployeeShiftsPopperProps> = ({
-  employeeId,
-}) => {
+const EmployeeShiftsPopper = (props: EmployeeShiftsPopperProps) => {
   // get all shifts from the hook
-  const employeeShifts = useEmployeeShifts(employeeId);
+  const employeeShifts = useEmployeeShifts(props.employeeId);
 
   // popper to display the shifts
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
