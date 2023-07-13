@@ -25,13 +25,17 @@ export default function AddShift() {
       ...data,
       date: new Date(data.date),
     };
-    const response = await fetchAddShift(formData);
-    if (response) {
-      store.dispatch(addShiftAction(response));
-      store.dispatch(
-        addShiftToEmployeeAction(response.employeeIds[0], response._id)
-      );
-      store.dispatch(decreaseActionNumberAction());
+    try {
+      const response = await fetchAddShift(formData);
+      if (response) {
+        store.dispatch(addShiftAction(response));
+        store.dispatch(
+          addShiftToEmployeeAction(response.employeeIds[0], response._id)
+        );
+        store.dispatch(decreaseActionNumberAction());
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

@@ -10,10 +10,14 @@ import { decreaseActionNumberAction } from "../redux/UserReducer";
 export default function AddDepartment() {
   // onSubmit function to add the department to backend and dispatch to redux
   const onSubmit = async (data: any) => {
-    const response = await fetchAddDepartment(data.name, data.manager);
-    if (response) {
-      store.dispatch(addDepartmentAction(response));
-      store.dispatch(decreaseActionNumberAction());
+    try {
+      const response = await fetchAddDepartment(data.name, data.manager);
+      if (response) {
+        store.dispatch(addDepartmentAction(response));
+        store.dispatch(decreaseActionNumberAction());
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

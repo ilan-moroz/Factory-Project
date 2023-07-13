@@ -20,10 +20,16 @@ export default function ShiftEmployeeFormDialog(props: shiftProps) {
   // onSubmit function to add shift to employee in database and dispatch change to redux
   const onSubmit = async (data: any) => {
     const { employeeId } = props;
-    await fetchAddShiftToEmployee(data.shift, employeeId);
-    store.dispatch(addEmployeeToShiftAction(employeeId, data.shift));
-    store.dispatch(addShiftToEmployeeAction(employeeId, data.shift));
-    store.dispatch(decreaseActionNumberAction());
+    try {
+      const response = await fetchAddShiftToEmployee(data.shift, employeeId);
+      if (response) {
+        store.dispatch(addEmployeeToShiftAction(employeeId, data.shift));
+        store.dispatch(addShiftToEmployeeAction(employeeId, data.shift));
+        store.dispatch(decreaseActionNumberAction());
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

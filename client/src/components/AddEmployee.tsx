@@ -10,10 +10,14 @@ import { decreaseActionNumberAction } from "../redux/UserReducer";
 export default function AddEmployee() {
   // onSubmit function to add the employee to backend and dispatch to redux
   const onSubmit = async (data: any) => {
-    const response = await fetchAddEmployee(data);
-    if (response) {
-      store.dispatch(addEmployeeAction(response));
-      store.dispatch(decreaseActionNumberAction());
+    try {
+      const response = await fetchAddEmployee(data);
+      if (response) {
+        store.dispatch(addEmployeeAction(response));
+        store.dispatch(decreaseActionNumberAction());
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

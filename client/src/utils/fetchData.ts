@@ -50,7 +50,7 @@ export const fetchAddDepartment = async (
     });
     if (response.status === 201) return response.data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
@@ -87,7 +87,7 @@ export const fetchUpdateDepartment = async (
     );
     if (response.status === 200) return response.data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
@@ -96,7 +96,7 @@ export const fetchAddEmployee = async (data = {}) => {
     const response = await api.post("/employees/createEmployee", data);
     if (response.status === 201) return response.data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
@@ -132,7 +132,7 @@ export const fetchAddShift = async (data = {}) => {
     const response = await api.post("/shifts/createShift", data);
     if (response.status === 201) return response.data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
@@ -147,7 +147,7 @@ export const fetchAddShiftToEmployee = async (
     });
     if (response.status === 200) return response.data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
@@ -169,6 +169,6 @@ export const fetchUpdateEmployee = async (
     });
     if (response.status === 200) return response.data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };

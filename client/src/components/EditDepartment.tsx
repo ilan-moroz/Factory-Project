@@ -22,14 +22,18 @@ const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
 
   // onSubmit function to update the department in backend and dispatch change to redux
   const onSubmit = async (data: any) => {
-    const response = await fetchUpdateDepartment(
-      data._id,
-      data.name,
-      data.manager
-    );
-    if (response) {
-      store.dispatch(updateDepartmentAction(response));
-      store.dispatch(decreaseActionNumberAction());
+    try {
+      const response = await fetchUpdateDepartment(
+        data._id,
+        data.name,
+        data.manager
+      );
+      if (response) {
+        store.dispatch(updateDepartmentAction(response));
+        store.dispatch(decreaseActionNumberAction());
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
