@@ -14,11 +14,9 @@ interface EditDepartmentFormDialogProps {
   departmentId: string;
 }
 
-const EditDepartment: React.FC<EditDepartmentFormDialogProps> = ({
-  departmentId,
-}) => {
+const EditDepartment = (props: EditDepartmentFormDialogProps) => {
   const { employees, departmentToEdit, manager, handleManagerChange } =
-    useEditDepartment(departmentId);
+    useEditDepartment(props.departmentId);
 
   // onSubmit function to update the department in backend and dispatch change to redux
   const onSubmit = async (data: any) => {
