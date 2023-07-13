@@ -11,6 +11,7 @@ import useDataFetching from "./hooks/useDataFetching";
 import { useUserActions } from "./hooks/useUserAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useResetNumOfActions } from "./hooks/useResetNumOfActions";
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,8 @@ function App() {
   useDataFetching();
   // if user have no actions left then log them out
   useUserActions();
+  // reset user actions each day
+  useResetNumOfActions();
 
   return (
     <div className="App">

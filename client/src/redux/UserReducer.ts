@@ -9,6 +9,7 @@ export enum UserActionType {
   setLogout = "setLogout",
   setLogin = "setLogin",
   decreaseActionsNumber = "decreaseActionsNumber",
+  resetNumOfActions = "resetNumOfActions",
 }
 
 export interface UserAction {
@@ -26,6 +27,10 @@ export const setLoginAction = (user: User, token: string): UserAction => {
 
 export const decreaseActionNumberAction = () => {
   return { type: UserActionType.decreaseActionsNumber };
+};
+
+export const resetNumOfActionsAction = () => {
+  return { type: UserActionType.resetNumOfActions };
 };
 
 export const userReducer = (
@@ -53,6 +58,14 @@ export const userReducer = (
         newState.user = {
           ...newState.user,
           numOfActions: newState.user.numOfActions - 1,
+        };
+      break;
+
+    case UserActionType.resetNumOfActions:
+      if (newState.user)
+        newState.user = {
+          ...newState.user,
+          numOfActions: 10,
         };
       break;
 
