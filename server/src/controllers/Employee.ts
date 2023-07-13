@@ -98,7 +98,7 @@ export const deleteEmployee = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Employee not found" });
     }
 
-    await Shift.deleteMany({ employeeId: id });
+    await Shift.updateMany({ employeeIds: id }, { $pull: { employeeIds: id } });
     await employee.deleteOne();
 
     res.status(200).json({ message: "Employee deleted successfully" });
