@@ -13,6 +13,7 @@ import { useManagerNames } from "../hooks/useManagerNames";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
 import { ColumnData } from "../models/ColumnData";
 import { TableBase } from "../components/TableBase";
+import { useDepartmentEmployees } from "../hooks/useDepartmentEmployees";
 
 const columns: ColumnData<Department>[] = [
   {
@@ -82,40 +83,53 @@ function fixedHeaderContent() {
   );
 }
 
-function rowContent(index: number, row: Department) {
-  const handleDelete = (id: string) => {
-    fetchDeleteDepartment(id);
-    store.dispatch(deleteDepartmentAction(id));
-    store.dispatch(decreaseActionNumberAction());
-  };
-
-  return (
-    <React.Fragment>
-      <TableCell>{index + 1}</TableCell>
-      {columns.map((column) => {
-        return (
-          <TableCell
-            key={column.dataKey}
-            align={column.numeric || false ? "right" : "left"}
-          >
-            <div>{row[column.dataKey as keyof Department]}</div>
-          </TableCell>
-        );
-      })}
-      <TableCell>
-        <EditDepartment departmentId={row._id} />
-      </TableCell>
-      <TableCell>
-        <IconButton onClick={() => handleDelete(row._id)}>
-          <DeleteForeverIcon color="error" />
-        </IconButton>
-      </TableCell>
-    </React.Fragment>
-  );
-}
-
 export default function ReactVirtualizedTable() {
+  const departmentWithEmployees = useDepartmentEmployees();
+
+  function rowContent(index: number, row: Department) {
+    const handleDelete = (id: string) => {
+      fetchDeleteDepartment(id);
+      store.dispatch(deleteDepartmentAction(id));
+      store.dispatch(decreaseActionNumberAction());
+    };
+
+    // check if department has employees
+    const hasEmployee = departmentWithEmployees(row._id);
+    return (
+      <React.Fragment>
+        <TableCell>{index + 1}</TableCell>
+        {columns.map((column) => {
+          return (
+            <TableCell
+              key={column.dataKey}
+              align={column.numeric || false ? "right" : "left"}
+            >
+              <div>{row[column.dataKey as keyof Department]}</div>
+            </TableCell>
+          );
+        })}
+        <TableCell>
+          <EditDepartment departmentId={row._id} />
+        </TableCell>
+        <TableCell>
+          {!hasEmployee ? (
+            <IconButton onClick={() => handleDelete(row._id)}>
+              <DeleteForeverIcon color="error" />
+            </IconButton>
+          ) : (
+            <>
+              Can't delete:
+              <br />
+              Employee exists
+            </>
+          )}
+        </TableCell>
+      </React.Fragment>
+    );
+  }
+
   const departmentsWithManagerNames = useManagerNames();
+
   return (
     <TableBase
       columns={columns}
