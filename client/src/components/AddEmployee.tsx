@@ -2,16 +2,16 @@ import TextField from "@mui/material/TextField";
 import { MenuItem } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState, store } from "../redux/Store";
-import { fetchAddEmployee } from "../utils/fetchData";
 import { addEmployeeAction } from "../redux/EmployeeReducer";
 import { FormDialogBase } from "./FormDialogBase";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
+import { addEmployee } from "../api/employeeApi";
 
 export default function AddEmployee() {
   // onSubmit function to add the employee to backend and dispatch to redux
   const onSubmit = async (data: any) => {
     try {
-      const response = await fetchAddEmployee(data);
+      const response = await addEmployee(data);
       if (response) {
         store.dispatch(addEmployeeAction(response));
         store.dispatch(decreaseActionNumberAction());

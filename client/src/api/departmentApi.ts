@@ -20,7 +20,7 @@ export const getAllDepartments = async () => {
     const response = await api.get("/departments/getAllDepartments");
     if (response.status === 200) return response.data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
@@ -29,7 +29,7 @@ export const deleteDepartment = async (id: string) => {
     const response = await api.delete(`/departments/deleteDepartment/${id}`);
     if (response.status === 200) return response.data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 

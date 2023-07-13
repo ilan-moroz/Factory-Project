@@ -3,11 +3,9 @@ import { getAllEmployeesAction } from "../redux/EmployeeReducer";
 import { getAllShiftsAction } from "../redux/ShiftReducer";
 import { getAllDepartmentsAction } from "../redux/DepartmentReducer";
 import { store } from "../redux/Store";
-import {
-  fetchGetAllDepartments,
-  fetchGetAllEmployees,
-  fetchGetAllShifts,
-} from "../utils/fetchData";
+import { getAllEmployees } from "../api/employeeApi";
+import { getAllShifts } from "../api/shiftApi";
+import { getAllDepartments } from "../api/departmentApi";
 
 const useDataFetching = () => {
   //if redux states are empty get all data from database and save in redux
@@ -28,7 +26,7 @@ const useDataFetching = () => {
   // fetch the employees
   const fetchEmployees = () => {
     console.log("getting employees from backend....");
-    fetchGetAllEmployees()
+    getAllEmployees()
       .then((response) => {
         store.dispatch(getAllEmployeesAction(response));
       })
@@ -40,7 +38,7 @@ const useDataFetching = () => {
   // fetch the shifts
   const fetchShifts = () => {
     console.log("getting shifts from backend....");
-    fetchGetAllShifts()
+    getAllShifts()
       .then((response) => {
         store.dispatch(getAllShiftsAction(response));
       })
@@ -52,7 +50,7 @@ const useDataFetching = () => {
   // fetch the deparments
   const fetchDepartments = () => {
     console.log("getting departments from backend....");
-    fetchGetAllDepartments()
+    getAllDepartments()
       .then((response) => {
         store.dispatch(getAllDepartmentsAction(response));
       })

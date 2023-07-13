@@ -6,7 +6,6 @@ import { Employee } from "../models/Employee";
 import { store } from "../redux/Store";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddEmployee from "../components/AddEmployee";
-import { fetchDeleteEmployee } from "../utils/fetchData";
 import { deleteEmployeeAction } from "../redux/EmployeeReducer";
 import ShiftEmployeeFormDialog from "../components/AddShiftToEmployee";
 import EmployeeShiftsPopper from "../components/EmployeeShiftsPopper";
@@ -16,6 +15,7 @@ import { EmployeeSearch } from "../components/EmployeeSearch";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
 import { ColumnData } from "../models/ColumnData";
 import { TableBase } from "../components/TableBase";
+import { deleteEmployee } from "../api/employeeApi";
 
 const columns: ColumnData<Employee>[] = [
   {
@@ -119,10 +119,14 @@ function fixedHeaderContent() {
 
 export default function ReactVirtualizedTable() {
   // handle the delete of an employee
-  const handleDelete = (id: string) => {
-    fetchDeleteEmployee(id);
-    store.dispatch(deleteEmployeeAction(id));
-    store.dispatch(decreaseActionNumberAction());
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteEmployee(id);
+      store.dispatch(deleteEmployeeAction(id));
+      store.dispatch(decreaseActionNumberAction());
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   function rowContent(index: number, row: Employee) {

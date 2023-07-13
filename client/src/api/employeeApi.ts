@@ -14,7 +14,7 @@ export const getAllEmployees = async () => {
     const response = await api.get("/employees/getAllEmployees");
     if (response.status === 200) return response.data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
@@ -23,7 +23,7 @@ export const deleteEmployee = async (id: string) => {
     const response = await api.delete(`/employees/deleteEmployee/${id}`);
     if (response.status === 200) return response.data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 

@@ -1,13 +1,13 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import { MenuItem } from "@mui/material";
-import { fetchUpdateDepartment } from "../utils/fetchData";
 import { store } from "../redux/Store";
 import { updateDepartmentAction } from "../redux/DepartmentReducer";
 import EditIcon from "@mui/icons-material/Edit";
 import { FormDialogBase } from "./FormDialogBase";
 import { useEditDepartment } from "../hooks/useEditDepartment";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
+import { updateDepartment } from "../api/departmentApi";
 
 //  what data we need from the main component
 interface EditDepartmentFormDialogProps {
@@ -21,7 +21,7 @@ const EditDepartment = (props: EditDepartmentFormDialogProps) => {
   // onSubmit function to update the department in backend and dispatch change to redux
   const onSubmit = async (data: any) => {
     try {
-      const response = await fetchUpdateDepartment(
+      const response = await updateDepartment(
         data._id,
         data.name,
         data.manager

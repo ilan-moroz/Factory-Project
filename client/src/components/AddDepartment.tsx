@@ -1,17 +1,17 @@
 import TextField from "@mui/material/TextField";
 import { MenuItem } from "@mui/material";
-import { fetchAddDepartment } from "../utils/fetchData";
 import { RootState, store } from "../redux/Store";
 import { addDepartmentAction } from "../redux/DepartmentReducer";
 import { useSelector } from "react-redux";
 import { FormDialogBase } from "./FormDialogBase";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
+import { addDepartment } from "../api/departmentApi";
 
 export default function AddDepartment() {
   // onSubmit function to add the department to backend and dispatch to redux
   const onSubmit = async (data: any) => {
     try {
-      const response = await fetchAddDepartment(data.name, data.manager);
+      const response = await addDepartment(data.name, data.manager);
       if (response) {
         store.dispatch(addDepartmentAction(response));
         store.dispatch(decreaseActionNumberAction());

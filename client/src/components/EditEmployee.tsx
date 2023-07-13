@@ -1,7 +1,6 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import { Checkbox, ListItemText, MenuItem } from "@mui/material";
-import { fetchUpdateEmployee } from "../utils/fetchData";
 import EditIcon from "@mui/icons-material/Edit";
 import { FormDialogBase } from "./FormDialogBase";
 import { useEditEmployee } from "../hooks/useEditEmployee";
@@ -13,6 +12,7 @@ import {
   removeEmployeeFromShiftAction,
 } from "../redux/ShiftReducer";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
+import { updateEmployee } from "../api/employeeApi";
 
 //  what data we need from the main component
 interface EditEmployeeProps {
@@ -36,7 +36,7 @@ const EditEmployee = (props: EditEmployeeProps) => {
   const onSubmit = async (data: any) => {
     // Update employee in the backend
     try {
-      const response = await fetchUpdateEmployee(
+      const response = await updateEmployee(
         data._id,
         data.firstName,
         data.lastName,

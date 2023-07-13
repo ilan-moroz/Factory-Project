@@ -10,7 +10,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { fetchLogin } from "../utils/fetchData";
 import { useForm } from "react-hook-form";
 import { InputAdornment } from "@mui/material";
 import { Password, Person } from "@mui/icons-material";
@@ -18,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { store } from "../redux/Store";
 import { setLoginAction } from "../redux/UserReducer";
 import { toast } from "react-toastify";
+import { login } from "../api/userApi";
 
 function Copyright(props: any) {
   return (
@@ -94,7 +94,7 @@ export default function Login() {
     const { userName, password } = data;
     const loginData = { userName, password };
     try {
-      const response = await fetchLogin(loginData);
+      const response = await login(loginData);
       if (response) {
         store.dispatch(setLoginAction(response.user, response.token));
         navigate("/home");

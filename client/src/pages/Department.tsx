@@ -3,7 +3,6 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import AddDepartment from "../components/AddDepartment";
 import { store } from "../redux/Store";
-import { fetchDeleteDepartment } from "../utils/fetchData";
 import { Department } from "../models/Department";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
@@ -14,6 +13,7 @@ import { decreaseActionNumberAction } from "../redux/UserReducer";
 import { ColumnData } from "../models/ColumnData";
 import { TableBase } from "../components/TableBase";
 import { useDepartmentEmployees } from "../hooks/useDepartmentEmployees";
+import { deleteDepartment } from "../api/departmentApi";
 
 const columns: ColumnData<Department>[] = [
   {
@@ -87,10 +87,14 @@ export default function ReactVirtualizedTable() {
   const departmentWithEmployees = useDepartmentEmployees();
 
   function rowContent(index: number, row: Department) {
-    const handleDelete = (id: string) => {
-      fetchDeleteDepartment(id);
-      store.dispatch(deleteDepartmentAction(id));
-      store.dispatch(decreaseActionNumberAction());
+    const handleDelete = async (id: string) => {
+      try {
+        await deleteDepartment(id);
+        store.dispatch(deleteDepartmentAction(id));
+        store.dispatch(decreaseActionNumberAction());
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     // check if department has employees

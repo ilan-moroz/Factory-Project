@@ -9,13 +9,13 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { fetchAddShift } from "../utils/fetchData";
 import { addShiftAction } from "../redux/ShiftReducer";
 import { store } from "../redux/Store";
 import { FormDialogBase } from "./FormDialogBase";
 import { useEmployeeIdToName } from "../hooks/useEmployeeIdToName";
 import { addShiftToEmployeeAction } from "../redux/EmployeeReducer";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
+import { addShift } from "../api/shiftApi";
 
 export default function AddShift() {
   // onSubmit function to add the shift to backend and dispatch to redux
@@ -26,7 +26,7 @@ export default function AddShift() {
       date: new Date(data.date),
     };
     try {
-      const response = await fetchAddShift(formData);
+      const response = await addShift(formData);
       if (response) {
         store.dispatch(addShiftAction(response));
         store.dispatch(

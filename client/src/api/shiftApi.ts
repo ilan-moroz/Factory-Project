@@ -5,7 +5,7 @@ export const getAllShifts = async () => {
     const response = await api.get("/shifts/getAllShifts");
     if (response.status === 200) return response.data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 

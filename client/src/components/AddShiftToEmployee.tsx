@@ -3,12 +3,12 @@ import { MenuItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { RootState, store } from "../redux/Store";
 import { useSelector } from "react-redux";
-import { fetchAddShiftToEmployee } from "../utils/fetchData";
 import { FormDialogBase } from "./FormDialogBase";
 import { rearrangeDate } from "../utils/rearrangeDate";
 import { addEmployeeToShiftAction } from "../redux/ShiftReducer";
 import { addShiftToEmployeeAction } from "../redux/EmployeeReducer";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
+import { addShiftToEmployee } from "../api/shiftApi";
 
 type shiftProps = {
   employeeId: string;
@@ -21,7 +21,7 @@ export default function ShiftEmployeeFormDialog(props: shiftProps) {
   const onSubmit = async (data: any) => {
     const { employeeId } = props;
     try {
-      const response = await fetchAddShiftToEmployee(data.shift, employeeId);
+      const response = await addShiftToEmployee(data.shift, employeeId);
       if (response) {
         store.dispatch(addEmployeeToShiftAction(employeeId, data.shift));
         store.dispatch(addShiftToEmployeeAction(employeeId, data.shift));
