@@ -48,21 +48,23 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ employeeId }) => {
       store.dispatch(updateEmployeeAction(response));
       store.dispatch(decreaseActionNumberAction());
 
-      // Get the shift IDs that were removed and dispatch the change
-      const removedShifts = initialShiftsArray.filter(
-        (shiftId) => !data.shiftIds.includes(shiftId)
-      );
-      removedShifts.forEach((shiftId) => {
-        store.dispatch(removeEmployeeFromShiftAction(data._id, shiftId));
-      });
+      if (data.shiftIds) {
+        // Get the shift IDs that were removed and dispatch the change
+        const removedShifts = initialShiftsArray.filter(
+          (shiftId) => !data.shiftIds.includes(shiftId)
+        );
+        removedShifts.forEach((shiftId) => {
+          store.dispatch(removeEmployeeFromShiftAction(data._id, shiftId));
+        });
 
-      // Get the shift IDs that were added and dispatch the change
-      const addedShiftIds = data.shiftIds.filter(
-        (id: string) => !initialShiftsArray.includes(id)
-      );
-      addedShiftIds.forEach((shiftId: string) => {
-        store.dispatch(addEmployeeToShiftAction(data._id, shiftId));
-      });
+        // Get the shift IDs that were added and dispatch the change
+        const addedShiftIds = data.shiftIds.filter(
+          (id: string) => !initialShiftsArray.includes(id)
+        );
+        addedShiftIds.forEach((shiftId: string) => {
+          store.dispatch(addEmployeeToShiftAction(data._id, shiftId));
+        });
+      }
     }
   };
 

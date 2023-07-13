@@ -54,31 +54,33 @@ export const updateEmployee = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Department not found" });
     }
 
-    // if employee is removed from a shift remove it from the database shift
-    for (const oldShiftId of employee.shiftIds) {
-      const oldShift = await Shift.findById(oldShiftId);
-      if (oldShift) {
-        const index = oldShift.employeeIds.indexOf(employee._id);
-        if (index > -1) {
-          oldShift.employeeIds.splice(index, 1);
-          await oldShift.save();
+    if (shiftIds) {
+      // if employee is removed from a shift remove it from the database shift
+      for (const oldShiftId of employee.shiftIds) {
+        const oldShift = await Shift.findById(oldShiftId);
+        if (oldShift) {
+          const index = oldShift.employeeIds.indexOf(employee._id);
+          if (index > -1) {
+            oldShift.employeeIds.splice(index, 1);
+            await oldShift.save();
+          }
         }
       }
-    }
-    // if employee is added to a shift add it to the database shift
-    for (const newShiftId of shiftIds) {
-      const newShift = await Shift.findById(newShiftId);
-      if (newShift && !newShift.employeeIds.includes(employee._id)) {
-        newShift.employeeIds.push(employee._id);
-        await newShift.save();
+      // if employee is added to a shift add it to the database shift
+      for (const newShiftId of shiftIds) {
+        const newShift = await Shift.findById(newShiftId);
+        if (newShift && !newShift.employeeIds.includes(employee._id)) {
+          newShift.employeeIds.push(employee._id);
+          await newShift.save();
+        }
       }
+      employee.shiftIds = shiftIds;
     }
 
     employee.firstName = firstName;
     employee.lastName = lastName;
     employee.startWorkYear = startWorkYear;
     employee.departmentId = departmentId;
-    employee.shiftIds = shiftIds;
 
     const updatedEmployee = await employee.save();
 
