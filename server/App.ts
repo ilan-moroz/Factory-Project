@@ -8,6 +8,7 @@ import AuthRoutes from "./src/routes/Auth";
 import EmployeeRoutes from "./src/routes/Employee";
 import ShiftRoutes from "./src/routes/Shift";
 import DepartmentRoutes from "./src/routes/Department";
+import { resetUserActions } from "./tasks/resetUserActions";
 
 dotenv.config();
 
@@ -35,6 +36,8 @@ mongoose
   .connect(process.env.MONGO_URL!)
   .then(() => {
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
+    // Initialize cron
+    resetUserActions();
   })
   .catch((error) => {
     console.log(`Cannot connect to database: ${error.message}`);
