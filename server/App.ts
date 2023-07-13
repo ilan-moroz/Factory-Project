@@ -8,7 +8,7 @@ import AuthRoutes from "./src/routes/Auth";
 import EmployeeRoutes from "./src/routes/Employee";
 import ShiftRoutes from "./src/routes/Shift";
 import DepartmentRoutes from "./src/routes/Department";
-import { resetUserActions } from "./tasks/resetUserActions";
+import { resetUserActions } from "./src/tasks/resetUserActions";
 
 dotenv.config();
 

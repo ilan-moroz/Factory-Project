@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import { User } from "../src/models/Factory";
+import { User } from "../models/Factory";
 
 // reset user actions at midnight
 export const resetUserActions = () => {
