@@ -9,7 +9,9 @@ import { addEmployeeToShiftAction } from "../redux/ShiftReducer";
 import { addShiftToEmployeeAction } from "../redux/EmployeeReducer";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
 import { addShiftToEmployee } from "../api/shiftApi";
+import { Shift } from "../models/Shifts";
 
+// what data we need from from main component
 type shiftProps = {
   employeeId: string;
 };
@@ -17,12 +19,14 @@ type shiftProps = {
 export default function ShiftEmployeeFormDialog(props: shiftProps) {
   const shifts = useSelector((state: RootState) => state.shifts.allShifts);
 
-  // onSubmit function to add shift to employee in database and dispatch change to redux
-  const onSubmit = async (data: any) => {
+  //onSubmit function to be used when the form is submitted
+  const onSubmit = async (data: { shift: string }) => {
     const { employeeId } = props;
     try {
+      // Attempt to add shift to employee in the database
       const response = await addShiftToEmployee(data.shift, employeeId);
       if (response) {
+        // If successful, dispatch data to Redux store
         store.dispatch(addEmployeeToShiftAction(employeeId, data.shift));
         store.dispatch(addShiftToEmployeeAction(employeeId, data.shift));
         store.dispatch(decreaseActionNumberAction());
@@ -53,7 +57,7 @@ export default function ShiftEmployeeFormDialog(props: shiftProps) {
             error={errors.shift ? true : false}
             helperText={errors.shift && "Shift is required"}
           >
-            {shifts.map((option: any) => (
+            {shifts.map((option: Shift) => (
               <MenuItem key={option._id} value={option._id}>
                 {rearrangeDate(option.date)} : {option.startTime}-
                 {option.endTime}
