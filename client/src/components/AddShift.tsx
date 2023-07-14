@@ -16,22 +16,27 @@ import { useEmployeeIdToName } from "../hooks/useEmployeeIdToName";
 import { addShiftToEmployeeAction } from "../redux/EmployeeReducer";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
 import { addShift } from "../api/shiftApi";
+import { Shift } from "../models/Shifts";
+import { Employee } from "../models/Employee";
 
 export default function AddShift() {
-  // onSubmit function to add the shift to backend and dispatch to redux
-  const onSubmit = async (data: any) => {
+  //onSubmit function to be used when the form is submitted
+  const onSubmit = async (data: Shift) => {
     // transform the date string to date object
     const formData = {
       ...data,
       date: new Date(data.date),
     };
     try {
+      // Attempt to add the shift to the database
       const response = await addShift(formData);
       if (response) {
+        // If successful, dispatch response data to Redux store
         store.dispatch(addShiftAction(response));
         store.dispatch(
           addShiftToEmployeeAction(response.employeeIds[0], response._id)
         );
+        // Also dispatch the decreaseActionNumberAction to decrease the num of actions for the user
         store.dispatch(decreaseActionNumberAction());
       }
     } catch (err) {
@@ -130,7 +135,7 @@ export default function AddShift() {
               selected.map((value: string) => employeeNameMap[value]).join(", ")
             }
           >
-            {employees.map((employee) => (
+            {employees.map((employee: Employee) => (
               <MenuItem key={employee._id} value={employee._id}>
                 <Checkbox checked={employeeIds.indexOf(employee._id) > -1} />
                 <ListItemText
