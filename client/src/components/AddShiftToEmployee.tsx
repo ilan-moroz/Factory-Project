@@ -11,7 +11,7 @@ import { decreaseActionNumberAction } from "../redux/UserReducer";
 import { addShiftToEmployee } from "../api/shiftApi";
 import { Shift } from "../models/Shifts";
 
-// what data we need from from main component
+// Props required by the addShiftToEmployee component
 type shiftProps = {
   employeeId: string;
 };
