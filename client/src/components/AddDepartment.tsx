@@ -6,14 +6,18 @@ import { useSelector } from "react-redux";
 import { FormDialogBase } from "./FormDialogBase";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
 import { addDepartment } from "../api/departmentApi";
+import { Employee } from "../models/Employee";
 
 export default function AddDepartment() {
-  // onSubmit function to add the department to backend and dispatch to redux
-  const onSubmit = async (data: any) => {
+  //onSubmit function to be used when the form is submitted
+  const onSubmit = async (data: { name: string; manager: string }) => {
     try {
+      // Attempt to add the department to the backend
       const response = await addDepartment(data.name, data.manager);
       if (response) {
+        // If successful, dispatch the addDepartmentAction to update the redux store
         store.dispatch(addDepartmentAction(response));
+        // Also dispatch the decreaseActionNumberAction to decrease the num of actions for the user
         store.dispatch(decreaseActionNumberAction());
       }
     } catch (err) {
@@ -64,7 +68,7 @@ export default function AddDepartment() {
             }}
           >
             {/* map all the employees */}
-            {employees.map((option: any) => (
+            {employees.map((option: Employee) => (
               <MenuItem key={option._id} value={option._id}>
                 {option.firstName} {option.lastName}
               </MenuItem>
