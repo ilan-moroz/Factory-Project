@@ -13,8 +13,11 @@ import {
 } from "../redux/ShiftReducer";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
 import { updateEmployee } from "../api/employeeApi";
+import { Department } from "../models/Department";
+import { Shift } from "../models/Shifts";
+import { Employee } from "../models/Employee";
 
-//  what data we need from the main component
+// Props required by the EditEmployee component
 interface EditEmployeeProps {
   employeeId: string;
 }
@@ -32,10 +35,10 @@ const EditEmployee = (props: EditEmployeeProps) => {
     initialShiftsArray,
   } = useEditEmployee(props.employeeId);
 
-  // onSubmit function to update the employee
-  const onSubmit = async (data: any) => {
-    // Update employee in the backend
+  //onSubmit function to be used when the form is submitted
+  const onSubmit = async (data: Employee) => {
     try {
+      // Attempt to Update the employee in the database
       const response = await updateEmployee(data._id, {
         firstName: data.firstName,
         lastName: data.lastName,
@@ -44,14 +47,14 @@ const EditEmployee = (props: EditEmployeeProps) => {
         shiftIds: data.shiftIds,
       });
       if (response) {
-        // Dispatch the updated employee to redux
+        // If successful, dispatch the response data to Redux store
         store.dispatch(updateEmployeeAction(response));
         store.dispatch(decreaseActionNumberAction());
 
         if (data.shiftIds) {
           // Get the shift IDs that were removed and dispatch the change
           const removedShifts = initialShiftsArray.filter(
-            (shiftId) => !data.shiftIds.includes(shiftId)
+            (shiftId) => !data.shiftIds?.includes(shiftId)
           );
           removedShifts.forEach((shiftId) => {
             store.dispatch(removeEmployeeFromShiftAction(data._id, shiftId));
@@ -139,7 +142,7 @@ const EditEmployee = (props: EditEmployeeProps) => {
             value={department}
             onChange={handleDepartmentChange}
           >
-            {departments.map((option: any) => (
+            {departments.map((option: Department) => (
               <MenuItem key={option._id} value={option._id}>
                 {option.name}
               </MenuItem>
@@ -156,7 +159,7 @@ const EditEmployee = (props: EditEmployeeProps) => {
             value={shiftsArray}
             SelectProps={{
               multiple: true,
-              renderValue: (selected: any) =>
+              renderValue: (selected: string[]) =>
                 selected
                   .map((shiftId: string) => {
                     const shiftInfo = shiftsMap.get(shiftId);
@@ -168,7 +171,7 @@ const EditEmployee = (props: EditEmployeeProps) => {
             }}
             onChange={handleShiftChange}
           >
-            {shifts.map((option: any) => (
+            {shifts.map((option: Shift) => (
               <MenuItem key={option._id} value={option._id}>
                 <Checkbox checked={shiftsArray.indexOf(option._id) > -1} />
                 <ListItemText
