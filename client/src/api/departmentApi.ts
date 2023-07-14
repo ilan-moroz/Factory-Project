@@ -31,7 +31,7 @@ export const getAllDepartments = async () => {
 // Function to delete a department
 export const deleteDepartment = async (id: string) => {
   try {
-    // Make a DELETE request to remove a department
+    // Make a DELETE request to remove a department by id
     const response = await api.delete(`/departments/deleteDepartment/${id}`);
     if (response.status === 200) return response.data;
   } catch (err) {

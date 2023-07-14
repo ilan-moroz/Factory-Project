@@ -1,7 +1,9 @@
 import api from "./apiConfig";
 
+// Function to add an employee
 export const addEmployee = async (data = {}) => {
   try {
+    // Make a POST request to add a new employee
     const response = await api.post("/employees/createEmployee", data);
     if (response.status === 201) return response.data;
   } catch (err) {
@@ -9,8 +11,10 @@ export const addEmployee = async (data = {}) => {
   }
 };
 
+// Function to get all employees
 export const getAllEmployees = async () => {
   try {
+    // Make a GET request to retrieve all employees
     const response = await api.get("/employees/getAllEmployees");
     if (response.status === 200) return response.data;
   } catch (err) {
@@ -18,8 +22,10 @@ export const getAllEmployees = async () => {
   }
 };
 
+// Function to delete an employee
 export const deleteEmployee = async (id: string) => {
   try {
+    // Make a DELETE request to remove an employee using the id
     const response = await api.delete(`/employees/deleteEmployee/${id}`);
     if (response.status === 200) return response.data;
   } catch (err) {
@@ -27,22 +33,14 @@ export const deleteEmployee = async (id: string) => {
   }
 };
 
-export const updateEmployee = async (
-  employeeId: string,
-  firstName: string,
-  lastName: string,
-  startWorkYear: number,
-  departmentId: string,
-  shiftIds: [string]
-) => {
+// Function to update an employee
+export const updateEmployee = async (employeeId: string, data: {}) => {
   try {
-    const response = await api.put(`/employees/updateEmployee/${employeeId}`, {
-      firstName: firstName,
-      lastName: lastName,
-      startWorkYear: startWorkYear,
-      departmentId: departmentId,
-      shiftIds: shiftIds,
-    });
+    // Make a PUT request to update an employee
+    const response = await api.put(
+      `/employees/updateEmployee/${employeeId}`,
+      data
+    );
     if (response.status === 200) return response.data;
   } catch (err) {
     throw err;
