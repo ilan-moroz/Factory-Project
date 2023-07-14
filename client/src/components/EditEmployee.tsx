@@ -7,15 +7,12 @@ import { useEditEmployee } from "../hooks/useEditEmployee";
 import { store } from "../redux/Store";
 import { updateEmployeeAction } from "../redux/EmployeeReducer";
 import { rearrangeDate } from "../utils/rearrangeDate";
-import {
-  addEmployeeToShiftAction,
-  removeEmployeeFromShiftAction,
-} from "../redux/ShiftReducer";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
 import { updateEmployee } from "../api/employeeApi";
 import { Department } from "../models/Department";
 import { Shift } from "../models/Shifts";
 import { Employee } from "../models/Employee";
+import { handleShiftsChange } from "../utils/handleShiftsChange";
 
 // Props required by the EditEmployee component
 interface EditEmployeeProps {
@@ -50,23 +47,9 @@ const EditEmployee = (props: EditEmployeeProps) => {
         // If successful, dispatch the response data to Redux store
         store.dispatch(updateEmployeeAction(response));
         store.dispatch(decreaseActionNumberAction());
-
+        // handle shifts changes
         if (data.shiftIds) {
-          // Get the shift IDs that were removed and dispatch the change
-          const removedShifts = initialShiftsArray.filter(
-            (shiftId) => !data.shiftIds?.includes(shiftId)
-          );
-          removedShifts.forEach((shiftId) => {
-            store.dispatch(removeEmployeeFromShiftAction(data._id, shiftId));
-          });
-
-          // Get the shift IDs that were added and dispatch the change
-          const addedShiftIds = data.shiftIds.filter(
-            (id: string) => !initialShiftsArray.includes(id)
-          );
-          addedShiftIds.forEach((shiftId: string) => {
-            store.dispatch(addEmployeeToShiftAction(data._id, shiftId));
-          });
+          handleShiftsChange(data, initialShiftsArray);
         }
       }
     } catch (err) {
