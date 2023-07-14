@@ -3,7 +3,7 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Employee } from "../models/Employee";
 
-//  what data we need from the main component
+// Props required by the EmployeeSearch component
 interface EmployeeSearchProps {
   employees: Employee[];
   setSearchedEmployees: React.Dispatch<React.SetStateAction<Employee[]>>;
@@ -15,7 +15,7 @@ export function EmployeeSearch({
   setSearchedEmployees,
   setIsSearchActive,
 }: EmployeeSearchProps) {
-  // search function activated on change of the search input and searches for employees based first/last name and department
+  //triggered whenever the user types in the search input and filters employees based first/last name and department
   const searchEmployee = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value.toLowerCase();
     if (searchTerm === "") {

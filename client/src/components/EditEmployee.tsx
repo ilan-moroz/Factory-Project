@@ -20,6 +20,7 @@ interface EditEmployeeProps {
 }
 
 const EditEmployee = (props: EditEmployeeProps) => {
+  // Using custom hook to provide needed data and handlers
   const {
     employeeToEdit,
     department,

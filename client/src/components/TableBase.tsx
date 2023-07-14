@@ -15,6 +15,7 @@ interface ColumnData {
   width: number;
 }
 
+// TableBaseProps defines the props that the TableBase component expects
 interface TableBaseProps {
   columns: ColumnData[];
   fixedHeaderContent: () => React.ReactNode;
@@ -41,6 +42,7 @@ const VirtuosoTableComponents: TableComponents<any> = {
   )),
 };
 
+// TableBase is a reusable table component
 export const TableBase: React.FC<TableBaseProps> = ({
   columns,
   fixedHeaderContent,

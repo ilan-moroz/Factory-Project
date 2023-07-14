@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useEmployeeShifts } from "../hooks/useEmployeeShifts";
 
+// Props required by the EmployeeShiftsPopper component
 interface EmployeeShiftsPopperProps {
   employeeId: string;
 }

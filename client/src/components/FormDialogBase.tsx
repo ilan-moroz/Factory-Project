@@ -12,7 +12,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-// This is a reusable form dialog component
+// FormDialogProps interface is defining the shape of props the component expects
 interface FormDialogProps {
   title: string;
   contentText: string;
@@ -22,6 +22,7 @@ interface FormDialogProps {
   initialData?: any;
 }
 
+// FormDialogBase is a reusable component that generates a dialog containing a form
 export function FormDialogBase({
   title,
   contentText,
