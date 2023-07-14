@@ -8,6 +8,7 @@ export const useShiftsEmployeeNames = () => {
     (state: RootState) => state.employees.employees
   );
 
+  // Create a mapping of employee Ids to their names
   const employeeIdNameMap: { [key: string]: string } = {};
   employees.forEach((employee: Employee) => {
     employeeIdNameMap[
@@ -15,6 +16,7 @@ export const useShiftsEmployeeNames = () => {
     ] = `${employee.firstName} ${employee.lastName}`;
   });
 
+  // Map the shifts to include employee names for each shift
   const shiftsWithEmployeeNames = shifts.map((shift) => ({
     ...shift,
     employeeNames: shift.employeeIds.map((id) => employeeIdNameMap[id]),

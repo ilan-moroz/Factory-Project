@@ -7,6 +7,7 @@ import { getAllEmployees } from "../api/employeeApi";
 import { getAllShifts } from "../api/shiftApi";
 import { getAllDepartments } from "../api/departmentApi";
 
+// Custom hook for fetching data from backend and saving it to Redux store
 const useDataFetching = () => {
   //if redux states are empty get all data from database and save in redux
   useEffect(() => {
@@ -47,7 +48,7 @@ const useDataFetching = () => {
       });
   };
 
-  // fetch the deparments
+  // fetch the departments
   const fetchDepartments = () => {
     console.log("getting departments from backend....");
     getAllDepartments()

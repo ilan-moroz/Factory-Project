@@ -9,10 +9,13 @@ export const useEditDepartment = (departmentId: string) => {
   const employees = useSelector(
     (state: RootState) => state.employees.employees
   );
+
+  // Find the department to edit
   const departmentToEdit = departments.find(
     (dep: any) => dep._id === departmentId
   );
 
+  // State for the manager value
   const [manager, setManager] = useState(departmentToEdit?.manager ?? "");
 
   // Update the manager state when the initial value changes

@@ -10,9 +10,12 @@ export const useEmployeeIdToName = () => {
     (state: RootState) => state.employees.employees
   );
 
+  // State to hold selected employee IDs
   const [employeeIds, setEmployeeIds] = useState<string[]>([]);
 
+  // Handler for changes in employee selection
   const handleChange = (event: SelectChangeEvent<string[]>) => {
+    // Set the selected employee IDs state
     setEmployeeIds(event.target.value as string[]);
   };
 
