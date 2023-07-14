@@ -36,14 +36,13 @@ const EditEmployee = (props: EditEmployeeProps) => {
   const onSubmit = async (data: any) => {
     // Update employee in the backend
     try {
-      const response = await updateEmployee(
-        data._id,
-        data.firstName,
-        data.lastName,
-        data.startWorkYear,
-        data.departmentId,
-        data.shiftIds
-      );
+      const response = await updateEmployee(data._id, {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        startWorkYear: data.startWorkYear,
+        departmentId: data.departmentId,
+        shiftIds: data.shiftIds,
+      });
       if (response) {
         // Dispatch the updated employee to redux
         store.dispatch(updateEmployeeAction(response));
