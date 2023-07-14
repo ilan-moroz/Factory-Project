@@ -6,14 +6,19 @@ import { addEmployeeAction } from "../redux/EmployeeReducer";
 import { FormDialogBase } from "./FormDialogBase";
 import { decreaseActionNumberAction } from "../redux/UserReducer";
 import { addEmployee } from "../api/employeeApi";
+import { Employee } from "../models/Employee";
+import { Department } from "../models/Department";
 
 export default function AddEmployee() {
-  // onSubmit function to add the employee to backend and dispatch to redux
-  const onSubmit = async (data: any) => {
+  //onSubmit function to be used when the form is submitted
+  const onSubmit = async (data: Employee) => {
     try {
+      // Attempt to add the Employee to the database
       const response = await addEmployee(data);
       if (response) {
+        // If successful, dispatch response data to Redux store
         store.dispatch(addEmployeeAction(response));
+        // Also dispatch the decreaseActionNumberAction to decrease the num of actions for the user
         store.dispatch(decreaseActionNumberAction());
       }
     } catch (err) {
@@ -91,7 +96,7 @@ export default function AddEmployee() {
               trigger("departmentId"); // manually trigger validation
             }}
           >
-            {departments.map((option: any) => (
+            {departments.map((option: Department) => (
               <MenuItem key={option._id} value={option._id}>
                 {option.name}
               </MenuItem>

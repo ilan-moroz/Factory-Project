@@ -12,7 +12,7 @@ export default function AddDepartment() {
   //onSubmit function to be used when the form is submitted
   const onSubmit = async (data: { name: string; manager: string }) => {
     try {
-      // Attempt to add the department to the backend
+      // Attempt to add the department to the database
       const response = await addDepartment(data.name, data.manager);
       if (response) {
         // If successful, dispatch the addDepartmentAction to update the redux store
