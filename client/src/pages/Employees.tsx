@@ -40,6 +40,7 @@ const columns: ColumnData<Employee>[] = [
   },
 ];
 
+// Define header content for the employees table
 function fixedHeaderContent() {
   return (
     <TableRow>
@@ -118,8 +119,9 @@ function fixedHeaderContent() {
 }
 
 export default function ReactVirtualizedTable() {
-  // handle the delete of an employee
+  // Function to handle delete employee action
   const handleDelete = async (id: string) => {
+    // Try to delete employee from backend, then update redux store
     try {
       await deleteEmployee(id);
       store.dispatch(deleteEmployeeAction(id));
@@ -129,6 +131,7 @@ export default function ReactVirtualizedTable() {
     }
   };
 
+  // Define content of each row in the table
   function rowContent(index: number, row: Employee) {
     return (
       <React.Fragment>

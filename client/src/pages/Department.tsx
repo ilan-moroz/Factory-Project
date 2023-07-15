@@ -28,6 +28,7 @@ const columns: ColumnData<Department>[] = [
   },
 ];
 
+// Define header content for the department table
 function fixedHeaderContent() {
   return (
     <TableRow>
@@ -84,10 +85,14 @@ function fixedHeaderContent() {
 }
 
 export default function ReactVirtualizedTable() {
+  // Use custom hook to fetch departments with employees
   const departmentWithEmployees = useDepartmentEmployees();
 
+  // Define content of each row in the table
   function rowContent(index: number, row: Department) {
+    // Function to handle delete department action
     const handleDelete = async (id: string) => {
+      // Try to delete department from backend, then update redux store
       try {
         await deleteDepartment(id);
         store.dispatch(deleteDepartmentAction(id));
@@ -132,6 +137,7 @@ export default function ReactVirtualizedTable() {
     );
   }
 
+  // Use custom hook to fetch departments with manager names
   const departmentsWithManagerNames = useManagerNames();
 
   return (
