@@ -46,7 +46,6 @@ The application uses MongoDB and has the following collections:
 
 - Registered users can interact with the system (login required).
 - Each user has a limited number of actions per day.
-- Full user name is displayed on every page.
 - Each user action reduces the user's credit of actions. Once the limit is reached, the user is logged out for the day.
 - Each page has a "Log-Out" link, redirecting the user back to the login page.
 
@@ -61,11 +60,10 @@ The application is divided into four main sections, each managed by its own cont
 
 ## Pages
 
-Each controller has several associated pages for performing various actions (e.g., viewing, creating, editing, and deleting items).
+Each page has several associated dialogs for performing various actions (creating, editing, and deleting items).
 
 ## Tech Stack
 
 - Frontend: React.js with Redux for state management
 - Backend: Express.js on Node.js
 - Database: MongoDB
-- Routing: React-router-dom
