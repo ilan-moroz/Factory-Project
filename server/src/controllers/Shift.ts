@@ -49,6 +49,7 @@ export const createShift = async (req: Request, res: Response) => {
   }
 };
 
+// POST /shifts/addShiftToEmployee
 export const addShiftToEmployee = async (req: Request, res: Response) => {
   try {
     const { shiftId, employeeId } = req.body;

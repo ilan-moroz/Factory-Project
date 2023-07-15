@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Employee, Department, Shift } from "../models/Factory";
 
-// GET /employees
+// GET /employees/getAllEmployees
 export const getAllEmployees = async (req: Request, res: Response) => {
   try {
     const employees = await Employee.find();
@@ -12,7 +12,7 @@ export const getAllEmployees = async (req: Request, res: Response) => {
   }
 };
 
-// POST /employees
+// POST /employees/createEmployee
 export const createEmployee = async (req: Request, res: Response) => {
   try {
     const { firstName, lastName, startWorkYear, departmentId } = req.body;
@@ -90,7 +90,7 @@ export const updateEmployee = async (req: Request, res: Response) => {
   }
 };
 
-// DELETE /employees/:id
+// DELETE /employees/deleteEmployee/:id
 export const deleteEmployee = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

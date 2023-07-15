@@ -4,7 +4,7 @@ import {
   getAllShifts,
   createShift,
   addShiftToEmployee,
-} from "../controllers/shift";
+} from "../controllers/Shift";
 import { userActionLimit } from "../middleware/userActionLimit";
 
 const router = express.Router();
