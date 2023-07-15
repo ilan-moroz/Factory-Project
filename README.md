@@ -4,44 +4,6 @@
 
 This project is a web application for managing a factory's departments, employees, and shifts. It's built using the MERN stack: MongoDB, Express.js, React.js, and Node.js, along with Redux for state management.
 
-## Database Schema
-
-The application uses MongoDB and has the following collections:
-
-1. **User Collection**
-
-   - ID (PK)
-   - Full Name
-   - User Name
-   - Password
-   - Num Of Actions (int)
-
-2. **Department Collection**
-
-   - ID (PK)
-   - Name
-   - Manager (FK referencing Employee.ID)
-
-3. **Employee Collection**
-
-   - ID (PK)
-   - First Name
-   - Last Name
-   - Start Work Year
-   - DepartmentID (FK referencing Department.ID)
-
-4. **Shift Collection**
-
-   - ID (PK)
-   - Date (date time)
-   - Start Time (int)
-   - End Time (int)
-
-5. **EmployeeShift Collection**
-   - ID (PK)
-   - EmployeeID (FK referencing Employee.ID)
-   - ShiftID (FK referencing Shift.ID)
-
 ## Application Features
 
 - Registered users can interact with the system (login required).
