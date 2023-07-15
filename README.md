@@ -9,7 +9,6 @@ This project is a web application for managing a factory's departments, employee
 - Registered users can interact with the system (login required).
 - Each user has a limited number of actions per day.
 - Each user action reduces the user's credit of actions. Once the limit is reached, the user is logged out for the day.
-- Each page has a "Log-Out" link, redirecting the user back to the login page.
 
 ## Controllers
 
