@@ -62,7 +62,7 @@ export const userReducer = (
       break;
 
     case UserActionType.resetNumOfActions:
-      if (newState.user)
+      if (newState.user?.isAdmin === false)
         newState.user = {
           ...newState.user,
           numOfActions: 10,
