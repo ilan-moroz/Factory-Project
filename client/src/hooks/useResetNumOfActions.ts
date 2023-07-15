@@ -8,21 +8,7 @@ export const useResetNumOfActions = () => {
       store.dispatch(resetNumOfActionsAction());
     };
 
-    // Get the last use date from local storage
-    const lastUseDate = new Date(localStorage.getItem("lastUseDate") || "");
     const today = new Date();
-
-    // If the app hasn't been used today, reset the actions
-    if (
-      lastUseDate.getDate() !== today.getDate() ||
-      lastUseDate.getMonth() !== today.getMonth() ||
-      lastUseDate.getFullYear() !== today.getFullYear()
-    ) {
-      resetNumOfActions();
-    }
-
-    // Update the last use date in local storage
-    localStorage.setItem("lastUseDate", today.toISOString());
 
     // Calculate the time until the next day
     const nextDay = new Date(
