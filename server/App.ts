@@ -4,7 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import mongoose from "mongoose";
-import AuthRoutes from "./src/routes/Auth";
+import UserRoutes from "./src/routes/User";
 import EmployeeRoutes from "./src/routes/Employee";
 import ShiftRoutes from "./src/routes/Shift";
 import DepartmentRoutes from "./src/routes/Department";
@@ -25,7 +25,7 @@ app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 app.use("/departments", DepartmentRoutes);
-app.use("/auth", AuthRoutes);
+app.use("/user", UserRoutes);
 app.use("/employees", EmployeeRoutes);
 app.use("/shifts", ShiftRoutes);
 

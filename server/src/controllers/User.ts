@@ -29,3 +29,17 @@ export const login = async (req: Request, res: Response) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const userNumOfActions = async (req: Request, res: Response) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findOne({ _id: userId });
+    if (user) {
+      res.status(200).json({ numOfActions: user.numOfActions });
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+};
