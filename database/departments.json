@@ -1,0 +1,180 @@
+[{
+  "_id": {
+    "$oid": "649bf24e774ed02075c5eaa9"
+  },
+  "name": "Marketing",
+  "__v": 0,
+  "manager": {
+    "$oid": "64abe9d0991ed1a2e00d9de3"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf258774ed02075c5eaac"
+  },
+  "name": "Design",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3c3d2b1c28e938ed42d24"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf25f774ed02075c5eaaf"
+  },
+  "name": "Merchandising",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3c1b5b1c28e938ed42d15"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf26a774ed02075c5eab2"
+  },
+  "name": "Pattern Making",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3c662b1c28e938ed42d33"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf277774ed02075c5eab5"
+  },
+  "name": "Sampling",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3ca4fb1c28e938ed42d56"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf280774ed02075c5eab8"
+  },
+  "name": "Fabric Storing",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3c54ab1c28e938ed42d2e"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf289774ed02075c5eabb"
+  },
+  "name": "Trims and Accessory",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3c360b1c28e938ed42d1a"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf292774ed02075c5eabe"
+  },
+  "name": "Production Planning and Control",
+  "__v": 0,
+  "manager": {
+    "$oid": "64abec60991ed1a2e00d9df1"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf29c774ed02075c5eac1"
+  },
+  "name": "Cutting",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3bec6b1c28e938ed42cff"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf2a4774ed02075c5eac4"
+  },
+  "name": "Sewing",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3beddb1c28e938ed42d04"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf2e8774ed02075c5eac7"
+  },
+  "name": "Machine Maintenance",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3bfeeb1c28e938ed42d09"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf2f0774ed02075c5eaca"
+  },
+  "name": "Industrial Engineering",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3d8b9b1c28e938ed42dde"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf2fa774ed02075c5eacd"
+  },
+  "name": "Washing",
+  "__v": 0,
+  "manager": {
+    "$oid": "64abe9d0991ed1a2e00d9de3"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf303774ed02075c5ead0"
+  },
+  "name": "Finishing",
+  "__v": 0,
+  "manager": {
+    "$oid": "64abec60991ed1a2e00d9df1"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf311774ed02075c5ead6"
+  },
+  "name": "Accounts department",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3c3d2b1c28e938ed42d24"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf319774ed02075c5ead9"
+  },
+  "name": "Human Resource and Administration",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3bfeeb1c28e938ed42d09"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf320774ed02075c5eadc"
+  },
+  "name": "Electronic Data Processing ",
+  "__v": 0,
+  "manager": {
+    "$oid": "64b3c662b1c28e938ed42d33"
+  }
+},
+{
+  "_id": {
+    "$oid": "649bf326774ed02075c5eadf"
+  },
+  "name": "Shipping and documentation",
+  "__v": 0,
+  "manager": {
+    "$oid": "64abec37991ed1a2e00d9dee"
+  }
+}]

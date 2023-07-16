@@ -1,0 +1,222 @@
+[{
+  "_id": {
+    "$oid": "64abe9d0991ed1a2e00d9de3"
+  },
+  "firstName": "val",
+  "lastName": "halla",
+  "startWorkYear": 2004,
+  "departmentId": {
+    "$oid": "649bf289774ed02075c5eabb"
+  },
+  "shiftIds": [
+    {
+      "$oid": "64afbb1ade6e3c02095cd870"
+    },
+    {
+      "$oid": "64b3d21ab1c28e938ed42dae"
+    }
+  ],
+  "__v": 35
+},
+{
+  "_id": {
+    "$oid": "64abec37991ed1a2e00d9dee"
+  },
+  "firstName": "anna",
+  "lastName": "conda",
+  "startWorkYear": 2009,
+  "departmentId": {
+    "$oid": "649bf311774ed02075c5ead6"
+  },
+  "shiftIds": [
+    {
+      "$oid": "64afbb1ade6e3c02095cd870"
+    }
+  ],
+  "__v": 7
+},
+{
+  "_id": {
+    "$oid": "64abec60991ed1a2e00d9df1"
+  },
+  "firstName": "bill",
+  "lastName": "bi",
+  "startWorkYear": 2019,
+  "departmentId": {
+    "$oid": "649bf303774ed02075c5ead0"
+  },
+  "shiftIds": [
+    {
+      "$oid": "64b3d202b1c28e938ed42da9"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3bec6b1c28e938ed42cff"
+  },
+  "firstName": "yossi",
+  "lastName": "atozi",
+  "startWorkYear": 2019,
+  "departmentId": {
+    "$oid": "649bf292774ed02075c5eabe"
+  },
+  "shiftIds": [
+    {
+      "$oid": "64b3d162b1c28e938ed42d95"
+    },
+    {
+      "$oid": "64b3d1c4b1c28e938ed42da4"
+    },
+    {
+      "$oid": "64b3d32bb1c28e938ed42db3"
+    }
+  ],
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64b3beddb1c28e938ed42d04"
+  },
+  "firstName": "amnon",
+  "lastName": "tilbi",
+  "startWorkYear": 2020,
+  "departmentId": {
+    "$oid": "649bf319774ed02075c5ead9"
+  },
+  "shiftIds": [
+    {
+      "$oid": "64b3d1c4b1c28e938ed42da4"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3bfeeb1c28e938ed42d09"
+  },
+  "firstName": "bibi",
+  "lastName": "bobo",
+  "startWorkYear": 1898,
+  "departmentId": {
+    "$oid": "649bf319774ed02075c5ead9"
+  },
+  "shiftIds": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3c1b5b1c28e938ed42d15"
+  },
+  "firstName": "ilan",
+  "lastName": "admatai",
+  "startWorkYear": 2004,
+  "departmentId": {
+    "$oid": "649bf280774ed02075c5eab8"
+  },
+  "shiftIds": [
+    {
+      "$oid": "64b3d162b1c28e938ed42d95"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3c360b1c28e938ed42d1a"
+  },
+  "firstName": "ahmed",
+  "lastName": "tibi",
+  "startWorkYear": 2023,
+  "departmentId": {
+    "$oid": "649bf2fa774ed02075c5eacd"
+  },
+  "shiftIds": [
+    {
+      "$oid": "64b3d32bb1c28e938ed42db3"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3c3d2b1c28e938ed42d24"
+  },
+  "firstName": "desi",
+  "lastName": "ain",
+  "startWorkYear": 1998,
+  "departmentId": {
+    "$oid": "649bf258774ed02075c5eaac"
+  },
+  "shiftIds": [
+    {
+      "$oid": "64b3d180b1c28e938ed42d9a"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3c54ab1c28e938ed42d2e"
+  },
+  "firstName": "shani",
+  "lastName": "tzel",
+  "startWorkYear": 2018,
+  "departmentId": {
+    "$oid": "649bf24e774ed02075c5eaa9"
+  },
+  "shiftIds": [
+    {
+      "$oid": "64b3d198b1c28e938ed42d9f"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3c662b1c28e938ed42d33"
+  },
+  "firstName": "jak",
+  "lastName": "chan",
+  "startWorkYear": 2008,
+  "departmentId": {
+    "$oid": "649bf277774ed02075c5eab5"
+  },
+  "shiftIds": [
+    {
+      "$oid": "64b3d21ab1c28e938ed42dae"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3ca4fb1c28e938ed42d56"
+  },
+  "firstName": "misho",
+  "lastName": "masho",
+  "startWorkYear": 1994,
+  "departmentId": {
+    "$oid": "649bf26a774ed02075c5eab2"
+  },
+  "shiftIds": [
+    {
+      "$oid": "64b3d21ab1c28e938ed42dae"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3d8b9b1c28e938ed42dde"
+  },
+  "firstName": "mesh",
+  "lastName": "ine",
+  "startWorkYear": 2023,
+  "departmentId": {
+    "$oid": "649bf2e8774ed02075c5eac7"
+  },
+  "shiftIds": [],
+  "__v": 0
+}]

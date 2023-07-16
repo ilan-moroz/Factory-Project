@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "6499cb85d3c99b772ad54327"
+  },
+  "fullName": "ilan Moroz",
+  "userName": "shnitzel",
+  "password": "$2b$10$KjpShuzC2bwDhsDV4BL/b.Zf0co/urs2IKEfkBdywgBqC/zsPzMLq",
+  "numOfActions": 9999,
+  "isAdmin": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6499cbde8b142e66c33e4fba"
+  },
+  "fullName": "Mal Shin",
+  "userName": "shinmal",
+  "password": "$2b$10$Lcn6zqXe4FVh4vVpz6K2CuTE9wu0Z1IPDXHvsBsu7dE83zO.jHM3m",
+  "numOfActions": 10,
+  "isAdmin": false,
+  "__v": 0
+}]

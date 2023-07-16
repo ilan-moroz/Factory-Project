@@ -1,0 +1,146 @@
+[{
+  "_id": {
+    "$oid": "64afbb1ade6e3c02095cd870"
+  },
+  "date": {
+    "$date": "2023-07-15T00:00:00.000Z"
+  },
+  "startTime": "10:00",
+  "endTime": "18:00",
+  "employeeIds": [
+    {
+      "$oid": "64abe9d0991ed1a2e00d9de3"
+    },
+    {
+      "$oid": "64abec37991ed1a2e00d9dee"
+    }
+  ],
+  "__v": 6
+},
+{
+  "_id": {
+    "$oid": "64b3d162b1c28e938ed42d95"
+  },
+  "date": {
+    "$date": "2023-07-16T00:00:00.000Z"
+  },
+  "startTime": "06:00",
+  "endTime": "17:00",
+  "employeeIds": [
+    {
+      "$oid": "64b3c1b5b1c28e938ed42d15"
+    },
+    {
+      "$oid": "64b3bec6b1c28e938ed42cff"
+    }
+  ],
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64b3d180b1c28e938ed42d9a"
+  },
+  "date": {
+    "$date": "2023-07-16T00:00:00.000Z"
+  },
+  "startTime": "17:00",
+  "endTime": "00:00",
+  "employeeIds": [
+    {
+      "$oid": "64b3c3d2b1c28e938ed42d24"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3d198b1c28e938ed42d9f"
+  },
+  "date": {
+    "$date": "2023-07-17T00:00:00.000Z"
+  },
+  "startTime": "00:00",
+  "endTime": "06:00",
+  "employeeIds": [
+    {
+      "$oid": "64b3c54ab1c28e938ed42d2e"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3d1c4b1c28e938ed42da4"
+  },
+  "date": {
+    "$date": "2023-07-17T00:00:00.000Z"
+  },
+  "startTime": "06:00",
+  "endTime": "16:00",
+  "employeeIds": [
+    {
+      "$oid": "64b3beddb1c28e938ed42d04"
+    },
+    {
+      "$oid": "64b3bec6b1c28e938ed42cff"
+    }
+  ],
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64b3d202b1c28e938ed42da9"
+  },
+  "date": {
+    "$date": "2023-07-17T00:00:00.000Z"
+  },
+  "startTime": "16:00",
+  "endTime": "23:00",
+  "employeeIds": [
+    {
+      "$oid": "64abec60991ed1a2e00d9df1"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b3d21ab1c28e938ed42dae"
+  },
+  "date": {
+    "$date": "2023-07-17T00:00:00.000Z"
+  },
+  "startTime": "23:00",
+  "endTime": "06:00",
+  "employeeIds": [
+    {
+      "$oid": "64b3c662b1c28e938ed42d33"
+    },
+    {
+      "$oid": "64b3ca4fb1c28e938ed42d56"
+    },
+    {
+      "$oid": "64abe9d0991ed1a2e00d9de3"
+    }
+  ],
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64b3d32bb1c28e938ed42db3"
+  },
+  "date": {
+    "$date": "2023-07-18T00:00:00.000Z"
+  },
+  "startTime": "06:00",
+  "endTime": "15:00",
+  "employeeIds": [
+    {
+      "$oid": "64b3c360b1c28e938ed42d1a"
+    },
+    {
+      "$oid": "64b3bec6b1c28e938ed42cff"
+    }
+  ],
+  "__v": 1
+}]
