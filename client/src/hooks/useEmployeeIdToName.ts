@@ -12,6 +12,8 @@ export const useEmployeeIdToName = () => {
 
   // State to hold selected employee IDs
   const [employeeIds, setEmployeeIds] = useState<string[]>([]);
+  // reset function
+  const resetEmployeeIds = () => setEmployeeIds([]);
 
   // Handler for changes in employee selection
   const handleChange = (event: SelectChangeEvent<string[]>) => {
@@ -27,5 +29,11 @@ export const useEmployeeIdToName = () => {
     ] = `${employee.firstName} ${employee.lastName}`;
   });
 
-  return { employeeIds, employeeNameMap, handleChange, employees };
+  return {
+    employeeIds,
+    employeeNameMap,
+    handleChange,
+    employees,
+    resetEmployeeIds,
+  };
 };

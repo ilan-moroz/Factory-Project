@@ -39,14 +39,20 @@ export default function AddShift() {
         // Also dispatch the decreaseActionNumberAction to decrease the num of actions for the user
         store.dispatch(decreaseActionNumberAction());
       }
+      resetEmployeeIds();
     } catch (err) {
       console.error(err);
     }
   };
 
   // useEmployeeIdToName hook manages employee selection and ID-name mapping for the form.
-  const { employeeIds, employeeNameMap, handleChange, employees } =
-    useEmployeeIdToName();
+  const {
+    employeeIds,
+    employeeNameMap,
+    handleChange,
+    employees,
+    resetEmployeeIds,
+  } = useEmployeeIdToName();
 
   return (
     <FormDialogBase
