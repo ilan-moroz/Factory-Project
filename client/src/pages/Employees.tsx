@@ -182,7 +182,6 @@ export default function ReactVirtualizedTable() {
   const searchComponent = React.useCallback(
     () => (
       <EmployeeSearch
-        employees={employees}
         setSearchedEmployees={setSearchedEmployees}
         setIsSearchActive={setIsSearchActive}
       />
