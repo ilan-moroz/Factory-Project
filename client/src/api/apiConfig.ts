@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:4000";
+const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
 // Create an instance of axios with the base URL
 const api = axios.create({
@@ -9,7 +9,7 @@ const api = axios.create({
 
 // Use axios interceptors to alter requests before they are sent
 api.interceptors.request.use(
-  (config) => {
+  config => {
     // Retrieve the persisted users from local storage
     const persistedUsers = localStorage.getItem("persist:users");
     let token;
@@ -26,7 +26,7 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
+  error => {
     return Promise.reject(error);
   }
 );
