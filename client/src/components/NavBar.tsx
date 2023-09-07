@@ -18,6 +18,7 @@ import { setLogoutAction } from "../redux/UserReducer";
 import { useSelector } from "react-redux";
 import { Chip } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
+import { useMediaQuery } from "react-responsive";
 
 const pages = ["Departments", "Employees", "Shifts"];
 const settings = ["Logout"];
@@ -65,6 +66,8 @@ function ResponsiveAppBar() {
   });
 
   const location = useLocation();
+
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 40.62em)" }); //650px
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -118,7 +121,7 @@ function ResponsiveAppBar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
+                {pages.map(page => (
                   <NavLink
                     key={page}
                     to={`/${page.toLowerCase()}`}
@@ -155,12 +158,13 @@ function ResponsiveAppBar() {
                 letterSpacing: ".3rem",
                 color: "inherit",
                 textDecoration: "none",
+                fontSize: isSmallScreen ? "1rem" : "1.5rem",
               }}
             >
               Moroz Factory
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
+              {pages.map(page => (
                 <NavLink
                   key={page}
                   to={`/${page.toLowerCase()}`}
@@ -215,7 +219,7 @@ function ResponsiveAppBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
+                {settings.map(setting => (
                   <MenuItem key={setting} onClick={logOut}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
@@ -223,7 +227,7 @@ function ResponsiveAppBar() {
               </Menu>
             </Box>
             {/* display only for users */}
-            {!admin && (
+            {!admin && !isSmallScreen && (
               <span style={{ marginLeft: 10 }}>
                 Actions left for today: {user?.numOfActions}
               </span>
