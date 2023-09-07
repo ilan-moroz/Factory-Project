@@ -29,23 +29,40 @@ Each page has several associated dialogs for performing various actions (creatin
 - Backend: Express.js on Node.js
 - Database: MongoDB
 
-## User Login
+## Usage
 
-To access the admin functionalities, follow these steps:
+To access the website functionalities, follow the steps outlined below:
 
-2. **User Credentials**: Use the following credentials to log in :
-   **Option 1**
-   - **User Name:** yossico
-   - **Password:** yossi123
-     **Option 2**
-   - **User Name:** joshjosh
-   - **Password:** josh123
-     **Option 3**
-   - **User Name:** drake
-   - **Password:** drake123
-     **Option 4**
-   - **User Name:** jojosef
-   - **Password:** josef123
-3. **Admin Dashboard**: Once logged in, you will be redirected to the admin dashboard where you can add new products and edit existing products.
+### 1. Logging In
+
+Use one of the following credentials to log in:
+
+#### Option 1
+
+- **Username:** yossico
+- **Password:** yossi123
+
+#### Option 2
+
+- **Username:** joshjosh
+- **Password:** josh123
+
+#### Option 3
+
+- **Username:** drake
+- **Password:** drake123
+
+#### Option 4
+
+- **Username:** jojosef
+- **Password:** josef123
+
+### 2. Exploring the Dashboard
+
+Once logged in, you will be redirected to the main page where you can navigate to different sections, including:
+
+- **Departments:** View all departments, add new ones, or edit existing ones.
+- **Employees:** View all employees, add new ones, edit existing profiles, delete profiles, view employee shifts, and assign shifts to employees.
+- **Shifts:** View all shifts, add new ones, and see which employees are assigned to different shifts.
 
 _Feel free to explore the functionalities and get a feel of the full capabilities of the application._
