@@ -28,3 +28,24 @@ Each page has several associated dialogs for performing various actions (creatin
 - Frontend: React.js with Redux for state management
 - Backend: Express.js on Node.js
 - Database: MongoDB
+
+## User Login
+
+To access the admin functionalities, follow these steps:
+
+2. **User Credentials**: Use the following credentials to log in :
+   **Option 1**
+   - **User Name:** yossico
+   - **Password:** yossi123
+     **Option 2**
+   - **User Name:** joshjosh
+   - **Password:** josh123
+     **Option 3**
+   - **User Name:** drake
+   - **Password:** drake123
+     **Option 4**
+   - **User Name:** jojosef
+   - **Password:** josef123
+3. **Admin Dashboard**: Once logged in, you will be redirected to the admin dashboard where you can add new products and edit existing products.
+
+_Feel free to explore the functionalities and get a feel of the full capabilities of the application._
